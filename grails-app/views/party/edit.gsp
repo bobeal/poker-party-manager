@@ -53,6 +53,23 @@
                      <span class="button"><g:actionSubmit value="Delete" /></span>
                </div>
             </g:form>
+            
+            <g:form controller="score" action="save" method="post" >
+               <div class="dialog">
+                <table>
+                  <tr class='prop'><td valign='top' class='name'><label for='party'>Party:</label></td><td valign='top' class='value ${hasErrors(bean:score,field:'party','errors')}'><g:select optionKey="id" from="${Party.list()}" name='party.id' value='${score?.party?.id}'></g:select></td></tr>
+                  <tr class='prop'><td valign='top' class='name'><label for='player'>Player:</label></td><td valign='top' class='value ${hasErrors(bean:score,field:'player','errors')}'><g:select optionKey="id" from="${Player.list()}" name='player.id' value='${score?.player?.id}'></g:select></td></tr>
+                  <tr class='prop'><td valign='top' class='name'><label for='points'>Points:</label></td><td valign='top' class='value ${hasErrors(bean:score,field:'points','errors')}'><input type='text' name='points' value='${score?.points}'></input></td></tr>
+                  <tr class='prop'><td valign='top' class='name'><label for='refunds'>Refunds:</label></td><td valign='top' class='value ${hasErrors(bean:score,field:'refunds','errors')}'><input type='text' name='refunds' value='${score?.refunds}'></input></td></tr>
+               </table>
+               </div>
+               <div class="buttons">
+                     <span class="formButton">
+                        <input type="submit" value="Create"></input>
+                     </span>
+               </div>
+            </g:form>
+            
         </div>
     </body>
 </html>
