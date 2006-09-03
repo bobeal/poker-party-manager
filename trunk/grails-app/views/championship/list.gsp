@@ -32,7 +32,16 @@
                        <td>${it.startDate}</td>
                        <td>${it.endDate}</td>
                        <td class="actionButtons">
-                            <span class="actionButton"><g:link action="show" id="${it.id}">Voir</g:link></span>
+                            <span class="actionButton">
+                              <g:link action="show" id="${it.id}">Voir</g:link>
+                            </span>
+                            <br/>
+                            <span class="actionButton">
+                              <g:link controller='party' 
+                                params='["championship.id":it.id]' 
+                                action='create'>Ajouter une partie</g:link>
+                            </span>
+                          </td>
                        </td>
                     </tr>
                </g:each>

@@ -3,16 +3,16 @@
     <head>
          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
          <meta name="layout" content="main" />
-         <title>Edit Player</title>
+         <title>Edition d'un joueur</title>
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Home</a></span>
-            <span class="menuButton"><g:link action="list">Player List</g:link></span>
-            <span class="menuButton"><g:link action="create">New Player</g:link></span>
+            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Accueil</a></span>
+            <span class="menuButton"><g:link action="list">Liste des joueurs</g:link></span>
+            <span class="menuButton"><g:link action="create">Nouveau joueur</g:link></span>
         </div>
         <div class="body">
-           <h1>Edit Player</h1>
+           <h1>Edition d'un joueur</h1>
            <g:if test="${flash.message}">
                  <div class="message">${flash.message}</div>
            </g:if>
@@ -30,15 +30,9 @@
                <input type="hidden" name="id" value="${player?.id}" />
                <div class="dialog">
                 <table>
-
-                       
-                       
-				<tr class='prop'><td valign='top' class='name'><label for='email'>Email:</label></td><td valign='top' class='value ${hasErrors(bean:player,field:'email','errors')}'><input type='text' name='email' value='${player?.email}' /></td></tr>
-                       
-				<tr class='prop'><td valign='top' class='name'><label for='login'>Login:</label></td><td valign='top' class='value ${hasErrors(bean:player,field:'login','errors')}'><input type='text' name='login' value='${player?.login}' /></td></tr>
-                       
-				<tr class='prop'><td valign='top' class='name'><label for='password'>Password:</label></td><td valign='top' class='value ${hasErrors(bean:player,field:'password','errors')}'><input type='text' name='password' value='${player?.password}' /></td></tr>
-                       
+  				  <tr class='prop'><td valign='top' class='name'><label for='email'>Email :</label></td><td valign='top' class='value ${hasErrors(bean:player,field:'email','errors')}'><input type='text' name='email' value='${player?.email}' /></td></tr>
+				  <tr class='prop'><td valign='top' class='name'><label for='login'>Login :</label></td><td valign='top' class='value ${hasErrors(bean:player,field:'login','errors')}'><input type='text' name='login' value='${player?.login}' /></td></tr>
+				  <tr class='prop'><td valign='top' class='name'><label for='password'>Password :</label></td><td valign='top' class='value ${hasErrors(bean:player,field:'password','errors')}'><input type='password' name='password' value='${player?.password}' /></td></tr>
                 </table>
                </div>
 

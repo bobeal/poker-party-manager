@@ -30,7 +30,7 @@
                         <tr class="prop">
                               <td valign="top" class="name">Championship:</td>
                               
-                                    <td valign="top" class="value"><g:link controller="championship" action="show" id="${party?.championship?.id}">${party?.championship}</g:link></td>
+                                    <td valign="top" class="value"><g:link controller="championship" action="show" id="${party?.championship?.id}">${party?.championship?.name}</g:link></td>
                               
                         </tr>
                    

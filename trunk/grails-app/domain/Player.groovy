@@ -21,4 +21,10 @@ class Player {
 		int hashCode = 0
 		hashCode = 29 * (hashCode + ( !id ? 0 : id ^ (id >>> 32) ) )
 	}
+    
+    def constraints = {
+        login(length:5..15,blank:false,unique:true)
+        password(length:5..15,blank:false)
+        email(blank:false)
+    }
 }	
