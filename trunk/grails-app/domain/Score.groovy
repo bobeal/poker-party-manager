@@ -4,6 +4,7 @@ class Score {
 
     int points
     int refunds
+    Double money
     
     def belongsTo = [Player,Party]
 
