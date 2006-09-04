@@ -19,10 +19,6 @@
            <div class="dialog">
                  <table>
                         <tr class="prop">
-                          <td valign="top" class="name">Id :</td>
-                          <td valign="top" class="value">${championship.id}</td>
-                        </tr>
-                        <tr class="prop">
                           <td valign="top" class="name">Label :</td>
                           <td valign="top" class="value">${championship.label}</td>
                         </tr>
@@ -54,21 +50,32 @@
            <div class="dialog">
            	 <table>
                <tr>
-                 <th>Id</th>
                  <th>Place</th>
                  <th>Date</th>
                  <g:each var="player" in="${Player.list()}">
-                   <th>${player?.login}</th>
+                 	<th>${player.login}</th>
                  </g:each>
+                 <th></th>
                </tr>
                <g:each var="p" in="${championship.parties}">
                  <tr>
-                 	<td>${p?.id}</td>
                  	<td>${p?.place}</td>
                  	<td>${p?.date}</td>
-                 	<g:each var="score" in="${p.scores}">
-                 	  <td>${score.player.login} : ${score.points} / ${score.refunds}</td>
-                 	</g:each>
+					<g:each var="player" in="${Player.list()}">
+                 	 	<td>
+                 	 	  <g:if test="${Score.findByPlayerAndParty(player,p).money > 0}">
+                 	 	  	<span style="color:green">${Score.findByPlayerAndParty(player,p).money}</span>
+                 	 	  </g:if>
+                 	 	  <g:else>
+                 	 	  	<span style="color:red">${Score.findByPlayerAndParty(player,p).money}</span>
+                 	 	  </g:else>
+                 	 	</td>
+					</g:each>
+                 	<td>
+                 		<g:link controller='party' params='["id":p?.id]' action='edit'>Editer</g:link>
+                 		<br/>
+                 		<g:link controller='party' params='["id":p?.id]' action='show'>Détails</g:link>
+                 	</td>
                  </tr>
                </g:each>
            	 </table>

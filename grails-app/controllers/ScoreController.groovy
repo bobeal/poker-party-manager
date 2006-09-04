@@ -15,8 +15,9 @@ class ScoreController {
         def score = Score.get( params.id )
         if(score) {
             score.delete()
-            flash.message = "Score ${params.id} deleted."
-            redirect(action:list)
+            //flash.message = "Score ${params.id} deleted."
+            redirect(controller:"party",action:"edit",id:params.party_id)
+//            redirect(action:list)
         }
         else {
             flash.message = "Score not found with id ${params.id}"
@@ -62,8 +63,10 @@ class ScoreController {
     def save = {
         def score = new Score()
         score.properties = params
+        score.money = (score.points - (score.refunds * 100)) / 40
         if(score.save()) {
-            redirect(action:show,id:score.id)
+            redirect(controller:"party",action:"edit",id:score.party.id)
+            //redirect(action:show,id:score.id)
         }
         else {
             render(view:'create',model:[score:score])

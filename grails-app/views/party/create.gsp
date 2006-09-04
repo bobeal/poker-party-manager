@@ -21,6 +21,7 @@
                 </div>
            </g:hasErrors>
            <g:form action="save" method="post" >
+           	   <input type="hidden" name="championship.id" value="${params['championship.id']}"/>
                <div class="dialog">
                 <table>
                   <tr class='prop'>
