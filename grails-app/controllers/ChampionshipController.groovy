@@ -70,4 +70,8 @@ class ChampionshipController {
         }
     }
 
+    def gettable = {
+        def championship = Championship.get( params.id )
+        render(view:'table',model:[id:params.id])
+    }
 }

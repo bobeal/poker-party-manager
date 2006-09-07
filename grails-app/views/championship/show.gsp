@@ -1,9 +1,11 @@
 
 <html>
     <head>
-         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-          <meta name="layout" content="main" />
-         <title>Visualisation d'un championnat</title>
+		<link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ajaxtabs.css')}" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="layout" content="main" />
+        <title>Visualisation d'un championnat</title>
+        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'ajaxtabs.js')}"></script>
     </head>
     <body>
         <div class="nav">
@@ -47,7 +49,13 @@
                  <span class="button"><g:actionSubmit value="Delete" /></span>
                </g:form>
            </div>
-           <div class="dialog">
+        
+        <ul id="maintab" class="shadetabs">
+			<li class="selected"><a href="#default" rel="partiestab">Parties</a></li>
+			<li><a href="${createLink(action:'gettable',id:championship.id)}" rel="partiestab">Classement</a></li>
+		</ul>
+
+           <div class="dialog" id="partiestab">
            	 <table>
                <tr>
                  <th>Place</th>
@@ -81,6 +89,13 @@
            	 </table>
            </div>
         </div>
+        
+<script type="text/javascript">
+//Start Ajax tabs script for UL with id="maintab" Separate multiple ids each with a comma.
+startajaxtabs("maintab")
+</script>
+
+        
     </body>
 </html>
             
