@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title>Visualisation d'un championnat</title>
-        <script type="text/javascript" src="${createLinkTo(dir:'js',file:'ajaxtabs.js')}"></script>
+        <g:javascript src="ajaxtabs.js" />
     </head>
     <body>
         <div class="nav">
@@ -65,27 +65,7 @@
                  </g:each>
                  <th></th>
                </tr>
-               <g:each var="p" in="${championship.parties}">
-                 <tr>
-                 	<td>${p?.place}</td>
-                 	<td>${p?.date}</td>
-					<g:each var="player" in="${Player.list()}">
-                 	 	<td>
-                 	 	  <g:if test="${Score.findByPlayerAndParty(player,p).money > 0}">
-                 	 	  	<span style="color:green">${Score.findByPlayerAndParty(player,p).money}</span>
-                 	 	  </g:if>
-                 	 	  <g:else>
-                 	 	  	<span style="color:red">${Score.findByPlayerAndParty(player,p).money}</span>
-                 	 	  </g:else>
-                 	 	</td>
-					</g:each>
-                 	<td>
-                 		<g:link controller='party' params='["id":p?.id]' action='edit'>Editer</g:link>
-                 		<br/>
-                 		<g:link controller='party' params='["id":p?.id]' action='show'>Détails</g:link>
-                 	</td>
-                 </tr>
-               </g:each>
+               <g:partiesTable parties="${Party.findAllByChampionship(championship, [sort:'date',order:'asc'] )}"/>
            	 </table>
            </div>
         </div>
