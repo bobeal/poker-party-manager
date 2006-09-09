@@ -41,7 +41,7 @@ class PartyController {
         if(party) {
              party.properties = params
             if(party.save()) {
-                redirect(action:show,id:party.id)
+                redirect(action:edit,id:party.id)
             }
             else {
                 render(view:'edit',model:[party:party])
@@ -68,5 +68,19 @@ class PartyController {
         else {
             render(view:'create',model:[party:party])
         }
+    }
+    
+    def checkScores = {
+        def party = Party.get( params.id )
+        def totalMoney = 0
+        
+        party.scores.each { score ->
+            totalMoney += score.money
+        }
+        
+        if (totalMoney == 0)
+            render "<div class=\"message\">Le compte est bon !</div>"
+        else
+            render "<div class=\"errors\">Too bad, il y a un &eacute;cart de ${totalMoney}</div>" 
     }
 }

@@ -1,14 +1,10 @@
 class Party { 
-    static final ALIGRE = 'Aligre'
-    static final VANVES = 'Vanves'
-    static final ALESIA = 'Alesia'
-
     Long id
 	Long version
 
-    String place
     Date date
     Championship championship
+    Place place
     
     def relatesToMany = [ scores : Score ]
     def belongsTo = [Championship]
@@ -37,8 +33,4 @@ class Party {
 		int hashCode = 0
 		hashCode = 29 * (hashCode + ( !id ? 0 : id ^ (id >>> 32) ) )
 	}
-
-    @Property constraints = {
-        place(blank:false)
-    }
 }

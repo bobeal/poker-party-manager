@@ -4,6 +4,7 @@
          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
          <meta name="layout" content="main" />
          <title>Edition d'une partie</title>
+         <g:javascript library="prototype" />
     </head>
     <body>
         <div class="nav">
@@ -28,9 +29,23 @@
                <input type="hidden" name="id" value="${party?.id}" />
                <div class="dialog">
                 <table>
-				<tr class='prop'><td valign='top' class='name'><label for='championship'>Championnat :</label></td><td valign='top' class='value ${hasErrors(bean:party,field:'championship','errors')}'><g:select optionKey="id" optionValue="label" from="${Championship.list()}" name='championship.id' value='${party?.championship?.id}'></g:select></td></tr>
-				<tr class='prop'><td valign='top' class='name'><label for='date'>Date :</label></td><td valign='top' class='value ${hasErrors(bean:party,field:'date','errors')}'><g:datePicker name='date' value='${party?.date}'></g:datePicker></td></tr>
-				<tr class='prop'><td valign='top' class='name'><label for='place'>Place :</label></td><td valign='top' class='value ${hasErrors(bean:party,field:'place','errors')}'><input type='text' name='place' value='${party?.place}' /></td></tr>
+				  <tr class='prop'>
+				    <td valign='top' class='name'><label for='championship'>Championnat :</label></td>
+				    <td valign='top' class='value ${hasErrors(bean:party,field:'championship','errors')}'>
+				      <g:select optionKey="id" optionValue="label" from="${Championship.list()}" name='championship.id' value='${party?.championship?.id}'></g:select></td>
+				  </tr>
+				  <tr class='prop'>
+				    <td valign='top' class='name'><label for='date'>Date :</label></td>
+				    <td valign='top' class='value ${hasErrors(bean:party,field:'date','errors')}'>
+				      <g:datePicker name='date' value='${party?.date}'></g:datePicker>
+				    </td>
+				  </tr>
+				  <tr class='prop'>
+				    <td valign='top' class='name'><label for='place'>Place :</label></td>
+				    <td valign='top' class='value ${hasErrors(bean:party,field:'place','errors')}'>
+				      <g:select optionKey="id" optionValue="name" from="${Place.list()}" name='place.id' value="${party?.place?.id}"></g:select>
+				    </td>
+				  </tr>
                 </table>
                </div>
 
@@ -55,6 +70,9 @@
                      </span>
                </div>
             </g:form>
+            
+            <div id="success-scores-check">
+            </div>
             
             <table>
               <tr>
@@ -83,6 +101,13 @@
 				</tr>
               </g:each>
             </table>
+            
+            <div class="buttons">
+              <span class="button">
+                <g:remoteLink action="checkScores" id="${party?.id}" 
+                  update="success-scores-check">Check</g:remoteLink>
+              </span>
+            </div>
             
         </div>
     </body>

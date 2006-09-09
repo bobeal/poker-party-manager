@@ -37,7 +37,7 @@
                       <label for='place'>Lieu :</label>
                     </td>
                     <td valign='top' class='value ${hasErrors(bean:party,field:'place','errors')}'>
-                      <input type='text' name='place' value='${party?.place}' />
+                      <g:select optionKey="id" optionValue="name" from="${Place.list()}" name='place.id'></g:select>
                     </td>
                   </tr>
                </table>
