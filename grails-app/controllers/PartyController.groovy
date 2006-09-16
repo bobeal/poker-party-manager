@@ -1,6 +1,4 @@
-
-            
-class PartyController {
+class PartyController extends BaseController {
     def index = { redirect(action:list,params:params) }
 
     def list = {

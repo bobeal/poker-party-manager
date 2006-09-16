@@ -1,6 +1,4 @@
-
-            
-class PlayerController {
+class PlayerController extends BaseController {
     def index = { redirect(action:list,params:params) }
 
     def list = {
@@ -70,4 +68,35 @@ class PlayerController {
         }
     }
 
+    def login = {
+   		if (session.user) {
+           	redirect(controller:'championship')	
+        } else {
+   			return
+        }
+    }
+
+    def handleLogin = {
+
+   		if (params.login && params.pwd) {
+			def player = Player.findByLogin(params.login)
+   			if (player) {
+        		if (player.password == params.pwd) {
+        		    session.user = player
+        		    redirect(controller:'championship')
+        		} else {
+                   	flash.message = "Echec d'authentification pour le login '${params.login}' "
+                   	render(view:'login')
+               	}
+   			}
+   		} else {
+			flash.message = 'Identifiant ou mot de passe non fourni'
+           	render(view:'login')
+       	}
+   	}
+
+   	def logout = {
+      	session.user = null
+   		render(view:'login')
+   	}
 }

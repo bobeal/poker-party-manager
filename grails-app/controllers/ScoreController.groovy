@@ -1,6 +1,5 @@
-
-            
-class ScoreController {
+class ScoreController extends BaseController {
+    
     def index = { redirect(action:list,params:params) }
 
     def list = {
