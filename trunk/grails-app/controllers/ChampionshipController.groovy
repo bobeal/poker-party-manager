@@ -1,6 +1,5 @@
+class ChampionshipController extends BaseController {
 
-            
-class ChampionshipController {
     def index = { redirect(action:list,params:params) }
 
     def list = {

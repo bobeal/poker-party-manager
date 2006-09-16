@@ -65,7 +65,7 @@
                  </g:each>
                  <th></th>
                </tr>
-               <g:partiesTable parties="${Party.findAllByChampionship(championship, [sort:'date',order:'asc'] )}"/>
+               <g:partiesTable parties="${Party.findAllByChampionship(championship, [sort:'date',order:'desc'] )}"/>
            	 </table>
            </div>
         </div>
