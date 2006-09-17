@@ -24,6 +24,12 @@ a:active,a:link,a:visited,a:hover {
 	color: #578BB8;	
 }
 
+.userInfo {
+	float:right;
+	margin-top:0px;
+	display:inline;
+	margin-right:10px;
+}
 
 h1 {
 	font-family:Arial,sans-serif;
