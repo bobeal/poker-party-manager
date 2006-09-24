@@ -7,11 +7,6 @@
          <g:javascript library="prototype" />
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Accueil</a></span>
-            <span class="menuButton"><g:link action="list">Liste des parties</g:link></span>
-            <span class="menuButton"><g:link action="create">Nouvelle Partie</g:link></span>
-        </div>
         <div class="body">
            <h1>Edition d'une partie</h1>
            <g:if test="${flash.message}">

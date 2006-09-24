@@ -6,10 +6,6 @@
          <title>Ajout d'une partie</title>         
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Accueil</a></span>
-            <span class="menuButton"><g:link action="list">Liste des parties</g:link></span>
-        </div>
         <div class="body">
            <h1>Ajout d'une partie au championnat </h1>
            <g:if test="${flash.message}">

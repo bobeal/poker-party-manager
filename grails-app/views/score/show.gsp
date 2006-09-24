@@ -6,11 +6,6 @@
          <title>Show Score</title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Home</a></span>
-            <span class="menuButton"><g:link action="list">Score List</g:link></span>
-            <span class="menuButton"><g:link action="create">New Score</g:link></span>
-        </div>
         <div class="body">
            <h1>Show Score</h1>
            <g:if test="${flash.message}">
