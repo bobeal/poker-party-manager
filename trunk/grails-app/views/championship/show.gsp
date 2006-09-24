@@ -8,11 +8,6 @@
         <g:javascript src="ajaxtabs.js" />
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Accueil</a></span>
-            <span class="menuButton"><g:link action="list">Liste des championnats</g:link></span>
-            <span class="menuButton"><g:link action="create">Nouveau championnat</g:link></span>
-        </div>
         <div class="body">
            <h1>Visualisation d'un championnat</h1>
            <g:if test="${flash.message}">

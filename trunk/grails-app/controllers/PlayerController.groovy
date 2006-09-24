@@ -1,4 +1,7 @@
 class PlayerController extends BaseController {
+    
+    AuthenticationService authenticationService
+    
     def index = { redirect(action:list,params:params) }
 
     def list = {
@@ -37,7 +40,8 @@ class PlayerController extends BaseController {
     def update = {
         def player = Player.get( params.id )
         if(player) {
-             player.properties = params
+            player.properties = params
+            player.password = authenticationService.encryptPassword(player.password)
             if(player.save()) {
                 redirect(action:show,id:player.id)
             }
@@ -60,6 +64,7 @@ class PlayerController extends BaseController {
     def save = {
         def player = new Player()
         player.properties = params
+        player.password = authenticationService.encryptPassword(player.password)
         if(player.save()) {
             redirect(action:show,id:player.id)
         }
@@ -81,9 +86,10 @@ class PlayerController extends BaseController {
    		if (params.login && params.pwd) {
 			def player = Player.findByLogin(params.login)
    			if (player) {
-        		if (player.password == params.pwd) {
+                def encryptedPassword = authenticationService.encryptPassword(params.pwd)
+        		if (player.password == encryptedPassword) {
         		    session.user = player
-        		    redirect(controller:'championship')
+        		    render(view:'welcome')
         		} else {
                    	flash.message = "Echec d'authentification pour le login '${params.login}' "
                    	render(view:'login')

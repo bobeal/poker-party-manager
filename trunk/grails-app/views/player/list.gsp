@@ -6,10 +6,6 @@
          <title>Liste des joueurs</title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Accueil</a></span>
-            <span class="menuButton"><g:link action="create">Nouveau Joueur</g:link></span>
-        </div>
         <div class="body">
            <h1>Liste des joueurs</h1>
             <g:if test="${flash.message}">

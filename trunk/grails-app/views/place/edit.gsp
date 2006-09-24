@@ -6,11 +6,6 @@
          <title>Edit Place</title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Home</a></span>
-            <span class="menuButton"><g:link action="list">Place List</g:link></span>
-            <span class="menuButton"><g:link action="create">New Place</g:link></span>
-        </div>
         <div class="body">
            <h1>Edit Place</h1>
            <g:if test="${flash.message}">

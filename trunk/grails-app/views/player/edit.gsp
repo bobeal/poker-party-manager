@@ -6,11 +6,6 @@
          <title>Edition d'un joueur</title>
     </head>
     <body>
-        <div class="nav">
-            <span class="menuButton"><a href="${createLinkTo(dir:'')}">Accueil</a></span>
-            <span class="menuButton"><g:link action="list">Liste des joueurs</g:link></span>
-            <span class="menuButton"><g:link action="create">Nouveau joueur</g:link></span>
-        </div>
         <div class="body">
            <h1>Edition d'un joueur</h1>
            <g:if test="${flash.message}">

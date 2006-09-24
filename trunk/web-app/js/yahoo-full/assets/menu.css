@@ -1,8 +1,10 @@
 /*
 Copyright (c) 2006, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
-http://developer.yahoo.net/yui/license.txt
+http://developer.yahoo.com/yui/license.txt
+Version: 0.11.3
 */
+
 
 
 /* Menu styles */
@@ -11,7 +13,8 @@ div.yuimenu {
 
     z-index:1;
     visibility:hidden;
-    background-color:#f6f7ee;
+    /* background-color:#f6f7ee; */
+    background-color:#8CAFCD;
     border:solid 1px #c4c4be;
     padding:1px;
     
@@ -22,7 +25,12 @@ div.yuimenu {
 
 div.yuimenubar {
 
-    background-color:#f6f7ee;
+	background-color:#D6D6D6;
+	height: 30px;
+	border: 2px solid #578BB8;
+	border-style: solid none none none ;	
+	
+	/*    background-color:#f6f7ee; */
     
 }
 
@@ -89,7 +97,6 @@ div.yuimenubar ul {
     list-style-type:none;
     margin:0;
     padding:0;
-    overflow:hidden;
 
 }
 
@@ -104,9 +111,9 @@ div.yuimenu ul {
 }
 
 
-div.yuimenu ul.first, 
+div.yuimenu ul.first-of-type, 
 div.yuimenu ul.hastitle,
-div.yuimenu h6.first {
+div.yuimenu h6.first-of-type {
 
     border-width:0;
 
@@ -129,6 +136,7 @@ div.yuimenubar li {
 div.yuimenu li.yuimenuitem {
 
     padding:2px 24px;
+	background-color:#8CAFCD;
     
 }
 
@@ -140,7 +148,7 @@ div.yuimenubar li li {
 }
 
 
-/* Matches the help text for a MenuItem instance */
+/* Matches the help text for a menu item */
 
 div.yuimenu li em {
 
@@ -168,16 +176,6 @@ div.yuimenubar li a {
     
 }
 
-
-/* Matches the sub menu indicator for a MenuItem instance */
-
-div.yuimenu li img {
-  
-    margin:0 -16px 0 10px;
-    border:0;
-
-}
-
 div.yuimenu li.hassubmenu,
 div.yuimenu li.hashelptext {
 
@@ -195,7 +193,7 @@ div.yuimenu li.hashelptext a.hashelptext {
 }
 
 
-/* Matches focused and selected MenuItem instances */
+/* Matches focused and selected menu items */
 
 div.yuimenu li.selected,
 div.yuimenubar li.selected {
@@ -220,7 +218,7 @@ div.yuimenubar li.selected a.selected {
 }
 
 
-/* Matches disabled MenuItem instances */
+/* Matches disabled menu items */
 
 div.yuimenu li.disabled, 
 div.yuimenubar li.disabled {
@@ -246,19 +244,64 @@ div.yuimenubar li.yuimenubaritem {
     border-style:solid;
     border-color:#c4c4be;
     padding:4px 24px;
-    margin:0;
+    margin:0 0 10px 0;
 
+	background-color:#8CAFCD;
 }
 
-div.yuimenubar li.yuimenubaritem.first {
+div.yuimenubar li.yuimenubaritem.first-of-type {
 
     border-width:0;
 
 }
 
+
+/* Matches the submenu indicator for menu items */
+
 div.yuimenubar li.yuimenubaritem img {
 
+    height:8px;
+    width:8px;
     margin:0 0 0 10px;
     vertical-align:middle;
 
+}
+
+div.yuimenu li.yuimenuitem img {
+
+    height:8px;
+    width:8px;
+    margin:0 -16px 0 10px;
+    border:0;
+
+    *margin-left:0;
+    *border-left-width:10px;
+    *border-style:solid;
+    *border-color:#f6f7ee;
+
+}
+
+div.yuimenu li.yuimenuitem.selected img.selected {
+
+    *border-color:#8c8ad0;
+
+}
+
+div.yuimenu li.checked {
+
+    position:relative;
+
+}
+
+div.yuimenu li.checked img.checked {
+
+    height:8px;
+    width:8px;
+    margin:0;
+    border:0;
+    position:absolute;
+    left:6px;
+    _left:-16px; /* Underscore hack b/c this is for IE 5.5 and IE 6 only */
+    top:.5em;
+    
 }
