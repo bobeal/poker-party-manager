@@ -153,6 +153,9 @@
 						  <li class="yuimenuitem">
 						    <a href="${createLink(controller:'player',action:'list')}">Voir</a>
 						  </li>
+						  <li class="yuimenuitem">
+						    <a href="${createLink(controller:'player',action:'create')}">Créer</a>
+						  </li>
 					    </ul>
 					  </div>
 					</div>

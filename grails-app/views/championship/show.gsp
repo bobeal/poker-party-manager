@@ -37,6 +37,7 @@
                         </tr>
                 </table>
            </div>
+           <!-- 
            <div class="buttons">
                <g:form controller="championship">
                  <input type="hidden" name="id" value="${championship?.id}" />
@@ -44,7 +45,10 @@
                  <span class="button"><g:actionSubmit value="Delete" /></span>
                </g:form>
            </div>
-        
+           -->
+           
+           <br/><br/>
+           
         <ul id="maintab" class="shadetabs">
 			<li class="selected"><a href="#default" rel="partiestab">Parties</a></li>
 			<li><a href="${createLink(action:'gettable',id:championship.id)}" rel="partiestab">Classement</a></li>
