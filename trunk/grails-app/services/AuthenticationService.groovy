@@ -16,7 +16,7 @@ class AuthenticationService {
         }
 
         def encryptedPwd = "{SHA}" + new BASE64Encoder().encode(hash)
-        println "encryptPassword() generated password : " + encryptedPwd
+        //println "encryptPassword() generated password : " + encryptedPwd
         return encryptedPwd
     }
 }

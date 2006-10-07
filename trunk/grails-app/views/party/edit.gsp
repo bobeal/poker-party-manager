@@ -46,8 +46,9 @@
 
                <div class="buttons">
                      <span class="button"><g:actionSubmit value="Update" /></span>
-                     <span class="button"><g:actionSubmit value="Delete" /></span>
+                     <!-- <span class="button"><g:actionSubmit value="Delete" /></span> -->
                </div>
+               
             </g:form>
             
             <g:form controller="score" action="save" method="post" >
