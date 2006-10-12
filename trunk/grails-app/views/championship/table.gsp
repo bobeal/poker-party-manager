@@ -3,7 +3,7 @@
     <th>Place</th>
     <th>Joueur</th>
 	<th>Total</th>
-	<th>Parties gagnées</th>
+	<th>Parties gagnÃ©es</th>
 	<th>Parties nulles</th>
 	<th>Parties perdues</th>
   </tr>

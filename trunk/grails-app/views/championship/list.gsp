@@ -14,7 +14,7 @@
                <tr>
                    <th>Id</th>
                    <th>Label</th>
-                   <th>Date de début</th>
+                   <th>Date de dÃ©but</th>
                    <th>Date de fin</th>
                    <th></th>
                </tr>

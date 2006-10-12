@@ -7,7 +7,7 @@
 	<body>
 		<h1>Bienvenue sur Poker Party Manager</h1>
 		<p>
-			Cette application vous permet de gérer des 
+			Cette application vous permet de gÃ©rer des 
 			<a href="${createLink(controller:'championship')}">championnats</a>, 
 			vos <a href="${createLink(controller:'player',action:'edit',id:session?.user?.id)}">informations personnelles</a>.
 		</p>

@@ -122,7 +122,7 @@
         	<img src="${createLinkTo(dir:'images',file:'grails_logo.jpg')}" alt="Poker" />
         </div>
 		<div class="userInfo">
-		  ${session?.user?.login} - <a href="${createLink(controller:'player',action:'logout')}">Déconnexion</a>
+		  ${session?.user?.login} - <a href="${createLink(controller:'player',action:'logout')}">DÃ©connexion</a>
     	</div>
 		<div class="yuimenubar" id="menu">
 			<div class="bd">
@@ -133,10 +133,10 @@
                       <div class="bd">
 					    <ul>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'championship',action:'create')}">Créer</a>
+						    <a href="${createLink(controller:'championship',action:'list')}">Voir</a>
 						  </li>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'championship',action:'list')}">Voir</a>
+						    <a href="${createLink(controller:'championship',action:'create')}">CrÃ©er</a>
 						  </li>
 					    </ul>
 					  </div>
@@ -154,7 +154,7 @@
 						    <a href="${createLink(controller:'player',action:'list')}">Voir</a>
 						  </li>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'player',action:'create')}">Créer</a>
+						    <a href="${createLink(controller:'player',action:'create')}">CrÃ©er</a>
 						  </li>
 					    </ul>
 					  </div>
@@ -166,10 +166,10 @@
                       <div class="bd">
 						<ul>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'place',action:'create')}">Créer</a>
+						    <a href="${createLink(controller:'place',action:'list')}">Voir</a>
 						  </li>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'place',action:'list')}">Voir</a>
+						    <a href="${createLink(controller:'place',action:'create')}">CrÃ©er</a>
 						  </li>
 					    </ul>
 					  </div>

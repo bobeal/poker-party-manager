@@ -3,11 +3,11 @@
     <head>
          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
          <meta name="layout" content="main" />
-         <title>Création d'un joueur</title>         
+         <title>CrÃ©ation d'un joueur</title>         
     </head>
     <body>
         <div class="body">
-           <h1>Création d'un joueur</h1>
+           <h1>CrÃ©ation d'un joueur</h1>
            <g:if test="${flash.message}">
                  <div class="message">${flash.message}</div>
            </g:if>

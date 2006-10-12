@@ -36,8 +36,6 @@ class PlayersTableTagLib {
             out << "</td>"
             out << "<td>"
             out << "<a href=\"" << grailsAttributes.getApplicationUri(request) << "/party/edit/" << party.id << "\">Editer</a>"
-            out << "<br/>"
-            out << "<a href=\"" << grailsAttributes.getApplicationUri(request) << "/party/show/" << party.id << "\">Détails</a>"
             out << "</td>"
             out << "</tr>"
         }
