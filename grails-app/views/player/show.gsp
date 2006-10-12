@@ -30,8 +30,9 @@
            <div class="buttons">
                <g:form controller="player">
                  <input type="hidden" name="id" value="${player?.id}" />
+                 <!-- 
                  <span class="button"><g:actionSubmit value="Edit" /></span>
-                 <span class="button"><g:actionSubmit value="Delete" /></span>
+                 -->
                </g:form>
            </div>
         </div>

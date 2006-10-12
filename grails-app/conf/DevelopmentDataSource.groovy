@@ -1,9 +1,9 @@
 class DevelopmentDataSource {
    boolean pooling = true
    String dbCreate = "update" // one of 'create', 'create-drop','update'
-   String url = "jdbc:postgresql://localhost:5432/poker"
+   String url = "jdbc:postgresql://localhost:5432/bor"
    String driverClassName = "org.postgresql.Driver"
-   String username = "poker"
-   String password = "p0ker!!"
+   String username = "bor"
+   String password = "bor"
 }
 

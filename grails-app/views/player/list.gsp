@@ -15,18 +15,16 @@
             </g:if>
            <table>
                <tr>
-                 <th>Id</th>
-                 <th>Email</th>
                  <th>Login</th>
+                 <th>Email</th>
                  <th></th>
                </tr>
                <g:each in="${playerList}">
                     <tr>
-                      <td>${it.id}</td>
-                      <td>${it.email}</td>
                       <td>${it.login}</td>
+                      <td>${it.email}</td>
                        <td class="actionButtons">
-                            <span class="actionButton"><g:link action="show" id="${it.id}">Détails</g:link></span>
+                            <span class="actionButton"><g:link action="show" id="${it.id}">DÃ©tails</g:link></span>
                        </td>
                     </tr>
                </g:each>

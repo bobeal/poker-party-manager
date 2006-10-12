@@ -1,14 +1,6 @@
 class PartyController extends BaseController {
     def index = { redirect(action:list,params:params) }
 
-    def list = {
-        [ partyList: Party.list( params ) ]
-    }
-
-    def show = {
-        [ party : Party.get( params.id ) ]
-    }
-
     def delete = {
         def party = Party.get( params.id )
         if(party) {

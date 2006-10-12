@@ -20,7 +20,7 @@
                           <td valign="top" class="value">${championship.label}</td>
                         </tr>
                         <tr class="prop">
-                          <td valign="top" class="name">Date de début :</td>
+                          <td valign="top" class="name">Date de dÃ©but :</td>
                           <td valign="top" class="value">${championship.startDate}</td>
                         </tr>
                         <tr class="prop">

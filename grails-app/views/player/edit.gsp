@@ -1,4 +1,3 @@
-
 <html>
     <head>
          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -17,7 +16,7 @@
                 </div>
            </g:hasErrors>
            <div class="prop">
-	      <span class="name">Id:</span>
+	      <span class="name">Id :</span>
 	      <span class="value">${player?.id}</span>
 	      <input type="hidden" name="player.id" value="${player?.id}" />
            </div>           
@@ -33,7 +32,6 @@
 
                <div class="buttons">
                      <span class="button"><g:actionSubmit value="Update" /></span>
-                     <span class="button"><g:actionSubmit value="Delete" /></span>
                </div>
             </g:form>
         </div>

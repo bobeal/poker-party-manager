@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>Connexion à Poker Party Manager</title>
+        <title>Connexion Ã  Poker Party Manager</title>
     </head>
     <body>
         <div class="body">

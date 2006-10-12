@@ -3,11 +3,11 @@
     <head>
          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
          <meta name="layout" content="main" />
-         <title>Création d'un championnat</title>         
+         <title>CrÃ©ation d'un championnat</title>         
     </head>
     <body>
         <div class="body">
-           <h1>Création d'un championnat</h1>
+           <h1>CrÃ©ation d'un championnat</h1>
            <g:if test="${flash.message}">
                  <div class="message">${flash.message}</div>
            </g:if>
@@ -28,7 +28,7 @@
                   </tr>
                   <tr class='prop'>
                     <td valign='top' class='name'>
-                      <label for='startDate'>Date de début :</label>
+                      <label for='startDate'>Date de dÃ©but :</label>
                     </td>
                     <td valign='top' class='value ${hasErrors(bean:championship,field:'startDate','errors')}'>
                       <g:datePicker name='startDate' value='${championship?.startDate}'></g:datePicker>
