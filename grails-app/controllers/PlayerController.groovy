@@ -41,8 +41,11 @@ class PlayerController extends BaseController {
         def player = Player.get( params.id )
         if(player) {
             player.properties = params
+            if (!player.validate()) {
+                render(view:'edit',model:[player:player])
+            }
             player.password = authenticationService.encryptPassword(player.password)
-            if(player.save()) {
+            if(player.save(false)) {
                 redirect(action:show,id:player.id)
             }
             else {
