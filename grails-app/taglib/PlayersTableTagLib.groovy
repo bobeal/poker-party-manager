@@ -5,12 +5,12 @@ class PlayersTableTagLib {
         
         playersLines.eachWithIndex { playerLine,index ->
             out << "<tr>"
-            out << "<td>" << index + 1 << "</td>"
-            out << "<td>" << playerLine?.playerLogin << "</td>"
-            out << "<td>" << playerLine?.totalMoney << "</td>"
-            out << "<td>" << playerLine?.partiesWon << "</td>"
-            out << "<td>" << playerLine?.partiesDraw << "</td>"
-            out << "<td>" << playerLine?.partiesLost << "</td>"
+            out << "<td width='10%'>" << index + 1 << "</td>"
+            out << "<td width='30%'>" << playerLine?.playerLogin << "</td>"
+            out << "<td width='21%'>" << playerLine?.getFormattedTotal() << "</td>"
+            out << "<td width='13%'>" << playerLine?.partiesWon << "</td>"
+            out << "<td width='13%'>" << playerLine?.partiesDraw << "</td>"
+            out << "<td width='13%'>" << playerLine?.partiesLost << "</td>"
             out << "</tr>"
         }
     }

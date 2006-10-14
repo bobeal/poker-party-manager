@@ -1,3 +1,6 @@
+import java.text.DecimalFormat
+import java.text.NumberFormat
+
 class PlayerTableLine {
     
     String playerLogin
@@ -12,6 +15,11 @@ class PlayerTableLine {
         partiesWon = 0
         partiesLost = 0
         partiesDraw = 0
+    }
+    
+    def getFormattedTotal() {
+        NumberFormat numberFormat = new DecimalFormat("###0.00")
+        return numberFormat.format(totalMoney)
     }
     
     def addScore(score) {
