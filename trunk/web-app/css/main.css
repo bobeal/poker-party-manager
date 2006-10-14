@@ -89,6 +89,18 @@ td {
 	margin-bottom: 5px;
 }
 
+.loginDialog 
+{
+	padding: 15px;
+	background-color:#F0F0F0;
+	border: 1px solid #778;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+.loginDialog label{
+	font-weight: bold;
+}
+
 textarea{
 	width: 250px;
 	height: 150px;
