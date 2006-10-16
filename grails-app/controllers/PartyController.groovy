@@ -29,7 +29,7 @@ class PartyController extends BaseController {
     def update = {
         def party = Party.get( params.id )
         if(party) {
-             party.properties = params
+            party.properties = params
             if(party.save()) {
                 redirect(action:edit,id:party.id)
             }
@@ -63,14 +63,16 @@ class PartyController extends BaseController {
     def checkScores = {
         def party = Party.get( params.id )
         def totalMoney = 0
+        def totalPoints = 0
         
         party.scores.each { score ->
             totalMoney += score.money
+            totalPoints += score.points - (score.refunds * 100)
         }
-        
-        if (totalMoney == 0)
+
+        if (totalPoints == 0)
             render "<div class=\"message\">Le compte est bon !</div>"
         else
-            render "<div class=\"errors\">Too bad, il y a un &eacute;cart de ${totalMoney}</div>" 
+            render "<div class=\"errors\">Too bad, il y a un &eacute;cart de ${totalPoints}</div>" 
     }
 }

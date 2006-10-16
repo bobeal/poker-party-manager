@@ -7,6 +7,7 @@
     </head>
     <body>
         <div class="body">
+           <a href="${createLink(controller:'championship',action:'show',id:params['championship.id'])}">Retour au championnat</a>
            <h1>Ajout d'une partie au championnat </h1>
            <g:if test="${flash.message}">
                  <div class="message">${flash.message}</div>

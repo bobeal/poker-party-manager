@@ -119,7 +119,9 @@
 	</head>
 	<body onload="<g:pageProperty name='body.onload'/>">
         <div class="logo">
-        	<img src="${createLinkTo(dir:'images',file:'grails_logo.jpg')}" alt="Poker" />
+        	<a href="${createLink(controller:'player',action:'welcome')}">
+        		<img src="${createLinkTo(dir:'images',file:'ppm.gif')}" alt="Poker" />
+        	</a>
         </div>
 		<div class="userInfo">
 		  ${session?.user?.login} - <a href="${createLink(controller:'player',action:'logout')}">Déconnexion</a>
