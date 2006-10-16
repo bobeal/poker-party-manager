@@ -8,6 +8,9 @@ class PlayerController extends BaseController {
         [ playerList: Player.list( params ) ]
     }
 
+    def welcome = {
+    }
+    
     def show = {
         [ player : Player.get( params.id ) ]
     }

@@ -6,10 +6,15 @@
 	</head>
 	<body>
 		<h1>Bienvenue sur Poker Party Manager</h1>
-		<p>
+		<p style="text-align:center">
 			Cette application vous permet de gérer des 
-			<a href="${createLink(controller:'championship')}">championnats</a>, 
+			<a href="${createLink(controller:'championship')}">championnats</a>,
+			des <a href="${createLink(controller:'place')}">tripots</a>,
+			des <a href="${createLink(controller:'player')}">joueurs</a> et
 			vos <a href="${createLink(controller:'player',action:'edit',id:session?.user?.id)}">informations personnelles</a>.
+		</p>
+		<p style="text-align:center">
+			Accéder directement au <a href="${createLink(controller:'championship',action:'show',id:'1')}">championnat en cours</a>
 		</p>
 	</body>
 </html>

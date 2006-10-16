@@ -8,6 +8,7 @@
     </head>
     <body>
         <div class="body">
+           <a href="${createLink(controller:'championship',action:'show',id:party?.championship?.id)}">Retour au championnat</a>
            <h1>Edition d'une partie</h1>
            <g:if test="${flash.message}">
                  <div class="message">${flash.message}</div>
