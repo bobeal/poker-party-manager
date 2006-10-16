@@ -47,7 +47,8 @@ class PlayerController extends BaseController {
             if (!player.validate()) {
                 render(view:'edit',model:[player:player])
             }
-            player.password = authenticationService.encryptPassword(player.password)
+            if (!player.password.startsWith('{SHA}'))
+	            player.password = authenticationService.encryptPassword(player.password)
             if(player.save(false)) {
                 redirect(action:show,id:player.id)
             }
