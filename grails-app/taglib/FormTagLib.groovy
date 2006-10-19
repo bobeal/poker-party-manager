@@ -126,11 +126,11 @@ class FormTagLib {
 		out.println '</select>'
 		// create year select
 		out.println "<select name='${name}_year'>"
-        for(i in (year - 100)..(year-1)) {
+        for(i in (year - 1)..(year-1)) {
 			out.println "<option value='${i}'>${i}</option>"
         }
         out.println "<option value='${year}' selected='selected'>${year}</option>"
-        for(i in (year + 1)..(year+100)) {
+        for(i in (year + 1)..(year+10)) {
             out.println "<option value='${i}'>${i}</option>"
         }
 		out.println '</select>'
