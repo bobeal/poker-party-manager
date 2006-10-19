@@ -5,6 +5,7 @@
          <meta name="layout" content="main" />
          <title>Edition d'une partie</title>
          <g:javascript library="prototype" />
+         <g:javascript library="scriptaculous" />
     </head>
     <body>
         <div class="body">
@@ -56,9 +57,30 @@
                <input type="hidden" name="party.id" value="${party?.id}"/>
                <div class="dialog">
                 <table>
-                  <tr class='prop'><td valign='top' class='name'><label for='player'>Joueur :</label></td><td valign='top' class='value ${hasErrors(bean:score,field:'player','errors')}'><g:select optionKey="id" optionValue="login" from="${Player.list()}" name='player.id' value='${score?.player?.id}'></g:select></td></tr>
-                  <tr class='prop'><td valign='top' class='name'><label for='points'>Points :</label></td><td valign='top' class='value ${hasErrors(bean:score,field:'points','errors')}'><input type='text' name='points' value='${score?.points}'></input></td></tr>
-                  <tr class='prop'><td valign='top' class='name'><label for='refunds'>Caves :</label></td><td valign='top' class='value ${hasErrors(bean:score,field:'refunds','errors')}'><input type='text' name='refunds' value='${score?.refunds}'></input></td></tr>
+                  <tr class='prop'>
+                    <td valign='top' class='name'>
+                      <label for='player'>Joueur :</label>
+                    </td>
+                    <td valign='top' class='value ${hasErrors(bean:score,field:'player','errors')}'>
+                      <g:select optionKey="id" optionValue="login" from="${Player.list()}" name='player.id' value='${score?.player?.id}'></g:select>
+                    </td>
+                  </tr>
+                  <tr class='prop'>
+                    <td valign='top' class='name'>
+                      <label for='points'>Points :</label>
+                    </td>
+                    <td valign='top' class='value ${hasErrors(bean:score,field:'points','errors')}'>
+                      <input type='text' name='points' value='${score?.points}'></input>
+                    </td>
+                  </tr>
+                  <tr class='prop'>
+                    <td valign='top' class='name'>
+                      <label for='refunds'>Caves :</label>
+                    </td>
+                    <td valign='top' class='value ${hasErrors(bean:score,field:'refunds','errors')}'>
+                      <input type='text' name='refunds' value='${score?.refunds}'></input>
+                    </td>
+                  </tr>
                </table>
                </div>
                <div class="buttons">
@@ -82,7 +104,12 @@
 			  <g:each var='score' in='${Score.findAllByParty(party, [sort:"money", order:"desc"] )}'>
 			   	<tr>
 			   		<td width="30%">${score.player?.login}</td>
-			   		<td width="15%">${score.points}</td>
+			   		<td width="15%"><p id="${score.player?.login}">${score.points}</p></td>
+			   		<script type="text/javascript">
+			   			new Ajax.InPlaceEditor('${score.player?.login}', 
+			   			   '${createLink(controller:"score",action:"updatePoints",params:["id":score.id])}',
+			   			   {highlightcolor:"#578BB8",cancelText:"annuler",clickToEditText:"cliquez pour changer la valeur du champ",cols:5});
+			   		</script>
 			   		<td width="15%">${score.refunds}</td>
 			   		<td width="15%">
 			   			<g:if test="${score.money > 0}">
