@@ -21,6 +21,12 @@ class PlayerTableLine {
         NumberFormat numberFormat = new DecimalFormat("###0.00")
         return numberFormat.format(totalMoney)
     }
+
+    def getLpa() {
+    	def tempDouble = ((double) partiesWon / (partiesWon + partiesDraw + partiesLost)) * 10
+    	NumberFormat numberFormat = new DecimalFormat("###0.00")
+    	return numberFormat.format(tempDouble)
+    }
     
     def addScore(score) {
         totalMoney = new Double(totalMoney + score.money)
