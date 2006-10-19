@@ -36,7 +36,7 @@ class ScoreController extends BaseController {
     def update = {
         def score = Score.get( params.id )
         if(score) {
-             score.properties = params
+            score.properties = params
             if(score.save()) {
                 redirect(action:show,id:score.id)
             }
@@ -50,6 +50,14 @@ class ScoreController extends BaseController {
         }
     }
 
+    def updatePoints = {
+       def score = Score.get(params.id)
+       
+       score.points = Integer.parseInt(params.value)
+       if (score.save())
+           render params.value
+    }
+    
     def create = {
         def score = new Score()
         score.properties = params
