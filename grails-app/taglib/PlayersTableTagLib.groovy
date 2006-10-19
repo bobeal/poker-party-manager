@@ -7,10 +7,11 @@ class PlayersTableTagLib {
             out << "<tr>"
             out << "<td width='10%'>" << index + 1 << "</td>"
             out << "<td width='30%'>" << playerLine?.playerLogin << "</td>"
-            out << "<td width='21%'>" << playerLine?.getFormattedTotal() << "</td>"
-            out << "<td width='13%'>" << playerLine?.partiesWon << "</td>"
-            out << "<td width='13%'>" << playerLine?.partiesDraw << "</td>"
-            out << "<td width='13%'>" << playerLine?.partiesLost << "</td>"
+            out << "<td width='20%'>" << playerLine?.getFormattedTotal() << "</td>"
+            out << "<td width='10%'>" << playerLine?.partiesWon << "</td>"
+            out << "<td width='10%'>" << playerLine?.partiesDraw << "</td>"
+            out << "<td width='10%'>" << playerLine?.partiesLost << "</td>"
+            out << "<td width='10%'>" << playerLine?.getLpa() << "</td>"
             out << "</tr>"
         }
     }
