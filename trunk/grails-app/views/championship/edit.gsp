@@ -33,7 +33,7 @@
 				  </tr>
 				  <tr class='prop'>
 				    <td valign='top' class='name'>
-				      <label for='startDate'>Date de début :</label>
+				      <label for='startDate'>Date de dÃ©but :</label>
 				    </td>
 				    <td valign='top' class='value ${hasErrors(bean:championship,field:'startDate','errors')}'>
 				      <g:datePicker name='startDate' value='${championship?.startDate}'></g:datePicker>
