@@ -1,0 +1,22 @@
+#Sat Oct 21 14:19:16 CEST 2006
+eclipse.preferences.version=1
+encoding//grails-app/i18n/messages_fr.properties=UTF-8
+encoding//grails-app/views/championship/create.gsp=UTF-8
+encoding//grails-app/views/championship/edit.gsp=UTF-8
+encoding//grails-app/views/championship/list.gsp=UTF-8
+encoding//grails-app/views/championship/show.gsp=UTF-8
+encoding//grails-app/views/championship/table.gsp=UTF-8
+encoding//grails-app/views/layouts/main.gsp=UTF-8
+encoding//grails-app/views/party/create.gsp=UTF-8
+encoding//grails-app/views/party/edit.gsp=UTF-8
+encoding//grails-app/views/place/create.gsp=UTF-8
+encoding//grails-app/views/place/edit.gsp=UTF-8
+encoding//grails-app/views/place/list.gsp=UTF-8
+encoding//grails-app/views/place/show.gsp=UTF-8
+encoding//grails-app/views/player/create.gsp=UTF-8
+encoding//grails-app/views/player/edit.gsp=UTF-8
+encoding//grails-app/views/player/list.gsp=UTF-8
+encoding//grails-app/views/player/login.gsp=UTF-8
+encoding//grails-app/views/player/show.gsp=UTF-8
+encoding//grails-app/views/player/welcome.gsp=UTF-8
+encoding/<project>=UTF-8

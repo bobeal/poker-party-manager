@@ -1,3 +1,5 @@
+import java.io.OutputStream
+
 class PlayerController extends BaseController {
     
     AuthenticationService authenticationService
@@ -31,11 +33,13 @@ class PlayerController extends BaseController {
     def edit = {
         def player = Player.get( params.id )
 
-        if(!player) {
-                flash.message = "Player not found with id ${params.id}"
-                redirect(action:list)
-        }
-        else {
+        if (!player) {
+            flash.message = "Player not found with id ${params.id}"
+            redirect(action:list)
+        } else if (!player.login.equals(session.user.login)) {
+            flash.message = "You cannot edit personal information of ${player.login}"
+            redirect(action:list)
+        } else {
             return [ player : player ]
         }
     }
@@ -44,6 +48,9 @@ class PlayerController extends BaseController {
         def player = Player.get( params.id )
         if(player) {
             player.properties = params
+            def f = request.getFile('photo')
+            if (f != null && f.getBytes().length > 0)
+	            player.photo = f.getBytes()
             if (!player.validate()) {
                 render(view:'edit',model:[player:player])
             }
@@ -83,9 +90,21 @@ class PlayerController extends BaseController {
         }
     }
 
+    def getPhotoData = {
+        def player = Player.get( params.id )
+		if (player && player.photo) {
+		    OutputStream os = response.getOutputStream()
+		    response.setContentType("image/jpeg")
+		    response.setContentLength(player.photo.length)
+		    os.write(player.photo)
+	    	os.flush();
+	    	os.close();
+		} 
+    }
+    
     def login = {
    		if (session.user) {
-           	redirect(controller:'championship')	
+           	render(view:'welcome')	
         } else {
    			return
         }

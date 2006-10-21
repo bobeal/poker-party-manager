@@ -5,7 +5,15 @@ class Player {
     String login
     String password
     String email
+	Boolean isSuperAdmin = false
     
+    byte[] photo
+    String favoriteQuote
+    String favoriteHand
+    String amulet
+    
+    def optionals = ['isSuperAdmin', 'photo', 'favoriteHand', 'favoriteQuote', 'amulet']
+                
     String toString() { "${this.class.name} :  $id" }
 	
 	boolean equals(other) {
@@ -25,6 +33,6 @@ class Player {
     def constraints = {
         login(length:5..15,blank:false,unique:true)
         password(length:5..15,blank:false)
-        email(blank:false)
+        email(blank:false,email:true)
     }
 }	
