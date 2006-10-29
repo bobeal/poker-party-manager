@@ -1,6 +1,11 @@
 a:active,a:link,a:visited,a:hover {
     color:#0D5798;    
 }
+
+.logo img {
+   border-style:none;
+}
+
 .menuButton {
 	background-color:#8CAFCD;
 	border: 1px solid white;
@@ -100,6 +105,12 @@ td {
 }
 .loginDialog label{
 	font-weight: bold;
+}
+.loginLogo
+{
+    margin-top: 50px;
+	margin-left: 39%;
+	margin-right: 39%;
 }
 
 textarea{

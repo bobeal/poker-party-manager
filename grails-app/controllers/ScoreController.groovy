@@ -54,8 +54,9 @@ class ScoreController extends BaseController {
        def score = Score.get(params.id)
        
        score.points = Integer.parseInt(params.value)
-       if (score.save())
-           render params.value
+       score.money = (score.points - (score.refunds * 100)) / 40
+       score.save()
+       render score.points
     }
     
     def create = {
