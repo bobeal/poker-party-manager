@@ -120,7 +120,7 @@
 	<body onload="<g:pageProperty name='body.onload'/>">
         <div class="logo">
         	<a href="${createLink(controller:'player',action:'welcome')}">
-        		<img src="${createLinkTo(dir:'images',file:'ppm.gif')}" alt="Poker" />
+        		<img src="${createLinkTo(dir:'images',file:'ppm_small.png')}" alt="Poker" />
         	</a>
         </div>
 		<div class="userInfo">

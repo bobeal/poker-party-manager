@@ -52,7 +52,7 @@
 	<classpathentry kind="var" path="GRAILS_HOME/lib/standard-2.4.jar"/>
 	<classpathentry kind="var" path="GRAILS_HOME/lib/xercesImpl.jar"/>
 	<classpathentry kind="var" path="GRAILS_HOME/lib/xml-apis.jar"/>
-	<classpathentry kind="var" path="GRAILS_HOME/dist/grails-0.2.jar"/>
+	<classpathentry kind="var" path="GRAILS_HOME/dist/grails-0.2.2.jar"/>
 	<classpathentry kind="var" path="GRAILS_HOME/ant/lib/ant.jar"/>
 	<classpathentry exported="true" kind="lib" path="bin-groovy"/>
 	<classpathentry kind="output" path="web-app/WEB-INF/classes"/>
