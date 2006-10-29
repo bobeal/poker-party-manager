@@ -124,54 +124,68 @@
         	</a>
         </div>
 		<div class="userInfo">
-		  ${session?.user?.login} - <a href="${createLink(controller:'player',action:'logout')}">Déconnexion</a>
+		  ${session?.user?.login} - <a href="${createLink(controller:'player',action:'logout')}"><g:message code="action.logout"/></a>
     	</div>
 		<div class="yuimenubar" id="menu">
 			<div class="bd">
 			<ul class="first-of-type">
 				<li class="yuimenubaritem first-of-type">
-					<g:link controller="championship">Championnats</g:link>
+					<g:link controller="championship"><g:message code="menu.championship"/></g:link>
 					<div id="championship" class="yuimenu">
                       <div class="bd">
 					    <ul>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'championship',action:'list')}">Voir</a>
+						    <a href="${createLink(controller:'championship',action:'list')}">
+						    	<g:message code="action.show"/>
+						    </a>
 						  </li>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'championship',action:'create')}">Créer</a>
+						    <a href="${createLink(controller:'championship',action:'create')}">
+						    	<g:message code="action.create"/>
+						    </a>
 						  </li>
 					    </ul>
 					  </div>
 					</div>
 				</li>
 				<li class="yuimenubaritem">
-					<g:link controller="player">Joueurs</g:link>
+					<g:link controller="player"><g:message code="menu.player"/></g:link>
 					<div id="player" class="yuimenu">
                       <div class="bd">
 						<ul>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'player',action:'edit',id:session.user.id)}">Ma page</a>
+						    <a href="${createLink(controller:'player',action:'edit',id:session.user.id)}">
+						    	<g:message code="player.my_page"/>
+						    </a>
 						  </li>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'player',action:'list')}">Voir</a>
+						    <a href="${createLink(controller:'player',action:'list')}">
+						    	<g:message code="action.show"/>
+						    </a>
 						  </li>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'player',action:'create')}">Créer</a>
+						    <a href="${createLink(controller:'player',action:'create')}">
+						    	<g:message code="action.create"/>
+						    </a>
 						  </li>
 					    </ul>
 					  </div>
 					</div>
 				</li>
 				<li class="yuimenubaritem">
-					<g:link controller="place">Tripots</g:link>
+					<g:link controller="place"><g:message code="menu.place"/></g:link>
 					<div id="place" class="yuimenu">
                       <div class="bd">
 						<ul>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'place',action:'list')}">Voir</a>
+						    <a href="${createLink(controller:'place',action:'list')}">
+						    	<g:message code="action.show"/>
+						    </a>
 						  </li>
 						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'place',action:'create')}">Créer</a>
+						    <a href="${createLink(controller:'place',action:'create')}">
+						    	<g:message code="action.create"/>
+						    </a>
 						  </li>
 					    </ul>
 					  </div>
