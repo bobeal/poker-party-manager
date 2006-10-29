@@ -1,3 +1,6 @@
+import java.text.DecimalFormat
+import java.text.NumberFormat
+
 class Score { 
 	Long id
 	Long version
@@ -13,6 +16,11 @@ class Score {
     
     String toString() { "${this.class.name} :  $id" }
 	
+    def formattedTotal() {
+        NumberFormat numberFormat = new DecimalFormat("###0.00")
+        return numberFormat.format(money)
+    }
+
 	boolean equals(other) {
 		if(other?.is(this))return true
 		if(!(other instanceof Score)) return false

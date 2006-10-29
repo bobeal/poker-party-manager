@@ -29,11 +29,11 @@ class PokerPartyManagerTagLib {
                 def playersScoreForParty = Score.findByPlayerAndParty(player,party)
                 if (playersScoreForParty != null) {
                     if (playersScoreForParty.money > 0)
-                        out << "<span style=\"color:green\">" << playersScoreForParty.money << "</span>"
+                        out << "<span style=\"color:green\">" << playersScoreForParty.formattedTotal() << "</span>"
                     else if (playersScoreForParty.money < 0)
-                        out << "<span style=\"color:red\">" << playersScoreForParty.money << "</span>"
+                        out << "<span style=\"color:red\">" << playersScoreForParty.formattedTotal() << "</span>"
                     else
-                        out << playersScoreForParty.money
+                        out << playersScoreForParty.formattedTotal()
                 }
             }
             out << "</td>"
