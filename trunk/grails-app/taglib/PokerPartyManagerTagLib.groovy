@@ -58,6 +58,9 @@ class PokerPartyManagerTagLib {
     
     @Property escapeHTML = { attrs, body ->
     	def data = attrs['data']
-    	out << data.replaceAll("'","&apos;")
+    	if (data)
+    	  out << data.replaceAll("'","&apos;")
+    	else
+    	  out << ""
     }
 }

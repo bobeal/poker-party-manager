@@ -104,19 +104,30 @@
 			  <g:each var='score' in='${Score.findAllByParty(party, [sort:"money", order:"desc"] )}'>
 			   	<tr>
 			   		<td width="30%">${score.player?.login}</td>
-			   		<td width="15%"><p id="${score.player?.login}">${score.points}</p></td>
+			   		<td width="15%"><p id="points-${score.player?.login}">${score.points}</p></td>
 			   		<script type="text/javascript">
-			   			new Ajax.InPlaceEditor('${score.player?.login}', 
+			   			new Ajax.InPlaceEditor('points-${score.player?.login}', 
 			   			   '${createLink(controller:"score",action:"updatePoints",params:["id":score.id])}',
-			   			   {highlightcolor:"#578BB8",cancelText:"annuler",clickToEditText:"cliquez pour changer la valeur du champ",cols:5});
+			   			   {highlightcolor:"#578BB8",cancelText:"annuler",
+			   			    clickToEditText:"cliquez pour changer la valeur du champ",cols:5,
+			   			    onComplete:function(transport,element) {
+			   			    	var resultData = eval('('+transport.responseText+')');
+								$('points-${score.player?.login}').innerHTML = resultData.points;
+								$('money-${score.player?.login}').innerHTML = resultData.money;
+								if (resultData.money > 0)
+									$('money-${score.player?.login}').setAttribute('style','color:green');
+								else
+									$('money-${score.player?.login}').setAttribute('style','color:red');
+			   			    }
+			   			   });
 			   		</script>
 			   		<td width="15%">${score.refunds}</td>
 			   		<td width="15%">
 			   			<g:if test="${score.money > 0}">
-			   				<span style="color:green">${score.money}</span>
+			   				<span id="money-${score.player?.login}" style="color:green">${score.money}</span>
 			   			</g:if>
 			   			<g:else>
-			   				<span style="color:red">${score.money}</span>
+			   				<span id="money-${score.player?.login}" style="color:red">${score.money}</span>
 			   			</g:else>
 			   		</td>
 			   		<td width="35%">
