@@ -16,17 +16,17 @@
                  <th><g:message code="player.email" /></th>
                  <th></th>
                </tr>
-               <g:each in="${playerList}">
+               <g:each in="${playerList}" var="player">
                     <tr>
-                      <td>${it.login}</td>
-                      <td>${it.email}</td>
+                      <td>${player.login}</td>
+                      <td>${player.email}</td>
                        <td class="actionButtons">
                             <span class="actionButton">
-                              <g:link action="show" id="${it.id}"><g:message code="action.show" /></g:link>
+                              <g:link action="show" id="${player?.id}"><g:message code="action.show" /></g:link>
                             </span>
 							<g:hasPlayerPagePermission id="${player?.id}">
                               <span class="actionButton">
-                                <g:link action="edit" id="${it.id}"><g:message code="action.edit" /></g:link>
+                                <g:link action="edit" id="${player?.id}"><g:message code="action.edit" /></g:link>
                               </span>
                  			</g:hasPlayerPagePermission>
                        </td>

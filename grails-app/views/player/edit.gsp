@@ -21,7 +21,6 @@
                <g:renderErrors bean="${player}" as="list" />
              </div>
            </g:hasErrors>
-   	       <input type="hidden" name="player.id" value="${player?.id}" />
            <g:form method="post" enctype="multipart/form-data">
              <input type="hidden" name="id" value="${player?.id}" />
              <div class="dialog">

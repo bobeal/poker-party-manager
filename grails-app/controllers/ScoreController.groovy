@@ -50,13 +50,17 @@ class ScoreController extends BaseController {
         }
     }
 
+    // called asynchronously for parties edition page
     def updatePoints = {
        def score = Score.get(params.id)
        
        score.points = Integer.parseInt(params.value)
        score.money = (score.points - (score.refunds * 100)) / 40
        score.save()
-       render score.points
+       render(builder:'json') {
+         points(score.points)
+         money(score.money)
+  	   }
     }
     
     def create = {
