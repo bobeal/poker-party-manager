@@ -1,12 +1,12 @@
 <table>
   <tr>
-    <th>Place</th>
-    <th>Joueur</th>
-	<th>Total</th>
-	<th>Parties gagn&eacute;es</th>
-	<th>Parties nulles</th>
-	<th>Parties perdues</th>
-	<th>Indice LPA (sur 10)</th>
+    <th><g:message code="championship.position"/></th>
+    <th><g:message code="championship.player"/></th>
+	<th><g:message code="championship.total"/></th>
+	<th><g:message code="championship.parties_won"/></th>
+	<th><g:message code="championship.parties_draw"/></th>
+	<th><g:message code="championship.parties_lost"/></th>
+	<th><g:message code="championship.lpa_index"/></th>
   </tr>
   <g:playersTable playersLines="${playersLines}"/>
 </table>

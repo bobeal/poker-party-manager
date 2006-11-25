@@ -2,10 +2,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="layout" content="main" />
-		<title>Accueil de Poker Party Manager</title>
+		<title>Poker Party Manager - <g:message code="message.home"/></title>
 	</head>
 	<body>
-		<h1>Bienvenue sur Poker Party Manager</h1>
+		<h1><g:message code="message.home"/></h1>
 		<p style="text-align:center">
 			Cette application vous permet de gérer des 
 			<a href="${createLink(controller:'championship')}">championnats</a>,

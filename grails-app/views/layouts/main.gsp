@@ -136,7 +136,7 @@
 					    <ul>
 						  <li class="yuimenuitem">
 						    <a href="${createLink(controller:'championship',action:'list')}">
-						    	<g:message code="action.show"/>
+						    	<g:message code="action.list"/>
 						    </a>
 						  </li>
 						  <li class="yuimenuitem">
@@ -160,7 +160,7 @@
 						  </li>
 						  <li class="yuimenuitem">
 						    <a href="${createLink(controller:'player',action:'list')}">
-						    	<g:message code="action.show"/>
+						    	<g:message code="action.list"/>
 						    </a>
 						  </li>
 						  <li class="yuimenuitem">
@@ -179,7 +179,7 @@
 						<ul>
 						  <li class="yuimenuitem">
 						    <a href="${createLink(controller:'place',action:'list')}">
-						    	<g:message code="action.show"/>
+						    	<g:message code="action.list"/>
 						    </a>
 						  </li>
 						  <li class="yuimenuitem">
