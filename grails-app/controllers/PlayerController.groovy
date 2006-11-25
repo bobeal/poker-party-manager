@@ -104,9 +104,9 @@ class PlayerController extends BaseController {
     
     def login = {
    		if (session.user) {
-           	render(view:'welcome')	
+   		  	redirect(controller:"championship",action:"list")	
         } else {
-   			return
+   		  	return
         }
     }
 
