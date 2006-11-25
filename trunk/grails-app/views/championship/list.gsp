@@ -8,7 +8,7 @@
         <div class="body">
            <h1><g:message code="championship.list_page"/></h1>
             <g:if test="${flash.message}">
-                 <div class="message">${flash.message}</div>
+                 <div class="message"><g:message code="${flash.message}"/></div>
             </g:if>
            <table>
                <tr>
@@ -23,19 +23,25 @@
                        <td>${it.startDate}</td>
                        <td>${it.endDate}</td>
                        <td class="actionButtons">
-                            <span class="actionButton">
-                              <g:link action="show" id="${it.id}">
-                                <g:message code="action.show"/>
-                              </g:link>
-                            </span>
-                            <br/>
-                            <span class="actionButton">
-                              <g:link controller='party' 
-                                      params='["championship.id":it.id]' 
-                                      action='create'>
-                                <g:message code="championship.add_party"/>
-                              </g:link>
-                            </span>
+                         <span class="actionButton">
+                           <g:link action="show" id="${it.id}">
+                             <g:message code="action.show"/>
+                           </g:link>
+                         </span>
+                         <br/>
+                         <span class="actionButton">
+                           <g:link controller='party' 
+                                   params='["championship.id":it.id]' 
+                                   action='create'>
+                             <g:message code="championship.add_party"/>
+                           </g:link>
+                         </span>
+						 <br/>
+                         <span class="actionButton">
+                           <g:link controller="party" action="invite" id="${it.id}">
+                             <g:message code="party.invite"/>
+                           </g:link>
+                         </span>
                        </td>
                     </tr>
                </g:each>
