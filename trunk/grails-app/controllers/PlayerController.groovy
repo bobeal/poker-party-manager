@@ -7,8 +7,6 @@ class PlayerController extends BaseController {
     def index = { redirect(action:list,params:params) }
 
     def list = {
-            def playerList = Player.list(params)
-            println "size ${playerList.login}"
         [ playerList: Player.list( params ) ]
     }
 

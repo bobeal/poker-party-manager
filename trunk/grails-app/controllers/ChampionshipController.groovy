@@ -23,27 +23,14 @@ class ChampionshipController extends BaseController {
         }
     }
 
-    def edit = {
-        def championship = Championship.get( params.id )
-
-        if(!championship) {
-                flash.message = "Championship not found with id ${params.id}"
-                redirect(action:list)
-        }
-        else {
-            return [ championship : championship ]
-        }
-    }
-
     def update = {
         def championship = Championship.get( params.id )
         if(championship) {
-             championship.properties = params
+            championship.properties = params
             if(championship.save()) {
                 redirect(action:show,id:championship.id)
-            }
-            else {
-                render(view:'edit',model:[championship:championship])
+            } else {
+                redirect(action:show,id:championship.id)
             }
         }
         else {
@@ -61,10 +48,9 @@ class ChampionshipController extends BaseController {
     def save = {
         def championship = new Championship()
         championship.properties = params
-        if(championship.save()) {
+        if (championship.save()) {
             redirect(action:show,id:championship.id)
-        }
-        else {
+        } else {
             render(view:'create',model:[championship:championship])
         }
     }
