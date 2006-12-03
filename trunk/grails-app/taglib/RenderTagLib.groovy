@@ -145,7 +145,7 @@ class RenderTagLib implements com.opensymphony.module.sitemesh.RequestConstants 
 		if(!max) max = (attrs.max ? attrs.max.toInteger() : 10)
 		if(!offset) offset = (attrs.offset ? attrs.offset.toInteger() : 0)
 		
-		def linkParams = [offset:offset-10,max:max]
+		def linkParams = [offset:offset-max,max:max]
 		def linkTagAttrs = ['class':'prevLink',action:action]
 		if(attrs.controller) {
 			linkTagAttrs.controller = attrs.controller	
@@ -176,7 +176,7 @@ class RenderTagLib implements com.opensymphony.module.sitemesh.RequestConstants 
 				}			
 			}			
 		}
-		linkParams.offset = offset+10
+		linkParams.offset = offset+max
 		if(combined < total) {	
 			linkTagAttrs.'class'='nextLink'			
 			link(linkTagAttrs,{out<< (attrs.'next'? attrs.'next' : 'Next' )})			
@@ -233,63 +233,29 @@ class RenderTagLib implements com.opensymphony.module.sitemesh.RequestConstants 
 	            t.make( [ 'it' : attrs.bean ] ).writeTo(out)
 	        }
         }
-        else {
-        	t.make().writeTo(out)
-        }
+		else if(attrs.template && attrs.size() == 1) {
+			t.make().writeTo(out)			
+		}
     }
 
-    /**
-     * Attempts to render input for a property value based by attempting to choose a rendering component
-     * to use based on the property type
-     */
-    def renderInput = { attrs, body ->
-        def bean = attrs['bean']
-        if(!bean) {
-            throwTagError("Tag [renderInput] is missing required attribute [bean]")
-        }
-        if(!attrs['property']) {
-            throwTagError("Tag [renderInput] is missing required attribute [property]")
-        }
+	/**
+	 * Used to include templates
+	 */
+	def include = { attrs ->
+		if(attrs.template) {
+	        def engine = grailsAttributes.getPagesTemplateEngine()
+	        def uri = grailsAttributes.getTemplateUri(attrs.template,request)
 
-       def app = grailsAttributes.getGrailsApplication()
-       def dc = app.getGrailsDomainClass(bean.class.name)
-       def pv = bean.metaPropertyValues.find {
-            it.name == attrs['property']
-       }
-       if(!pv) {
-          throwTagError("Property [${attrs['property']}] does not exist in tag [renderInput] for bean [${bean}]")
-       }
-       def engine = grailsAttributes.getPagesTemplateEngine()
-       def uri = findUriForType(pv.type)
+	        def url = servletContext.getResource(uri)
+	        if(!url)
+	            throwTagError("No template found for name [${attrs.template}] in tag [include]")
 
-       if(!uri)
-            throwTagError("Type [${pv.type}] is unsupported by tag [renderInput]. No template found.")
-
-       def t = engine.createTemplate(   uri,
-                                        servletContext,
-                                        request,
-                                        response)
-       if(!t) {
-            throwTagError("Type [${pv.type}] is unsupported by tag [renderInput]. No template found.")
-       }
-
-       def binding = [ name:pv.name,value:pv.value]
-       binding['constraints'] = (dc ? dc.constrainedProperties : null)
-
-       t.make(binding).writeTo(out)
-    }
-
-    private String findUriForType(type) {
-        if(type == Object.class)
-            return null;
-        def uri = "/WEB-INF/internal/render/${type.name}.gsp";
-        def url = servletContext.getResource(uri)
-
-        if(url != null) {
-            return uri
-        }
-        else {
-            return findUriForType(type.superClass)
-        }
-    }	
+	        def t = engine.createTemplate(  uri,
+	                                        servletContext,
+	                                        request,
+	                                        response)
+			
+			t.make().writeTo(out)
+		}
+	}	
 }

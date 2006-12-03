@@ -46,24 +46,24 @@ class PlayerController extends BaseController {
 
     def update = {
         def player = Player.get( params.id )
-        if(player) {
+        if (player) {
             player.properties = params
             def f = request.getFile('photo')
             if (f != null && f.getBytes().length > 0)
 	            player.photo = f.getBytes()
             if (!player.validate()) {
+                println "validation error"
+                render(view:'edit',model:[player:player])
+                return
+            }
+            if (player.newPassword != null && !player.newPassword.equals(""))
+	            player.password = authenticationService.encryptPassword(player.newPassword)
+            if (player.save(false)) {
+                render(view:'show',model:[player:player])
+            } else {
                 render(view:'edit',model:[player:player])
             }
-            if (!player.password.startsWith('{SHA}'))
-	            player.password = authenticationService.encryptPassword(player.password)
-            if(player.save(false)) {
-                redirect(action:show,id:player.id)
-            }
-            else {
-                render(view:'edit',model:[player:player])
-            }
-        }
-        else {
+        } else {
             flash.message = "Player not found with id ${params.id}"
             redirect(action:edit,id:params.id)
         }
@@ -112,9 +112,11 @@ class PlayerController extends BaseController {
 
     def handleLogin = {
 
+        println "handleLogin"
    		if (params.login && params.pwd) {
 			def player = Player.findByLogin(params.login)
    			if (player) {
+   			    println "found player ${player.id}"
                 def encryptedPassword = authenticationService.encryptPassword(params.pwd)
         		if (player.password == encryptedPassword) {
         		    session.user = player
@@ -123,6 +125,9 @@ class PlayerController extends BaseController {
                    	flash.message = "Echec d'authentification pour le login '${params.login}' "
                    	render(view:'login')
                	}
+   			} else {
+   			    flash.message = 'Identifiant inconnu'
+   			    render(view:'login')
    			}
    		} else {
 			flash.message = 'Identifiant ou mot de passe non fourni'

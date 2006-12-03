@@ -37,8 +37,8 @@
 				   <td valign='top' class='name'>
 				     <label for='password'><g:message code="player.password"/>  :</label>
 				   </td>
-				   <td valign='top' class='value ${hasErrors(bean:player,field:'password','errors')}'>
-				     <input type='password' name='password' value='${player?.password}' />
+				   <td valign='top' class='value ${hasErrors(bean:player,field:'newPassword','errors')}'>
+				     <input type='password' name='newPassword' />
 				   </td>
 				 </tr>
 			     <tr class='prop'>

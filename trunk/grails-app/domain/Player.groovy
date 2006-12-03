@@ -4,6 +4,7 @@ class Player {
 
     String login
     String password
+    String newPassword
     String email
 	Boolean isSuperAdmin = false
     
@@ -13,7 +14,8 @@ class Player {
     String amulet
     
     def optionals = ['isSuperAdmin', 'photo', 'favoriteHand', 'favoriteQuote', 'amulet']
-                
+	def transients = ['newPassword']
+	                  
     String toString() { "${this.class.name} :  $id" }
 	
 	boolean equals(other) {
@@ -30,9 +32,9 @@ class Player {
 		hashCode = 29 * (hashCode + ( !id ? 0 : id ^ (id >>> 32) ) )
 	}
     
-    def constraints = {
+    static constraints = {
         login(length:5..15,blank:false,unique:true)
-        password(length:5..15,blank:false)
+        password(minSize:5,blank:false)
         email(blank:false,email:true)
     }
 }	
