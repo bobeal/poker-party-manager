@@ -21,7 +21,7 @@ class Place {
 		hashCode = 29 * (hashCode + ( !id ? 0 : id ^ (id >>> 32) ) )
 	}
     
-    def constraints = {
+    static constraints = {
         name(length:5..40,blank:false)
     }
 }	
