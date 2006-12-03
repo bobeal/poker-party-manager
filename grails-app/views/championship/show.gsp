@@ -1,4 +1,3 @@
-
 <html>
     <head>
 		<link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ajaxtabs.css')}" />
