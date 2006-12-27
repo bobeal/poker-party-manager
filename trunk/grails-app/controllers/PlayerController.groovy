@@ -51,21 +51,19 @@ class PlayerController extends BaseController {
             def f = request.getFile('photo')
             if (f != null && f.getBytes().length > 0)
 	            player.photo = f.getBytes()
-            if (!player.validate()) {
-                println "validation error"
-                render(view:'edit',model:[player:player])
-                return
-            }
-            if (player.newPassword != null && !player.newPassword.equals(""))
-	            player.password = authenticationService.encryptPassword(player.newPassword)
-            if (player.save(false)) {
-                render(view:'show',model:[player:player])
-            } else {
-                render(view:'edit',model:[player:player])
-            }
+           	if (player.newPassword != null && !player.newPassword.equals(""))
+            	player.password = authenticationService.encryptPassword(player.newPassword)
+           	if (player.save()) {
+           	    log.debug("Updated player ${player}")
+               	render(view:'show',model:[player:player])
+           	} else {
+           	    log.debug("Got errors for player ${player}")
+           	    log.debug("Errors are ${player.errors}")
+				render(view:'edit',model:[player:player])
+           	}
         } else {
             flash.message = "Player not found with id ${params.id}"
-            redirect(action:edit,id:params.id)
+            redirect(action:list)
         }
     }
 
@@ -78,14 +76,14 @@ class PlayerController extends BaseController {
     def save = {
         def player = new Player()
         player.properties = params
-        if (!player.validate()) {
+		// validate before encrypting password
+        if (!player.validate(true)) {
             render(view:'create',model:[player:player])
         }
         player.password = authenticationService.encryptPassword(player.password)
-        if(player.save(false)) {
-            redirect(action:show,id:player.id)
-        }
-        else {
+        if (player.save()) {
+            render(view:'edit',model:[player:player])
+        } else {
             render(view:'create',model:[player:player])
         }
     }
@@ -112,11 +110,9 @@ class PlayerController extends BaseController {
 
     def handleLogin = {
 
-        println "handleLogin"
    		if (params.login && params.pwd) {
 			def player = Player.findByLogin(params.login)
    			if (player) {
-   			    println "found player ${player.id}"
                 def encryptedPassword = authenticationService.encryptPassword(params.pwd)
         		if (player.password == encryptedPassword) {
         		    session.user = player

@@ -1,6 +1,6 @@
 class PokerPartyManagerTagLib {
 
-    @Property playersTable = { attrs ->
+    def playersTable = { attrs ->
         def playersLines = attrs['playersLines']
         
         playersLines.eachWithIndex { playerLine,index ->
@@ -16,7 +16,7 @@ class PokerPartyManagerTagLib {
         }
     }
 
-    @Property partiesTable = { attrs ->
+    def partiesTable = { attrs ->
         def parties = attrs['parties']
         def players = Player.list()
         
@@ -52,7 +52,7 @@ class PokerPartyManagerTagLib {
 	/**
 	 * Only invokes the body if the user within the session is a system administrator
 	 */
-	@Property hasPlayerPagePermission = { attrs, body ->
+	def hasPlayerPagePermission = { attrs, body ->
 		if(session.user) {
 			def u = session.user
 			if(u.isSuperAdmin || String.valueOf(u.id.longValue()) == attrs['id']) {
@@ -61,7 +61,7 @@ class PokerPartyManagerTagLib {
 		}
 	}
     
-    @Property escapeHTML = { attrs, body ->
+    def escapeHTML = { attrs, body ->
     	def data = attrs['data']
     	if (data)
     	  out << data.replaceAll("'","&apos;")

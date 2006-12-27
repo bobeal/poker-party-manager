@@ -20,29 +20,9 @@
           <g:renderErrors bean="${party}" as="list" />
         </div>
       </g:hasErrors>
-      <g:form controller="party" method="post" >
+      <g:form method="post" >
         <input type="hidden" name="id" value="${party?.id}" />
-        <div class="dialog">
-          <table>
-            <tr class='prop'>
-              <td valign='top' class='name'>
-                <label for='date'><g:message code="party.date"/> :</label>
-              </td>
-              <td valign='top' class='value ${hasErrors(bean:party,field:'date','errors')}'>
-				<g:datePicker name='date' value='${party?.date}'></g:datePicker>
-              </td>
-            </tr>
-            <tr class='prop'>
-			  <td valign='top' class='name'>
-			    <label for='place'><g:message code="party.place"/> :</label>
-			  </td>
-			  <td valign='top' class='value ${hasErrors(bean:party,field:'place','errors')}'>
-			    <g:select optionKey="id" optionValue="name" from="${Place.list()}" 
-			              name='place.id' value="${party?.place?.id}"></g:select>
-			  </td>
-			</tr>
-          </table>
-        </div>
+       	<g:render template="/party/fieldlist" model="[party:party]" />
         <div class="buttons">
           <span class="button"><g:actionSubmit value="Update" /></span>
         </div>
