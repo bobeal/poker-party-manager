@@ -5,14 +5,22 @@ class Party {
     Date date
     Championship championship
     Place place
-    
+	String kind = allKinds.get(0)
+	Double buyin
+	Integer coinsPerBuyin
+	String prizePool
+	
     def relatesToMany = [ scores : Score ]
     def belongsTo = [Championship]
                      
     Set scores = new HashSet()
-    
+
+    static transients = [ "allKinds" ]
+
     String toString() { "${this.class.name} :  $id" }
-	
+
+    static allKinds = [ "Cash Game", "Sit and Go"]
+
     def addScore(score) {
         if (!score)
             scores = new HashSet()
@@ -32,5 +40,10 @@ class Party {
 	int hashCode() {
 		int hashCode = 0
 		hashCode = 29 * (hashCode + ( !id ? 0 : id ^ (id >>> 32) ) )
+	}
+	
+	static constraints = {
+	    coinsPerBuyin(matches:"[0-9]",blank:false)
+	    buyin(blank:false)
 	}
 }

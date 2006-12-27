@@ -3,6 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
     <title>Poker Party Manager - <g:message code="party.create_page"/></title>         
+    <g:javascript library="prototype" />
   </head>
   <body>
     <div class="body">
@@ -20,27 +21,7 @@
       </g:hasErrors>
       <g:form action="save" method="post" >
         <input type="hidden" name="championship.id" value="${params['championship.id']}"/>
-        <div class="dialog">
-          <table>
-            <tr class='prop'>
-              <td valign='top' class='name'>
-                <label for='date'><g:message code="party.date"/> :</label>
-              </td>
-              <td valign='top' class='value ${hasErrors(bean:party,field:'date','errors')}'>
-                <g:datePicker name='date' value='${party?.date}'></g:datePicker>
-              </td>
-            </tr>
-            <tr class='prop'>
-              <td valign='top' class='name'>
-                <label for='place'><g:message code="party.place"/> :</label>
-              </td>
-              <td valign='top' class='value ${hasErrors(bean:party,field:'place','errors')}'>
-                <g:select optionKey="id" optionValue="name" 
-                          from="${Place.list()}" name='place.id'></g:select>
-              </td>
-            </tr>
-          </table>
-        </div>
+       	<g:render template="/party/fieldlist" model="[party:party]" />
         <div class="buttons">
           <span class="formButton">
             <input type="submit" value="Create"></input>
