@@ -33,7 +33,7 @@ class Player {
 	}
     
     static constraints = {
-        login(length:5..15,blank:false,unique:true)
+        login(length:5..15,blank:false) //,unique:true
         password(minSize:5,blank:false)
         email(blank:false,email:true)
     }

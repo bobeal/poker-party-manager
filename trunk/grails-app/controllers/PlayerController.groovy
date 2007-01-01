@@ -1,4 +1,6 @@
 import java.io.OutputStream
+import org.springframework.validation.BindException;
+import org.springframework.validation.Errors;
 
 class PlayerController extends BaseController {
     
@@ -47,6 +49,21 @@ class PlayerController extends BaseController {
     def update = {
         def player = Player.get( params.id )
         if (player) {
+            // temp fix 'til unique constraint validation is fixed
+            if (player.login != params.login) {
+                log.debug("Login changed from ${player.login} to ${params.login}")
+                def tempPlayer = Player.findByLogin(params.login)
+                if (tempPlayer) {
+                    def returnedPlayer = new Player()
+                    returnedPlayer.properties = params
+                    Errors errors = new BindException(returnedPlayer, returnedPlayer.getClass().getName());
+                    errors.rejectValue("login", "player.login.not_unique")
+                    returnedPlayer.errors = errors
+                    render(view:'edit', model:[player:returnedPlayer])
+                    return
+                }
+            }
+			// end temp fix
             player.properties = params
             def f = request.getFile('photo')
             if (f != null && f.getBytes().length > 0)
@@ -56,6 +73,7 @@ class PlayerController extends BaseController {
            	if (player.save()) {
            	    log.debug("Updated player ${player}")
                	render(view:'show',model:[player:player])
+               	session.user = player
            	} else {
            	    log.debug("Got errors for player ${player}")
            	    log.debug("Errors are ${player.errors}")
