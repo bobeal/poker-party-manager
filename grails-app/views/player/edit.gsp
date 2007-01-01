@@ -66,7 +66,7 @@
 				     <label for='favoriteHand'><g:message code="player.favorite_hand"/> :</label>
 				   </td>
 				   <td valign='top' class='value ${hasErrors(bean:player,field:'favoriteHand','errors')}'>
-				     <input type='text' name='favoriteHand' value='${player?.favoriteHand}' />
+				     <input type='text' name='favoriteHand' value='<g:escapeHTML data="${player?.favoriteHand}"/>' />
 				   </td>
 				 </tr>
 				 <tr class='prop'>
@@ -74,7 +74,7 @@
 				     <label for='favoriteQuote'><g:message code="player.favorite_quote"/> :</label>
 				   </td>
 				   <td valign='top' class='value ${hasErrors(bean:player,field:'favoriteQuote','errors')}'>
-				     <input type='text' size='100' name='favoriteQuote' value='${player?.favoriteQuote}' />
+				     <input type='text' size='100' name='favoriteQuote' value='<g:escapeHTML data="${player?.favoriteQuote}"/>' />
 				   </td>
 				 </tr>
 				 <tr class='prop'>
