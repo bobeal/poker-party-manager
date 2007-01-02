@@ -10,24 +10,16 @@ class Party {
 	Integer coinsPerBuyin
 	String prizePool
 	
-    def relatesToMany = [ scores : Score ]
-    def belongsTo = [Championship]
+    static hasMany = [ scores : Score ]
+    static belongsTo = [Championship]
                      
-    Set scores = new HashSet()
-
+    static optionals = [ "buyin", "coinsPerBuyin", "prizePool"]
     static transients = [ "allKinds" ]
 
     String toString() { "${this.class.name} :  $id" }
 
     static allKinds = [ "Cash Game", "Sit and Go"]
 
-    def addScore(score) {
-        if (!score)
-            scores = new HashSet()
-        scores.add(score)
-        return this
-    }
-    
 	boolean equals(other) {
 		if(other?.is(this))return true
 		if(!(other instanceof Party)) return false

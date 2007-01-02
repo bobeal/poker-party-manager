@@ -6,15 +6,20 @@ class Player {
     String password
     String newPassword
     String email
-	Boolean isSuperAdmin = false
     
+    static hasMany = [ managedChampionships:Championship ]
+
+    Boolean isSuperAdmin = false
+    Boolean canManageChampionship = false
+	
     byte[] photo
     String favoriteQuote
     String favoriteHand
     String amulet
     
-    def optionals = ['isSuperAdmin', 'photo', 'favoriteHand', 'favoriteQuote', 'amulet']
-	def transients = ['newPassword']
+    static optionals = ['isSuperAdmin', 'canManageChampionship', 'photo', 'favoriteHand', 
+                        'favoriteQuote', 'amulet']
+	static transients = ['newPassword']
 	                  
     String toString() { "${this.class.name} :  $id" }
 	
@@ -36,5 +41,14 @@ class Player {
         login(length:5..15,blank:false) //,unique:true
         password(minSize:5,blank:false)
         email(blank:false,email:true)
+    }
+    
+    def canManageChampionship(championshipId) {
+        def result = managedChampionships.find { championship ->
+        	championship.id.toString().equals(championshipId.toString())
+        }
+        if (result != null)
+            return true
+	    return false
     }
 }	

@@ -9,7 +9,7 @@ class Score {
     int refunds
     Double money
     
-    def belongsTo = [Player,Party]
+    static belongsTo = [Player,Party]
 
     Player player
     Party party

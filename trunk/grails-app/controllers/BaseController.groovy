@@ -1,11 +1,21 @@
 abstract class BaseController {
-	def beforeInterceptor = [action:this.&auth,except:['login','handleLogin']]
+	def beforeInterceptor = [action:this.&authAndAuthz,except:['login','handleLogin']]
 	
-	def auth() {
-			if(!session.user) {
-				redirect(controller:'player',action:'login')
-				return false
-			}
+	def authAndAuthz() {
+
+		if(!session.user) {
+			redirect(controller:'player',action:'login')
+			return false
+		}
+		
+		log.debug("Request servlet path : ${request.servletPath}")
+		log.debug("Request path info : ${request.pathInfo}")
+		if (request.servletPath == "/party") {
+		    if (request.pathInfo == "/create") {
+		        def championshipId = request.getParameter("championship.id")
+		        return session.user.canManageChampionship(championshipId)
+		    }
+		}
 	}
 }
 

@@ -25,8 +25,8 @@ class PartyController extends BaseController {
         def party = Party.get( params.id )
 
         if(!party) {
-                flash.message = "Party not found with id ${params.id}"
-                redirect(action:list)
+			flash.message = "Party not found with id ${params.id}"
+            redirect(action:list)
         }
         else {
             return [ party : party ]
@@ -92,7 +92,7 @@ class PartyController extends BaseController {
 		params.guests.each { guest ->
 			def email = Player.get(guest).email
 			if (email) {
-			    println "sending invitation to ${email}"
+			    log.debug("sending invitation to ${email}")
 				guestList.add(email)
 			}
 		}
