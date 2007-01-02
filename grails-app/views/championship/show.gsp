@@ -27,6 +27,14 @@
               <td valign="top" class="value">${championship.endDate}</td>
             </tr>
             <tr class="prop">
+              <td valign="top" class="name"><g:message code="championship.admins"/> :</td>
+              <td valign="top" class="value">
+              	<g:each in="${championship.admins}" var="admin">
+              		${admin.login}<br/>
+              	</g:each>	
+              </td>
+            </tr>
+            <tr class="prop">
               <td valign="top" class="name">&nbsp;</td>
               <td valign="top" class="value">
                 <g:link controller='party' 

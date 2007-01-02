@@ -42,6 +42,18 @@
                 <g:datePicker name='endDate' value='${championship?.endDate}'></g:datePicker>
               </td>
             </tr>
+            <tr class='prop'>
+              <td valign='top' class='name'>
+                <label for='guest'><g:message code="championship.admins"/> :</label>
+              </td>
+              <td valign='top' class='value'>
+                <select name="adminsId" multiple>
+                  <g:each in="${Player.findAllByCanManageChampionship(true)}" var="player">
+                    <option value="${player.id}">${player.login}</option>
+                  </g:each>
+                </select>
+              </td>
+            </tr>
           </table>
         </div>
         <div class="buttons">

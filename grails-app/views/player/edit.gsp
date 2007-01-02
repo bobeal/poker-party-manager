@@ -85,6 +85,23 @@
 				     <input type='text' size='50' name='amulet' value='<g:escapeHTML data="${player?.amulet}"/>' />
 				   </td>
 				 </tr>
+			     <tr class='prop'>
+			       <td valign='top' class='name'>
+			         <label for='isSuperAdmin'><g:message code="player.is_super_admin"/>  :</label>
+			       </td>
+			       <td valign='top' class='value'>
+			         <g:checkBox name='isSuperAdmin' value='${player?.isSuperAdmin}' />
+			       </td>
+			     </tr>
+			     <tr class='prop'>
+			       <td valign='top' class='name'>
+			         <label for='canManageChampionship'>
+			         	<g:message code="player.can_manage_championship"/>  :</label>
+			       </td>
+			       <td valign='top' class='value'>
+			         <g:checkBox name='canManageChampionship' value='${player?.canManageChampionship}' />
+			       </td>
+			     </tr>
                </table>
              </div>
              <div class="buttons">

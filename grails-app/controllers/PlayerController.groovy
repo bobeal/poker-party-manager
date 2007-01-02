@@ -33,6 +33,7 @@ class PlayerController extends BaseController {
     }
 
     def edit = {
+
         def player = Player.get( params.id )
 
         if (!player) {

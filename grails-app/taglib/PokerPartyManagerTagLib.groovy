@@ -61,6 +61,14 @@ class PokerPartyManagerTagLib {
 		}
 	}
     
+    def canManageChampionship = { attrs, body ->
+    	if (session.user) {
+    	    def championshipId = attrs['championship']
+    	    if (session.user.canManageChampionship(championshipId))
+    	        body()
+    	}
+	}
+    
     def escapeHTML = { attrs, body ->
     	def data = attrs['data']
     	if (data)

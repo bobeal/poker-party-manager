@@ -10,16 +10,16 @@ class ChampionshipController extends BaseController {
         [ championship : Championship.get( params.id ) ]
     }
 
+    // called asynchronously, only renders operation result that will be displayed
+    // in a special div
     def delete = {
         def championship = Championship.get( params.id )
         if(championship) {
             championship.delete()
-            flash.message = "Championship ${params.id} deleted."
-            redirect(action:list)
-        }
-        else {
-            flash.message = "Championship not found with id ${params.id}"
-            redirect(action:list)
+            render "deleted book"
+        } else {
+			renderError(params.id)
+			render "book not found"
         }
     }
 
@@ -48,6 +48,11 @@ class ChampionshipController extends BaseController {
     def save = {
         def championship = new Championship()
         championship.properties = params
+		params.adminsId.each { adminId ->
+			def admin = Player.get(adminId)
+			log.debug("adding player ${admin.login} (${admin.id})")
+			admin.addChampionship(championship).save()
+        }
         if (championship.save()) {
             redirect(action:show,id:championship.id)
         } else {
