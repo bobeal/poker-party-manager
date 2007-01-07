@@ -1,50 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<link rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
-        <title>Poker Party Manager - <g:message code="player.login_page" /></title>
-    </head>
-    <body>
-    	<div class="logo loginLogo">
-       		<img src="${createLinkTo(dir:'images',file:'ppm.png')}" alt="Poker" />
-        </div>
-        <div class="body">
-           <g:if test="${flash['message']}">
-                 <div class="message">${flash['message']}</div>
-           </g:if>
-           <g:form action="handleLogin" method="post">
-               <div class="loginDialog">
-			   	 <p><g:message code="player.login_page.instructions"/> :</p>
-                 <table>
-                  <tr class='prop'>
-                      <td valign='top' style='text-align:left;' width='40%'>
-                          <label for='login'><g:message code="player.login"/> :</label>
-                      </td>
-                      <td valign='top' style='text-align:left;' width='60%'> 
-                          <input id="login" type='text' name='login' value='${agent?.login}' />
-                      </td>
-                  </tr>
-
-                  <tr class='prop'>
-                      <td valign='top' style='text-align:left;' width='40%'>
-                          <label for='pwd'><g:message code="player.password"/> :</label>
-                      </td>
-                      <td valign='top' style='text-align:left;' width='60%'> 
-                          <input id="pwd" type='password' name='pwd' value='${agent?.pwd}' />
-                      </td>
-                  </tr>
-
-                  <tr class='prop'>
-                      <td valign='top' style='text-align:left;' width='40%'>
-                          &nbsp;
-                      </td>
-                      <td valign='top' style='text-align:left;' width='60%'> 
-                          <input type="submit" value="Login"></input>
-                      </td>
-                  </tr>
-                 </table>			   	
-               </div>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'login.css')}" />
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-fonts-grids.css')}" />
+    <title>Poker Party Manager - <g:message code="player.login_page" /></title>
+    </style>
+  </head>
+  <body>
+    <div id="doc" class="yui-t7">
+  	  <div id="hd" class="loginLogo">
+   		<img src="${createLinkTo(dir:'images',file:'ppm.png')}" alt="Poker" />
+      </div>
+      <div id="bd" class="body">
+        <div id="yui-main">
+          <div class="yui-b">
+            <div style="margin-left:20%;margin-right:20%;">
+            <g:form action="handleLogin" method="post">
+              <fieldset>
+                <legend><g:message code="player.login_page.instructions"/></legend>
+                <g:if test="${flash['message']}">
+                  <p class="message">${flash['message']}</p>
+                </g:if>
+                <label for="login" class="required"><g:message code="player.login"/> :</label>
+                <input id="login" type='text' name='login' value='${agent?.login}' />
+                <br />
+                <label for="pwd" class="required"><g:message code="player.password"/> :</label>
+                <input id="pwd" type='password' name='pwd' value='${agent?.pwd}' />
+                <br />
+                <label for="submit"></label>
+                <input class="submit" type="submit" value="Login" />
+              </fieldset>
             </g:form>
+            </div>
+          </div>
         </div>
-    </body>
+      </div>
+      <div id="ft">Powered by <a href="http://grails.org">Grails</a></div>
+    </div>
+  </body>
 </html>
