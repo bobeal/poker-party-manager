@@ -6,6 +6,7 @@ class Score {
 	Long version
 
     int points
+    int position
     int refunds
     Double money
     

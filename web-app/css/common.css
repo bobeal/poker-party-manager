@@ -1,0 +1,176 @@
+/* general styles */
+
+body {
+	margin:0px;
+	font-family:Arial,sans-serif;
+}
+
+a:active,a:link,a:visited,a:hover {
+    color:#0D5798;
+    text-decoration: none;  
+}
+
+#hd-footer {
+	border-top: 2px solid #578BB8;
+	clear:both;
+	width:100%;
+	height: 0.5em;
+}
+
+#ft {
+	border-top: 2px solid #578BB8;
+	text-align: center;
+	margin-top: 0.5em;
+}
+
+.message {
+	border: 1px solid #FFCC00;
+	padding: 5px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+div .errors {
+	border: 2px solid red;
+	padding: 5px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.important {
+	color: red;
+}
+
+select .errors, input .errors {
+   border: 1px solid red;
+}
+
+.userInfo {
+	text-align: right;
+	float:right;
+}
+
+/* style for embedded pages (pages inside ajax tabs) */
+
+div.embed {
+	padding: 10px;
+	background-color:#FFFF88;
+	width: 100%;
+	/* padding: 15px; */
+	/* background-color:#F0F0F0; */
+	border: 1px solid #778;
+	overflow: auto;
+}
+
+th.embed {
+	background-color: #C3D9FF;
+}
+
+.message_embed {
+	border: 1px solid #FFCC00;
+	background-color: white;
+	padding: 5px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+div .errors_embed {
+	border: 2px solid red;
+	background-color: white;
+	padding: 5px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+/* table styles */
+
+table { 
+	/*
+	table-layout: fixed;
+    margin-left: 0em;
+    margin-right: -22em; 
+    */
+    width: 100%;
+    border: 1px solid #578BB8;
+}
+
+
+th {
+	background-color:#FFFF88;
+	font-family:Arial,sans-serif;
+	padding:5px;
+	text-align:center;	
+}
+
+td {
+	text-align:center;
+}
+
+td.odd {
+	background-color:#F0F0F0;
+	text-align:center;
+	/* border: 1px solid #578BB8; */
+}
+
+td.even {
+	background-color:white;
+	text-align:center;
+	/* border: 1px solid #578BB8; */
+}
+
+/* form styles */
+
+form {
+	/* set width in form, not fieldset (still takes up more room w/ fieldset width */
+	/* font:100% verdana,arial,sans-serif; */
+	margin: 0;
+	padding: 0;
+  /*
+  min-width: 500px;
+  max-width: 600px;
+  width: 560px; 
+  */
+}
+
+form label { 
+	display: block;  /* block float the labels to left column, set a width */
+	float: left; 
+	width: 50%;
+	padding: 0; 
+	margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
+	text-align: left; 
+}
+
+form fieldset {
+	border: 1px solid #578BB8;
+	padding: 10px;        /* padding in fieldset support spotty in IE */
+	margin: 0;
+}
+
+form fieldset legend {
+	font-size:1.1em; /* bump up legend font size, not too large or it'll overwrite border on left */
+                       /* be careful with padding, it'll shift the nice offset on top of border  */
+}
+
+form input, form textarea, form select {
+	/* display: inline; inline display must not be set or will hide submit buttons in IE 5x mac */
+	width:auto;      /* set width of form elements to auto-size, otherwise watch for wrap on resize */
+	margin:5px 0 0 10px; /* set margin on left of form elements rather than right of
+                              label aligns textarea better in IE */
+}
+
+form .required {
+	font-weight: bold; /* uses class instead of div, more efficient */
+}
+
+form br {
+	clear: left;
+}
+
+form .submit {
+	float: right;
+}
+
+fieldset.embed {
+	background-color: white;
+}

@@ -11,10 +11,11 @@
 	margin-bottom:10px;
 }
 
-form {  /* set width in form, not fieldset (still takes up more room w/ fieldset width */
-  /* font:100% verdana,arial,sans-serif; */
-  margin: 0;
-  padding: 0;
+form {  
+	/* set width in form, not fieldset (still takes up more room w/ fieldset width */
+	/* font:100% verdana,arial,sans-serif; */
+	margin: 0;
+	padding: 0;
   /*
   min-width: 500px;
   max-width: 600px;
@@ -32,9 +33,9 @@ form label {
 }
 
 form fieldset {
-  border: 1px solid #578BB8;
-  padding: 10px;        /* padding in fieldset support spotty in IE */
-  margin: 0;
+	border: 1px solid #578BB8;
+	padding: 10px;        /* padding in fieldset support spotty in IE */
+	margin: 0;
 }
 
 form fieldset legend {

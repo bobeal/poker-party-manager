@@ -6,7 +6,7 @@ class PartyController extends BaseController {
     
     EmailerService emailerService
 
-    def index = { redirect(action:list,params:params) }
+    def index = { redirect(controller:'championship',action:'list',params:params) }
 
     def delete = {
         def party = Party.get( params.id )
@@ -29,22 +29,22 @@ class PartyController extends BaseController {
             redirect(action:list)
         }
         else {
-            return [ party : party ]
+            render(view:'edit_embed',model:[party:party])
+            // return [ party : party ]
         }
     }
 
     def update = {
         def party = Party.get( params.id )
-        if(party) {
+        if (party) {
             party.properties = params
             if(party.save()) {
-                redirect(action:edit,id:party.id)
+                render(view:'edit_embed',model:[party:party])
+            } else {
+                flash.message = "Error updating party ${params.id}"
+                render(view:'edit_embed',model:[party:party])
             }
-            else {
-                render(view:'edit',model:[party:party])
-            }
-        }
-        else {
+        } else {
             flash.message = "Party not found with id ${params.id}"
             redirect(action:edit,id:params.id)
         }
@@ -52,35 +52,42 @@ class PartyController extends BaseController {
 
     def create = {
         def party = new Party()
-        party.properties = params
-        return ['party':party]
+        render(view:'create_embed',model:['party':party,'id':params.id])
     }
 
     def save = {
         def party = new Party()
         party.properties = params
         if(party.save()) {
-            redirect(action:'edit',id:party.id)
+            render(view:'edit_embed',model:[party:party])
+        } else {
+            render(view:'create_embed',model:[party:party])
         }
-        else {
-            render(view:'create',model:[party:party])
-        }
+    }
+    
+    def forwardToEditEmbed = {
+		def party = Party.get( params.id )
+    	render(view:'edit_embed',model:[party:party])
     }
     
     def checkScores = {
         def party = Party.get( params.id )
+        
+        if (party.kind == "Sit and Go") {
+            render "<div class=\"message_embed\">Rien &agrave; v&eacute;rifier en sit and go !</div>"
+        }
         def totalMoney = 0
         def totalPoints = 0
         
         party.scores.each { score ->
             totalMoney += score.money
-            totalPoints += score.points - (score.refunds * 100)
+            totalPoints += score.points - (score.refunds * score.party.coinsPerBuyin)
         }
 
         if (totalPoints == 0)
-            render "<div class=\"message\">Le compte est bon !</div>"
+            render "<div class=\"message_embed\">Le compte est bon !</div>"
         else
-            render "<div class=\"errors\">Too bad, il y a un &eacute;cart de ${totalPoints}</div>" 
+            render "<div class=\"errors_embed\">Too bad, il y a un &eacute;cart de ${totalPoints}</div>" 
     }
     
     def invite = {
