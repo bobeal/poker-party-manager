@@ -2,7 +2,7 @@
 Copyright (c) 2006, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.com/yui/license.txt
-Version: 0.11.3
+Version: 0.12.1
 */
 
 
@@ -10,37 +10,36 @@ Version: 0.11.3
 /* Menu styles */
 
 div.yuimenu {
-
-    z-index:1;
-    visibility:hidden;
-    /* background-color:#f6f7ee; */
-    background-color:#8CAFCD;
-    border:solid 1px #c4c4be;
+    border:solid 1px #578BB8;
     padding:1px;
-    
+	text-align: center;
 }
 
+/* Submenus are positioned absolute and hidden by default */
+
+div.yuimenu div.yuimenu,
+div.yuimenubar div.yuimenu {
+
+    position:absolute;
+    visibility:hidden;
+
+}
 
 /* MenuBar Styles */
 
 div.yuimenubar {
 
-	background-color:#D6D6D6;
-	height: 30px;
-	border: 2px solid #578BB8;
-	border-style: solid none none none ;	
-	
-	/*    background-color:#f6f7ee; */
+    background-color:#f6f7ee;
     
 }
 
 /*
-    Application of "zoom:1" triggers "haslayout" in IE so that the module's
+    Applying a width triggers "haslayout" in IE so that the module's
     body clears its floated elements
 */
 div.yuimenubar div.bd {
 
-    zoom:1;
+    width:100%;
 
 }
 
@@ -68,7 +67,7 @@ div.yuimenubar h6 {
     margin:0;
     border:solid 1px #c4c4be;
     color:#b9b9b9;    
-
+	background-color: #FFFF88;
 }
 
 div.yuimenubar h6 {
@@ -125,18 +124,17 @@ div.yuimenu h6.first-of-type {
 div.yuimenu li,
 div.yuimenubar li {
 
-    font-size:85%;
+    /* font-size:85%; */
     cursor:pointer;
     cursor:hand;
     white-space:nowrap;
-    text-align:left;
+    /* text-align:left; */
 
 }
 
 div.yuimenu li.yuimenuitem {
 
     padding:2px 24px;
-	background-color:#8CAFCD;
     
 }
 
@@ -244,9 +242,8 @@ div.yuimenubar li.yuimenubaritem {
     border-style:solid;
     border-color:#c4c4be;
     padding:4px 24px;
-    margin:0 0 10px 0;
+    margin:0;
 
-	background-color:#8CAFCD;
 }
 
 div.yuimenubar li.yuimenubaritem.first-of-type {
@@ -271,19 +268,9 @@ div.yuimenu li.yuimenuitem img {
 
     height:8px;
     width:8px;
-    margin:0 -16px 0 10px;
+    margin:0 -16px 0 0;
+    padding-left:10px;
     border:0;
-
-    *margin-left:0;
-    *border-left-width:10px;
-    *border-style:solid;
-    *border-color:#f6f7ee;
-
-}
-
-div.yuimenu li.yuimenuitem.selected img.selected {
-
-    *border-color:#8c8ad0;
 
 }
 
@@ -298,10 +285,11 @@ div.yuimenu li.checked img.checked {
     height:8px;
     width:8px;
     margin:0;
+    padding:0;
     border:0;
     position:absolute;
     left:6px;
-    _left:-16px; /* Underscore hack b/c this is for IE 5.5 and IE 6 only */
+    _left:-16px; /* Underscore hack b/c this is for IE 6 only */
     top:.5em;
     
 }

@@ -51,4 +51,11 @@ class Player {
             return true
 	    return false
     }
+    
+    def isAdminOrSelf(playerId) {
+		if (isSuperAdmin || id.toString().equals(playerId))
+		    return true
+		else
+		    return false
+    }
 }	

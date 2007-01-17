@@ -1,5 +1,9 @@
+import org.hibernate.SessionFactory
+
 class ChampionshipController extends BaseController {
 
+    SessionFactory sessionFactory
+    
     def index = { redirect(action:list,params:params) }
 
     def list = {
@@ -14,12 +18,27 @@ class ChampionshipController extends BaseController {
     // in a special div
     def delete = {
         def championship = Championship.get( params.id )
+        log.info("Deleting championship ${championship.id}")
         if(championship) {
-            championship.delete()
-            render "deleted book"
+            
+            // temp hack
+            // see http://jira.codehaus.org/browse/GRAILS-563
+			try {
+			    championship.admins.each { admin ->
+			    	admin.managedChampionships.remove(championship)
+			    }
+	            championship.delete()
+
+	            sessionFactory.getCurrentSession().flush()
+				log.debug("championship ${params.id} deleted.")
+				render "success"
+			} catch( Exception ex ) {
+				log.debug("championship ${params.id} could not be deleted !")
+				ex.printStackTrace()
+				render "failure"
+			}
         } else {
-			renderError(params.id)
-			render "book not found"
+			render "failure"
         }
     }
 
@@ -48,10 +67,16 @@ class ChampionshipController extends BaseController {
     def save = {
         def championship = new Championship()
         championship.properties = params
-		params.adminsId.each { adminId ->
-			def admin = Player.get(adminId)
-			log.debug("adding player ${admin.login} (${admin.id})")
-			admin.addChampionship(championship).save()
+		log.debug("admins id ${params.adminsId}")
+		if (params.adminsId && params.adminsId.class.name == 'java.lang.String') {
+		    def admin = Player.get(params.adminsId)
+		    admin.addChampionship(championship).save()
+		} else {
+			params.adminsId?.each { adminId ->
+				def admin = Player.get(adminId)
+				log.debug("adding player ${admin.login} (${admin.id})")
+				admin.addChampionship(championship).save()
+			}
         }
         if (championship.save()) {
             redirect(action:show,id:championship.id)

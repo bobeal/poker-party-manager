@@ -1,5 +1,5 @@
 var bustcachevar=1 //bust potential caching of external pages after initial request? (1=yes, 0=no)
-var loadstatustext="Requesting content..."
+var loadstatustext="<img src='ajaxtabs/loading.gif' /> Requesting content..."
 
 ////NO NEED TO EDIT BELOW////////////////////////
 var loadedobjects=""
@@ -70,6 +70,14 @@ document.getElementsByTagName("head").item(0).appendChild(fileref)
 loadedobjects+=file+" " //Remember this object as being already added to page
 }
 }
+}
+}
+
+function expandtab(tabcontentid, tabnumber){ //interface for selecting a tab (plus expand corresponding content)
+var thetab=document.getElementById(tabcontentid).getElementsByTagName("a")[tabnumber]
+if (thetab.getAttribute("rel")){
+ajaxpage(thetab.getAttribute("href"), thetab.getAttribute("rel"), thetab)
+loadobjs(thetab.getAttribute("rev"))
 }
 }
 

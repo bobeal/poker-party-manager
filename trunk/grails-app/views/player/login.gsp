@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'login.css')}" />
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-fonts-grids.css')}" />
     <title>Poker Party Manager - <g:message code="player.login_page" /></title>
-    </style>
   </head>
   <body>
     <div id="doc" class="yui-t7">
@@ -29,7 +28,7 @@
                 <input id="pwd" type='password' name='pwd' value='${agent?.pwd}' />
                 <br />
                 <label for="submit"></label>
-                <input class="submit" type="submit" value="Login" />
+                <input class="submit" id="submit" type="submit" value="Login" />
               </fieldset>
             </g:form>
             </div>

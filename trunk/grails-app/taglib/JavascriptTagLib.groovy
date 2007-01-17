@@ -33,7 +33,7 @@ class JavascriptTagLib  {
 	static final LIBRARY_MAPPINGS = [
 										prototype : ['prototype/prototype'],
 										yahoo : [ 'yahoo/yahoo-min','yahoo/connection-min', 'yahoo/dom-min','yahoo/event-min','yahoo/animation-min'],
-                                        yahoofull : [ 'yahoo-full/yahoo','yahoo-full/dom', 'yahoo-full/event','yahoo-full/container_core', 'yahoo-full/menu'],
+                                        yahoofull : [ 'yahoo-full/yahoo','yahoo-full/dom', 'yahoo-full/event','yahoo-full/container_core', 'yahoo-full/menu' ],
 										dojo : [ 'dojo/dojo']
 									]
 										

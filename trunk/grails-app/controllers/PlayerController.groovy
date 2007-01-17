@@ -9,7 +9,7 @@ class PlayerController extends BaseController {
     def index = { redirect(action:list,params:params) }
 
     def list = {
-        [ playerList: Player.list( params ) ]
+        [ playerList: Player.list( sort:"login", order:"asc" ) ]
     }
 
     def welcome = {
@@ -74,7 +74,9 @@ class PlayerController extends BaseController {
            	if (player.save()) {
            	    log.debug("Updated player ${player}")
                	render(view:'show',model:[player:player])
-               	session.user = player
+               	// update current logged in user if he changed his own page
+               	if (session.user.id.toString().equals(player.id))
+	               	session.user = player
            	} else {
            	    log.debug("Got errors for player ${player}")
            	    log.debug("Errors are ${player.errors}")

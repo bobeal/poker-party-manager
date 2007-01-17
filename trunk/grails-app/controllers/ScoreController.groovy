@@ -14,7 +14,7 @@ class ScoreController extends BaseController {
         def score = Score.get( params.id )
         if(score) {
             score.delete()
-            redirect(controller:"party",action:"edit",id:params.party_id)
+			redirect(controller:'party',action:'forwardToEditEmbed',id:params.party_id)
         } else {
             flash.message = "Score not found with id ${params.id}"
             redirect(action:list)
@@ -55,7 +55,7 @@ class ScoreController extends BaseController {
        def score = Score.get(params.id)
        
        score.points = Integer.parseInt(params.value)
-       score.money = (score.points - (score.refunds * 100)) / 40
+       score.money = (score.points - (score.refunds * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
        score.save()
        render(builder:'json') {
          points(score.points)
@@ -72,9 +72,11 @@ class ScoreController extends BaseController {
     def save = {
         def score = new Score()
         score.properties = params
-        score.money = (score.points - (score.refunds * 100)) / 40
+        if (score.party.kind == "Cash Game") {
+	        score.money = (score.points - (score.refunds * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
+        }
         if(score.save()) {
-            redirect(controller:"party",action:"edit",id:score.party.id)
+            redirect(controller:'party',action:'forwardToEditEmbed',id:score.party.id)
         }
         else {
             render(view:'create',model:[score:score])

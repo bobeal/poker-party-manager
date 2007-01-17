@@ -1,50 +1,40 @@
 <html>
     <head>
-		<link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ajaxtabs.css')}" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
+        <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ajaxtabs.css')}" />
         <title>Poker Party Manager - <g:message code="championship.view_page"/></title>
         <g:javascript src="ajaxtabs.js" />
     </head>
     <body>
-      <div class="body">
-        <h1><g:message code="championship.view_page"/></h1>
-        <g:if test="${flash.message}">
-          <div class="message">${flash.message}</div>
-        </g:if>
-        <div class="dialog">
-          <table>
-            <tr class="prop">
-              <td valign="top" class="name"><g:message code="championship.label"/> :</td>
-              <td valign="top" class="value">${championship.label}</td>
-            </tr>
-            <tr class="prop">
-              <td valign="top" class="name"><g:message code="championship.start_date"/> :</td>
-              <td valign="top" class="value">${championship.startDate}</td>
-            </tr>
-            <tr class="prop">
-              <td valign="top" class="name"><g:message code="championship.end_date"/> :</td>
-              <td valign="top" class="value">${championship.endDate}</td>
-            </tr>
-            <tr class="prop">
-              <td valign="top" class="name"><g:message code="championship.admins"/> :</td>
-              <td valign="top" class="value">
-              	<g:each in="${championship.admins}" var="admin">
-              		${admin.login}<br/>
-              	</g:each>	
-              </td>
-            </tr>
-            <tr class="prop">
-              <td valign="top" class="name">&nbsp;</td>
-              <td valign="top" class="value">
-                <g:link controller='party' 
-                        params='["championship.id":championship?.id]' 
-                        action='create'><g:message code="championship.add_party"/></g:link>
-              </td>
-            </tr>
-          </table>
-        </div>
+      <form>
 
+        <fieldset>
+          <legend><g:message code="championship.view_page"/></legend>
+
+          <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+          </g:if>
+
+          <label><g:message code="championship.label"/> :</label>
+          ${championship.label}
+          <br/>
+          
+          <label><g:message code="championship.start_date"/> :</label>
+          ${championship.startDate}
+          <br/>
+          
+          <label><g:message code="championship.end_date"/> :</label>
+          ${championship.endDate}
+          <br/>
+
+          <label><g:message code="championship.admins"/> :</label>
+          <g:each in="${championship.admins}" var="admin">
+            ${admin.login}&nbsp;
+          </g:each>
+
+        </fieldset>
+      </form>
            <!-- 
            <div class="buttons">
                <g:form controller="championship">
@@ -56,6 +46,9 @@
            -->
            
         <br/><br/>
+
+        <!--  TODO : add a test to only display if sthg to -->           
+
            
         <ul id="maintab" class="shadetabs">
   		  <li class="selected">
@@ -68,27 +61,36 @@
   		      <g:message code="championship.positions"/>
 		    </a>
 		  </li>
+          <li>
+            <a href="${createLink(controller:'party',action:'create',id:championship.id)}" rel="partiestab">
+              <g:message code="championship.add_party"/>
+            </a>
+          </li>
+          <li>
+            <a id="menu_edit_party" href="#" rel="partiestab">
+              <g:message code="championship.party_edition"/>
+            </a>
+          </li>
         </ul>
 
-        <div class="dialog" id="partiestab">
+        <div class="embed" id="partiestab">
           <table>
             <tr>
-              <th><g:message code="party.place"/></th>
-              <th><g:message code="party.date"/></th>
+              <th class="embed"><g:message code="party.place"/></th>
+              <th class="embed"><g:message code="party.date"/></th>
               <g:each var="player" in="${Player.list()}">
-               	<th>${player.login}</th>
+               	<th class="embed">${player.login}</th>
               </g:each>
               <th></th>
             </tr>
             <g:partiesTable parties="${Party.findAllByChampionship(championship, [sort:'date',order:'desc'] )}"/>
           </table>
         </div>
-      </div>
 
       <script type="text/javascript">
-        startajaxtabs("maintab")
+        startajaxtabs("maintab");
       </script>
+
         
     </body>
 </html>
-            

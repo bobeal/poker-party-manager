@@ -1,199 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
 <html>
-	<head>
-		<title><g:layoutTitle default="Poker Party Manager" /></title>
-		<link rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}"></link>
-		<link rel="stylesheet" href="${createLinkTo(dir:'js/yahoo-full/assets',file:'menu.css')}"></link>
-		<g:javascript library="yahoofull" />
-        <script type="text/javascript">
-            // "load" handler for the window
-            YAHOO.example.onWindowLoad = function(p_oEvent) {
-                // Hides submenus of the root Menubar instance
-                function hideSubmenus() {
-                    if(oMenuBar.activeItem) {
-                        var oSubmenu = oMenuBar.activeItem.cfg.getProperty("submenu");
-                        if(oSubmenu) {
-                            oSubmenu.hide();
-                        }
-                    }
-
-                }    
-
-                // Cancels the call to "hideSubmenus"
-                function cancelTimer() {
-                    if(nTimeoutId) {
-                       window.clearTimeout(nTimeoutId);
-                    }
-                }
-    
-                // "mouseout" event handler for each submenu of the menubar
-                function onSubmenuMouseOut(p_sType, p_aArguments, p_oMenu) {
-                    cancelTimer();
-                    nTimeoutId = window.setTimeout(hideSubmenus, 750);
-                }
-    
-                // "mouseover" handler for each item in the menubar
-                function onMenuBarItemMouseOver(p_sType, p_aArguments, p_oMenuItem) {
-                    var oActiveItem = this.parent.activeItem;
-                    // Hide any other submenus that might be visible
-                    if(oActiveItem && oActiveItem != this) {
-                        this.parent.clearActiveItem();
-                    }
-                
-                    // Select and focus the current MenuItem instance
-                    this.cfg.setProperty("selected", true);
-                    this.focus();
-                
-                    // Show the submenu for this instance
-                    var oSubmenu = this.cfg.getProperty("submenu");
-                    if(oSubmenu) {
-                        oSubmenu.show();
-                    }
-                }
-    
-                // "mouseout" handler for each item in the menubar
-                function onMenuBarItemMouseOut(p_sType, p_aArguments, p_oMenuItem) {
-                    this.cfg.setProperty("selected", false);
-                    var oSubmenu = this.cfg.getProperty("submenu");
-                    if(oSubmenu) {
-                        var oDOMEvent = p_aArguments[0],
-                            oRelatedTarget = YAHOO.util.Event.getRelatedTarget(oDOMEvent);
-                        if(
-                            !(
-                                oRelatedTarget == oSubmenu.element || 
-                                this._oDom.isAncestor(oSubmenu.element, oRelatedTarget)
-                            )
-                        ) {
-                            oSubmenu.hide();
-                        }
-                    }
-                }
-
-                var nTimeoutId;
-
-                // Instantiate and render the menubar and corresponding submenus
-                var oMenuBar = new YAHOO.widget.MenuBar("menu", { submenualignment: ["tl","bl"]} );
-                oMenuBar.render();
-
-                // Add a "mouseover" and "mouseout" event handler each item 
-                // in the menu bar 
-
-                var aMenuBarItems = oMenuBar.getItemGroups()[0],
-                    i = aMenuBarItems.length - 1;
-
-                do {
-                    aMenuBarItems[i].mouseOverEvent.subscribe(onMenuBarItemMouseOver);
-                    aMenuBarItems[i].mouseOutEvent.subscribe(onMenuBarItemMouseOut);
-                }
-                while(i--);
-
-
-                // Assign event handlers
-
-                // Add a "mouseover" handler to the menubar
-
-                oMenuBar.mouseOverEvent.subscribe(cancelTimer);
-
-                var oChampionship = oMenuBar.getItem(0).cfg.getProperty("submenu"),
-                    oPlayer = oMenuBar.getItem(1).cfg.getProperty("submenu"),
-                    oPlace = oMenuBar.getItem(2).cfg.getProperty("submenu");
-
-                // Add a "mouseover" event handler to each submenu
-                oChampionship.mouseOverEvent.subscribe(cancelTimer);
-                oPlayer.mouseOverEvent.subscribe(cancelTimer);
-                oPlace.mouseOverEvent.subscribe(cancelTimer);
-
-                // Add a "mouseout" event handler to each submenu
-                oChampionship.mouseOutEvent.subscribe(onSubmenuMouseOut, oChampionship, true);
-                oPlayer.mouseOutEvent.subscribe(onSubmenuMouseOut, oPlayer, true);
-                oPlace.mouseOutEvent.subscribe(onSubmenuMouseOut, oPlace, true);
-
-
-                // Add a "click" handler to the document
-                YAHOO.util.Event.addListener(document, "click", hideSubmenus);
-            }
-
-            // Add a "load" handler for the window
-            YAHOO.util.Event.addListener(window, "load", YAHOO.example.onWindowLoad);
-        </script>
-		<g:layoutHead />
-	</head>
-	<body onload="<g:pageProperty name='body.onload'/>">
-        <div class="logo">
-        	<a href="${createLink(controller:'player',action:'welcome')}">
-        		<img src="${createLinkTo(dir:'images',file:'ppm_small.png')}" alt="Poker" />
-        	</a>
+  <head>
+	<title><g:layoutTitle default="Poker Party Manager" /></title>
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-fonts-grids.css')}" />
+	<link rel="stylesheet" href="${createLinkTo(dir:'js/yahoo-full/assets',file:'menu.css')}"></link>
+    <link rel="stylesheet" href="${createLinkTo(dir:'css/container',file:'container.css')}"></link>
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'common.css')}"></link>
+	<g:javascript library="yahoofull" />
+    <g:javascript src="menu.js" />
+    <g:javascript library="scriptaculous" />
+    <g:javascript library="prototype" />
+	<g:layoutHead />
+    <g:javascript src="ppm.js" />
+  </head>
+  <body onload="<g:pageProperty name='body.onload'/>">
+    <div id="doc2" class="yui-t1">
+      <div id="hd">
+        <div style="float:left;">
+          <a href="${createLink(controller:'player',action:'welcome')}">
+        	<img src="${createLinkTo(dir:'images',file:'ppm_small.png')}" alt="Poker" />
+          </a>
+          <!-- <img src="${createLinkTo(dir:'images',file:'ppm_header.png')}" /> -->
         </div>
-		<div class="userInfo">
+		<span class="userInfo">
 		  ${session?.user?.login} - <a href="${createLink(controller:'player',action:'logout')}"><g:message code="action.logout"/></a>
-    	</div>
-		<div class="yuimenubar" id="menu">
-			<div class="bd">
-			<ul class="first-of-type">
-				<li class="yuimenubaritem first-of-type">
-					<g:link controller="championship"><g:message code="menu.championship"/></g:link>
-					<div id="championship" class="yuimenu">
-                      <div class="bd">
-					    <ul>
-						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'championship',action:'list')}">
-						    	<g:message code="action.list"/>
-						    </a>
-						  </li>
-						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'championship',action:'create')}">
-						    	<g:message code="action.create"/>
-						    </a>
-						  </li>
-					    </ul>
-					  </div>
-					</div>
-				</li>
-				<li class="yuimenubaritem">
-					<g:link controller="player"><g:message code="menu.player"/></g:link>
-					<div id="player" class="yuimenu">
-                      <div class="bd">
-						<ul>
-						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'player',action:'edit',id:session.user.id)}">
-						    	<g:message code="player.my_page"/>
-						    </a>
-						  </li>
-						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'player',action:'list')}">
-						    	<g:message code="action.list"/>
-						    </a>
-						  </li>
-						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'player',action:'create')}">
-						    	<g:message code="action.create"/>
-						    </a>
-						  </li>
-					    </ul>
-					  </div>
-					</div>
-				</li>
-				<li class="yuimenubaritem">
-					<g:link controller="place"><g:message code="menu.place"/></g:link>
-					<div id="place" class="yuimenu">
-                      <div class="bd">
-						<ul>
-						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'place',action:'list')}">
-						    	<g:message code="action.list"/>
-						    </a>
-						  </li>
-						  <li class="yuimenuitem">
-						    <a href="${createLink(controller:'place',action:'create')}">
-						    	<g:message code="action.create"/>
-						    </a>
-						  </li>
-					    </ul>
-					  </div>
-					</div>
-				</li>
-			</ul>
-			</div>
-		</div>
-		<g:layoutBody />
-	</body>	
+    	</span>
+        <div id="hd-footer">&nbsp;</div>
+      </div>
+    
+      <div id="bd">
+        <div id="yui-main">
+          <div class="yui-b">
+            <g:layoutBody />
+          </div>
+        </div>
+        <div class="yui-b">
+          <div id="menuwithgroups" class="yuimenu">
+            <div class="bd">
+              <h6 class="first-of-type"><g:link controller="championship"><g:message code="menu.championship"/></g:link></h6>
+              <ul>
+                <li class="yuimenuitem">
+                  <a href="${createLink(controller:'championship',action:'list')}">
+                    <g:message code="action.list"/>
+                  </a>
+                </li>
+                <li class="yuimenuitem">
+                  <a href="${createLink(controller:'championship',action:'create')}">
+                    <g:message code="action.create"/>
+                  </a>
+                </li>
+              </ul>
+              <h6><g:link controller="player"><g:message code="menu.player"/></g:link></h6>
+              <ul>
+                <li class="yuimenuitem">
+                  <a href="${createLink(controller:'player',action:'edit',id:session.user.id)}">
+                    <g:message code="player.my_page"/>
+                  </a>
+                </li>
+                <li class="yuimenuitem">
+                  <a href="${createLink(controller:'player',action:'list')}">
+                    <g:message code="action.list"/>
+                  </a>
+                </li>
+                <li class="yuimenuitem">
+                  <a href="${createLink(controller:'player',action:'create')}">
+                    <g:message code="action.create"/>
+                  </a>
+                </li>
+              </ul>
+              <h6><g:link controller="place"><g:message code="menu.place"/></g:link></h6>
+              <ul>
+                <li class="yuimenuitem">
+                  <a href="${createLink(controller:'place',action:'list')}">
+                    <g:message code="action.list"/>
+                  </a>
+                </li>
+                <li class="yuimenuitem">
+                  <a href="${createLink(controller:'place',action:'create')}">
+                    <g:message code="action.create"/>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>        
+        </div>
+      </div>
+    
+      <div id="ft">
+        Powered by <a href="http://grails.org">Grails</a>
+      </div>
+    </div>   
+  </body>	
 </html>

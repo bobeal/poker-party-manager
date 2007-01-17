@@ -15,6 +15,12 @@ abstract class BaseController {
 		        def championshipId = request.getParameter("championship.id")
 		        return session.user.canManageChampionship(championshipId)
 		    }
+		} else if (request.servletPath == "/player") {
+		    if (request.pathInfo ==~ "/edit") {
+		        def playerId = request.getParameter("id")
+		        log.debug("got player id : ${playerId}")
+		        return session.user.isAdminOrSelf(playerId)
+		    }
 		}
 	}
 }

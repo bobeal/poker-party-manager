@@ -6,14 +6,14 @@ class Party {
     Championship championship
     Place place
 	String kind = allKinds.get(0)
+	
 	Double buyin
 	Integer coinsPerBuyin
-	String prizePool
-	
+
     static hasMany = [ scores : Score ]
     static belongsTo = [Championship]
                      
-    static optionals = [ "buyin", "coinsPerBuyin", "prizePool"]
+    static optionals = [ "buyin", "coinsPerBuyin" ]
     static transients = [ "allKinds" ]
 
     String toString() { "${this.class.name} :  $id" }
@@ -36,6 +36,16 @@ class Party {
 	
 	static constraints = {
 	    coinsPerBuyin(matches:"[0-9]",blank:false)
-	    buyin(blank:false)
+		buyin(matches:"[(0-9)*.(0-9)*]",blank:false)
+	    /*
+	    buyin(validator : {
+	        val, obj ->
+	        	println obj.properties['kind']
+	        	println val
+	        	if (obj.properties['kind'] == "Cash Game" && val == null)
+	        		return false
+	    	}
+	    )
+	    */
 	}
 }
