@@ -1,6 +1,10 @@
+import org.springframework.web.servlet.support.RequestContextUtils as RCU;
+import org.hibernate.SessionFactory;
+
 abstract class BaseController {
 	def beforeInterceptor = [action:this.&authAndAuthz,except:['login','handleLogin']]
-	
+	def SessionFactory sessionFactory
+	                         
 	def authAndAuthz() {
 
 		if(!session.user) {
@@ -22,6 +26,13 @@ abstract class BaseController {
 		        return session.user.isAdminOrSelf(playerId)
 		    }
 		}
+	}
+
+	def getMessage(code) {
+        def messageSource = grailsAttributes.getApplicationContext().getBean("messageSource")
+		def message = messageSource.getMessage( code, null, "", RCU.getLocale(request) )
+
+		return message
 	}
 }
 

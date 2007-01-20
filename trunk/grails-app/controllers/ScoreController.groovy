@@ -10,14 +10,37 @@ class ScoreController extends BaseController {
         [ score : Score.get( params.id ) ]
     }
 
+    // called asynchronously, only renders operation result that will be displayed
+    // in a special div
     def delete = {
         def score = Score.get( params.id )
+        log.info("Deleting score ${score.id}")
         if(score) {
-            score.delete()
-			redirect(controller:'party',action:'forwardToEditEmbed',id:params.party_id)
+            
+            // temp hack
+            // see http://jira.codehaus.org/browse/GRAILS-563
+			try {
+	            score.delete()
+
+	            sessionFactory.getCurrentSession().flush()
+				log.debug("score ${params.id} deleted.")
+				render(builder:'json') {
+         			status('success')
+         			msg(getMessage('score.success_delete'))
+  	   			}
+			} catch( Exception ex ) {
+				log.debug("score ${params.id} could not be deleted !")
+				ex.printStackTrace()
+				render(builder:'json') {
+         			status('failure')
+         			msg(getMessage('score.failure_delete'))
+  	   			}
+			}
         } else {
-            flash.message = "Score not found with id ${params.id}"
-            redirect(action:list)
+			render(builder:'json') {
+     			status('failure')
+     			msg(getMessage('score.failure_delete'))
+   			}
         }
     }
 
@@ -63,6 +86,17 @@ class ScoreController extends BaseController {
   	   }
     }
     
+    // called asynchronously for parties edition page
+    def updateMoney = {
+       def score = Score.get(params.id)
+       
+       score.money = Double.valueOf(params.value)
+       score.save()
+       render(builder:'json') {
+         money(score.money)
+  	   }
+    }
+    
     def create = {
         def score = new Score()
         score.properties = params
@@ -74,6 +108,8 @@ class ScoreController extends BaseController {
         score.properties = params
         if (score.party.kind == "Cash Game") {
 	        score.money = (score.points - (score.refunds * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
+        } else if (score.party.kind == "Sit and Go") {
+            score.money = - (score.refunds * score.party.buyin)
         }
         if(score.save()) {
             redirect(controller:'party',action:'forwardToEditEmbed',id:score.party.id)

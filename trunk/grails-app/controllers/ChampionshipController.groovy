@@ -1,8 +1,4 @@
-import org.hibernate.SessionFactory
-
 class ChampionshipController extends BaseController {
-
-    SessionFactory sessionFactory
     
     def index = { redirect(action:list,params:params) }
 
@@ -27,18 +23,30 @@ class ChampionshipController extends BaseController {
 			    championship.admins.each { admin ->
 			    	admin.managedChampionships.remove(championship)
 			    }
+			    championship.parties.each { party ->
+			    	party.delete()
+			    }
 	            championship.delete()
 
 	            sessionFactory.getCurrentSession().flush()
 				log.debug("championship ${params.id} deleted.")
-				render "success"
+				render(builder:'json') {
+         			status('success')
+         			msg(getMessage('championship.success_delete'))
+  	   			}
 			} catch( Exception ex ) {
 				log.debug("championship ${params.id} could not be deleted !")
 				ex.printStackTrace()
-				render "failure"
+				render(builder:'json') {
+         			status('failure')
+         			msg(getMessage('championship.failure_delete'))
+  	   			}
 			}
         } else {
-			render "failure"
+			render(builder:'json') {
+     			status('failure')
+     			msg(getMessage('championship.failure_delete'))
+   			}
         }
     }
 

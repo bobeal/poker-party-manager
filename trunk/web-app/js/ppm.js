@@ -11,25 +11,60 @@ function switchKindFields() {
 	}
 }
 
-function setChampionshipTab(tabId) {
+function setChampionshipTab(tabId, submitUrl) {
+	document.getElementById(tabId).href = submitUrl;
 	expandtab('maintab', 3);
-	Element.show(tabId);
+	Element.show(document.getElementById(tabId).parentNode);
 }
 
-function simulateClick(objectId) {
-	var evt = document.createEvent("MouseEvents");
-  	evt.initMouseEvent("click", true, true, window,
-    	0, 0, 0, 0, 0, false, false, false, false, 0, null);
-  	var cb = document.getElementById(objectId); 
-  	cb.dispatchEvent(evt);
-  	/*
-  	var canceled = !cb.dispatchEvent(evt);
-  	if(canceled) {
-    	// A handler called preventDefault
-    	alert("canceled");
-  	} else {
-    	// None of the handlers called preventDefault
-    	alert("not canceled");
-  	}
-  	*/
+var tryingDeleteElementId = '';
+
+function confirmDelete(confirmDlg, yesDlg, noDlg, elementId, postUrl) {
+    var yesSubmitUrl = postUrl + "/" + elementId;
+    tryingDeleteElementId = elementId;
+    var commands = document.getElementById('commands-' + elementId);
+    var post = commands.parentNode;
+    commands.style.display = 'none';
+    var confirmDeleteMethod = 'new Ajax.Updater(\'\',\'' + yesSubmitUrl + '\',{asynchronous:true,evalScripts:true,onSuccess:successDelete});return false;';
+    var newDiv = Builder.node('div', {className:'commands', id:'commands-askdelete-' + elementId}, [
+        Builder.node('span', {className:'important'}, ' ' + confirmDlg + ' '),
+        Builder.node('a', {onclick:confirmDeleteMethod, href:'javascript:void(0);'}, yesDlg),
+        ' / ',
+        Builder.node('a', {onclick:'javascript:cancelDelete();', href:'javascript:void(0);'}, noDlg),
+    ]);
+    post.appendChild(newDiv);
 }
+
+function cancelDelete() {
+    Element.remove(document.getElementById('commands-askdelete-' + tryingDeleteElementId));
+    Element.toggle(document.getElementById('commands-' + tryingDeleteElementId));
+    tryingDeleteElementId = '';
+}
+
+function successDelete(t) {
+	var deleteResponse = eval('(' + t.responseText + ')');
+    if (deleteResponse.status == "success") {
+       document.getElementById('delete-result-status').innerHTML = 
+       		"<div class=\"message_embed\">" + deleteResponse.msg + "</div>";
+       Effect.Fade(document.getElementById('row-' + tryingDeleteElementId));
+       Element.remove(document.getElementById('row-' + tryingDeleteElementId));
+    } else {
+       document.getElementById('delete-result-status').innerHTML = 
+       		"<div class=\"errors_embed\">" + deleteResponse.msg + "</div>";
+    }
+    Effect.Appear('delete-result-status', {duration: 3.0 });
+    new Effect.Highlight('delete-result-status', {duration: 2.0});
+    Effect.Fade('delete-result-status');
+    cancelDelete();
+}
+
+/*
+function failureDelete() {
+    document.getElementById('deleteResultStatus').innerHTML = "<div class=\"errors\">" + deleteResponse.msg + "</div>";
+    Effect.Appear('deleteResultStatus', {duration: 3.0 });
+    new Effect.Highlight('deleteResultStatus', {duration: 2.0});
+    Effect.Fade('deleteResultStatus');
+    cancelDelete();
+}
+*/
+
