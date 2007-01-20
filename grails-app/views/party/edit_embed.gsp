@@ -59,7 +59,9 @@
   </fieldset>
 </g:form>
             
-<div id="success-scores-check">
+<div id="scores-check-result">
+</div>
+<div id="delete-result-status" style="display: none;">
 </div>
 
 <g:if test="${Score.countByParty(party) > 0}">
@@ -67,15 +69,21 @@
 <table>
   <tr>
     <th class="embed"><g:message code="score.player"/></th>
-    <th class="embed"><g:message code="score.chips"/></th>
+    <g:if test="${party.kind == 'Cash Game'}">
+      <th class="embed"><g:message code="score.chips"/></th>
+    </g:if>
+    <g:if test="${party.kind == 'Sit and Go'}">
+      <th class="embed"><g:message code="score.position"/></th>
+    </g:if>
     <th class="embed"><g:message code="score.rebuys"/></th>
     <th class="embed"><g:message code="score.money"/></th>
     <th class="embed"></th>
   </tr>
   <g:each var="score" in="${Score.findAllByParty(party, [sort:'money', order:'desc'] )}">
-    <tr>
-      <td width="30%">${score.player?.login}</td>
-      <td width="15%">
+    <tr id="row-${score.id}">
+      <td width="30%" class="even">${score.player?.login}</td>
+      <g:if test="${party.kind == 'Cash Game'}">
+      <td width="15%" class="even">
         <p id="points-${score.player?.login}">${score.points}</p>
       </td>
       <script type="text/javascript">
@@ -94,8 +102,12 @@
           }
          });
       </script>
-      <td width="15%">${score.refunds}</td>
-      <td width="15%">
+      </g:if>
+      <g:if test="${party.kind == 'Sit and Go'}">
+        <td width="15%" class="even">${score.position}</td>
+      </g:if>
+      <td width="15%" class="even">${score.refunds}</td>
+      <td width="15%" class="even">
         <g:if test="${score.money > 0}">
           <span id="money-${score.player?.login}" style="color:green">${score.money}</span>
         </g:if>
@@ -103,21 +115,46 @@
           <span id="money-${score.player?.login}" style="color:red">${score.money}</span>
         </g:else>
       </td>
-      <td width="35%">
-        <g:link controller='score' params='["id":score?.id, "party_id":party?.id]'
-          action='delete'>
-          <g:message code="score.delete"/>
-        </g:link>
+      <g:if test="${party.kind == 'Sit and Go'}">
+      <script type="text/javascript">
+       new Ajax.InPlaceEditor('money-${score.player?.login}', 
+         '${createLink(controller:"score",action:"updateMoney",params:["id":score.id])}',
+         {highlightcolor:"#578BB8",cancelText:"annuler",
+          clickToEditText:"cliquez pour changer la valeur du champ",cols:5,
+          onComplete:function(transport,element) {
+            var resultData = eval('('+transport.responseText+')');
+            $('money-${score.player?.login}').innerHTML = resultData.money;
+            if (resultData.money > 0)
+              $('money-${score.player?.login}').setAttribute('style','color:green');
+            else
+              $('money-${score.player?.login}').setAttribute('style','color:red');
+          }
+         });
+      </script>
+      </g:if>
+      <td width="35%" class="even">
+        <div id="commands-${score.id}" class="commands" style="display: inline;">
+          <a href="javascript:void(0);" 
+             onclick="javascript:confirmDelete('${message(code:'score.confirm_delete')}',
+                                               '${message(code:'dialog.yes')}',
+                                               '${message(code:'dialog.no')}',
+                                               '${score.id}',
+                                               '${createLink(action:'delete',controller:'score')}');return false;">
+            <g:message code="action.delete" />
+          </a>
+        </div>
       </td>
     </tr>
   </g:each>
 </table>
 
-<div style="float:right;">
-  <g:remoteLink action="checkScores" id="${party?.id}" update="success-scores-check">
-    <g:message code="score.check"/>
-  </g:remoteLink>
-</div>
+<g:if test="${party.kind == 'Cash Game'}">
+  <div style="float:right;">
+    <g:remoteLink action="checkScores" id="${party?.id}" update="scores-check-result">
+      <g:message code="score.check"/>
+    </g:remoteLink>
+  </div>
+</g:if>
 
 </div>
 </g:if>

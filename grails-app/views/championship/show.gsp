@@ -66,8 +66,8 @@
               <g:message code="championship.add_party"/>
             </a>
           </li>
-          <li>
-            <a id="menu_edit_party" href="#" rel="partiestab">
+          <li style="display:none;" id="entry_menu_edit_party">
+            <a id="menu_edit_party" href="javascript:void(0);" rel="partiestab">
               <g:message code="championship.party_edition"/>
             </a>
           </li>
