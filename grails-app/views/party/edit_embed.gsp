@@ -2,19 +2,19 @@
   <fieldset class="embed">
     <legend><g:message code="party.edit_page"/></legend>
 
-      <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-      </g:if>
-      <g:hasErrors bean="${party}">
-        <div class="errors">
-          <g:renderErrors bean="${party}" as="list" />
-        </div>
-      </g:hasErrors>
+    <g:if test="${flash.message}">
+      <div class="message">${flash.message}</div>
+    </g:if>
+    <g:hasErrors bean="${party}">
+      <div class="errors">
+        <g:renderErrors bean="${party}" as="list" />
+      </div>
+    </g:hasErrors>
 
     <input type="hidden" name="id" value="${party?.id}" />
    	<g:render template="/party/fieldlist" model="[party:party]" />
 
-    <legend for="submit">&nbsp;</legend>
+    <label for="submit">&nbsp;</label>
     <g:submitToRemote url="[controller:'party',action:'update']" update="partiestab" value="Update" />
   </fieldset>
 </g:form>
@@ -76,6 +76,9 @@
       <th class="embed"><g:message code="score.position"/></th>
     </g:if>
     <th class="embed"><g:message code="score.rebuys"/></th>
+    <g:if test="${party.kind == 'Sit and Go'}">
+      <th class="embed"><g:message code="score.prize"/></th>
+    </g:if>
     <th class="embed"><g:message code="score.money"/></th>
     <th class="embed"></th>
   </tr>
@@ -83,30 +86,53 @@
     <tr id="row-${score.id}">
       <td width="30%" class="even">${score.player?.login}</td>
       <g:if test="${party.kind == 'Cash Game'}">
-      <td width="15%" class="even">
-        <p id="points-${score.player?.login}">${score.points}</p>
-      </td>
-      <script type="text/javascript">
-       new Ajax.InPlaceEditor('points-${score.player?.login}', 
-         '${createLink(controller:"score",action:"updatePoints",params:["id":score.id])}',
-         {highlightcolor:"#578BB8",cancelText:"annuler",
-          clickToEditText:"cliquez pour changer la valeur du champ",cols:5,
-          onComplete:function(transport,element) {
-            var resultData = eval('('+transport.responseText+')');
-        $('points-${score.player?.login}').innerHTML = resultData.points;
-        $('money-${score.player?.login}').innerHTML = resultData.money;
-        if (resultData.money > 0)
-          $('money-${score.player?.login}').setAttribute('style','color:green');
-        else
-          $('money-${score.player?.login}').setAttribute('style','color:red');
-          }
-         });
-      </script>
+        <td width="15%" class="even">
+          <p id="points-${score.player?.login}">${score.points}</p>
+        </td>
+        <script type="text/javascript">
+          new Ajax.InPlaceEditor('points-${score.player?.login}', 
+            '${createLink(controller:"score",action:"updatePoints",params:["id":score.id])}',
+            {highlightcolor:"#578BB8",cancelText:"annuler",
+              clickToEditText:"cliquez pour changer la valeur du champ",cols:5,
+              onComplete:function(transport,element) {
+                var resultData = eval('('+transport.responseText+')');
+                $('points-${score.player?.login}').innerHTML = resultData.points;
+                $('money-${score.player?.login}').innerHTML = resultData.money;
+                if (resultData.money > 0)
+                  $('money-${score.player?.login}').setAttribute('style','color:green');
+                else
+                  $('money-${score.player?.login}').setAttribute('style','color:red');
+              }
+            }
+          );
+        </script>
       </g:if>
       <g:if test="${party.kind == 'Sit and Go'}">
         <td width="15%" class="even">${score.position}</td>
       </g:if>
       <td width="15%" class="even">${score.refunds}</td>
+      <g:if test="${party.kind == 'Sit and Go'}">
+        <td width="15%" class="even">
+          <span id="prize-${score.player?.login}">${score.prize}</span>
+        </td>
+        <script type="text/javascript">
+          new Ajax.InPlaceEditor('prize-${score.player?.login}', 
+            '${createLink(controller:"score",action:"updatePrize",params:["id":score.id])}',
+            {highlightcolor:"#578BB8",cancelText:"annuler",
+              clickToEditText:"cliquez pour changer la valeur du champ",cols:5,
+              onComplete:function(transport,element) {
+                var resultData = eval('('+transport.responseText+')');
+                $('prize-${score.player?.login}').innerHTML = resultData.prize;
+                $('money-${score.player?.login}').innerHTML = resultData.money;
+                if (resultData.money > 0)
+                  $('money-${score.player?.login}').setAttribute('style','color:green');
+                else
+                  $('money-${score.player?.login}').setAttribute('style','color:red');
+              }
+            }
+          );
+        </script>
+      </g:if>
       <td width="15%" class="even">
         <g:if test="${score.money > 0}">
           <span id="money-${score.player?.login}" style="color:green">${score.money}</span>
@@ -115,23 +141,6 @@
           <span id="money-${score.player?.login}" style="color:red">${score.money}</span>
         </g:else>
       </td>
-      <g:if test="${party.kind == 'Sit and Go'}">
-      <script type="text/javascript">
-       new Ajax.InPlaceEditor('money-${score.player?.login}', 
-         '${createLink(controller:"score",action:"updateMoney",params:["id":score.id])}',
-         {highlightcolor:"#578BB8",cancelText:"annuler",
-          clickToEditText:"cliquez pour changer la valeur du champ",cols:5,
-          onComplete:function(transport,element) {
-            var resultData = eval('('+transport.responseText+')');
-            $('money-${score.player?.login}').innerHTML = resultData.money;
-            if (resultData.money > 0)
-              $('money-${score.player?.login}').setAttribute('style','color:green');
-            else
-              $('money-${score.player?.login}').setAttribute('style','color:red');
-          }
-         });
-      </script>
-      </g:if>
       <td width="35%" class="even">
         <div id="commands-${score.id}" class="commands" style="display: inline;">
           <a href="javascript:void(0);" 
@@ -148,13 +157,11 @@
   </g:each>
 </table>
 
-<g:if test="${party.kind == 'Cash Game'}">
-  <div style="float:right;">
-    <g:remoteLink action="checkScores" id="${party?.id}" update="scores-check-result">
-      <g:message code="score.check"/>
-    </g:remoteLink>
-  </div>
-</g:if>
+<div style="float:right;">
+  <g:remoteLink action="checkScores" id="${party?.id}" update="scores-check-result">
+    <g:message code="score.check"/>
+  </g:remoteLink>
+</div>
 
 </div>
 </g:if>

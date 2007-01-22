@@ -73,9 +73,6 @@ class PartyController extends BaseController {
     def checkScores = {
         def party = Party.get( params.id )
         
-        if (party.kind == "Sit and Go") {
-            render "<div class=\"message_embed\">Rien &agrave; v&eacute;rifier en sit and go !</div>"
-        }
         def totalMoney = 0
         def totalPoints = 0
         
@@ -84,10 +81,16 @@ class PartyController extends BaseController {
             totalPoints += score.points - (score.refunds * score.party.coinsPerBuyin)
         }
 
-        if (totalPoints == 0)
+        
+        if ((party.kind == 'Cash Game' && totalPoints == 0)
+                || (party.kind == 'Sit and Go' && totalMoney == 0)) {
             render "<div class=\"message_embed\">Le compte est bon !</div>"
-        else
-            render "<div class=\"errors_embed\">Too bad, il y a un &eacute;cart de ${totalPoints}</div>" 
+        } else {
+            if (party.kind == 'Cash Game')
+				render "<div class=\"errors_embed\">Too bad, il y a un &eacute;cart de ${totalPoints}</div>"
+			else
+				render "<div class=\"errors_embed\">Too bad, il y a un &eacute;cart de ${totalMoney}</div>"
+        }
     }
     
     def invite = {
