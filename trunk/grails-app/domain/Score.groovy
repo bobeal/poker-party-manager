@@ -4,11 +4,17 @@ import java.text.NumberFormat
 class Score { 
 	Long id
 	Long version
-
-    int points
-    int position
+	
+	// common properties
     int refunds
     Double money
+
+    // cash game specific properties
+    int points
+
+    // sit and go specific properties
+    int position
+	int prize    
     
     static belongsTo = [Player,Party]
 

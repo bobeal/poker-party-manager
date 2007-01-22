@@ -16,16 +16,15 @@
 </g:select>
 <br/>
 
-<label for="buyin" id="buyinLabel" class="${party?.kind == 'Cash Game' ? 'required' : '' }"><g:message code="party.buyin" /> :</label>
+<label for="buyin" id="buyinLabel" class="${party?.kind == 'Cash Game' ? 'required' : '' }">
+  <g:message code="party.buyin" /> :</label>
 <g:textField class="${hasErrors(bean:party,field:'buyin','errors')}" name="buyin" 
   value='${party?.buyin}' />
-<div id="sitandgo" style="${party?.kind == 'Sit and Go' ? 'display:inline' : 'display:none;' }">
-  <g:message code="party.buyin.sitandgo_example" />
-  <br/>
-</div>
-<div id="cashgame" style="${party?.kind == 'Cash Game' ? 'display:inline' : 'display:none;' }">
+<g:if test="${party?.kind == 'Cash Game'}">
   <g:message code="party.buyin.cashgame_example" />
-  <br/>
+</g:if>
+<br/>
+<div id="cashgame" style="${party?.kind == 'Cash Game' ? 'display:inline' : 'display:none;' }">
   <label for="coinsPerBuyin" class="required"><g:message code="party.coins_per_buyin" /> :</label>
   <g:textField class="${hasErrors(bean:party,field:'coinsPerBuyin','errors')}"
     name="coinsPerBuyin" value='${party?.coinsPerBuyin}' />

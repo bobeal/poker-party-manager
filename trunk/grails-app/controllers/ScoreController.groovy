@@ -2,14 +2,6 @@ class ScoreController extends BaseController {
     
     def index = { redirect(action:list,params:params) }
 
-    def list = {
-        [ scoreList: Score.list( params ) ]
-    }
-
-    def show = {
-        [ score : Score.get( params.id ) ]
-    }
-
     // called asynchronously, only renders operation result that will be displayed
     // in a special div
     def delete = {
@@ -44,36 +36,7 @@ class ScoreController extends BaseController {
         }
     }
 
-    def edit = {
-        def score = Score.get( params.id )
-
-        if(!score) {
-                flash.message = "Score not found with id ${params.id}"
-                redirect(action:list)
-        }
-        else {
-            return [ score : score ]
-        }
-    }
-
-    def update = {
-        def score = Score.get( params.id )
-        if(score) {
-            score.properties = params
-            if(score.save()) {
-                redirect(action:show,id:score.id)
-            }
-            else {
-                render(view:'edit',model:[score:score])
-            }
-        }
-        else {
-            flash.message = "Score not found with id ${params.id}"
-            redirect(action:edit,id:params.id)
-        }
-    }
-
-    // called asynchronously for parties edition page
+    // called asynchronously from parties edition page
     def updatePoints = {
        def score = Score.get(params.id)
        
@@ -86,14 +49,16 @@ class ScoreController extends BaseController {
   	   }
     }
     
-    // called asynchronously for parties edition page
-    def updateMoney = {
+    // called asynchronously from parties edition page
+    def updatePrize = {
        def score = Score.get(params.id)
        
-       score.money = Double.valueOf(params.value)
+       score.prize = Integer.parseInt(params.value)
+       score.money = score.prize - (score.refunds * score.party.buyin)
        score.save()
        render(builder:'json') {
-         money(score.money)
+		   prize(score.prize)
+		   money(score.money)
   	   }
     }
     
