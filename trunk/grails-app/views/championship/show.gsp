@@ -47,20 +47,17 @@
            
         <br/><br/>
 
-        <!--  TODO : add a test to only display if sthg to -->           
-
-           
         <ul id="maintab" class="shadetabs">
-  		  <li class="selected">
-  		    <a href="#default" rel="partiestab">
+          <li class="selected">
+            <a href="#default" rel="partiestab">
+              <g:message code="championship.positions"/>
+            </a>
+          </li>
+  		  <li>
+  		    <a href="${createLink(action:'getparties',id:championship.id)}" rel="partiestab">
   		      <g:message code="championship.parties"/>
   		    </a>
   		  </li>
-		  <li>
-		    <a href="${createLink(action:'gettable',id:championship.id)}" rel="partiestab">
-  		      <g:message code="championship.positions"/>
-		    </a>
-		  </li>
           <li>
             <a href="${createLink(controller:'party',action:'create',id:championship.id)}" rel="partiestab">
               <g:message code="championship.add_party"/>
@@ -74,23 +71,12 @@
         </ul>
 
         <div class="embed" id="partiestab">
-          <table>
-            <tr>
-              <th class="embed"><g:message code="party.place"/></th>
-              <th class="embed"><g:message code="party.date"/></th>
-              <g:each var="player" in="${Player.list()}">
-               	<th class="embed">${player.login}</th>
-              </g:each>
-              <th></th>
-            </tr>
-            <g:partiesTable parties="${Party.findAllByChampionship(championship, [sort:'date',order:'desc'] )}"/>
-          </table>
+          <g:render template="displaystandings" model="['playersLines':playersLines]" />
         </div>
 
-      <script type="text/javascript">
-        startajaxtabs("maintab");
-      </script>
+        <script type="text/javascript">
+          startajaxtabs("maintab");
+        </script>
 
-        
     </body>
 </html>

@@ -1,5 +1,7 @@
 class ChampionshipController extends BaseController {
     
+    ChampionshipService championshipService
+    
     def index = { redirect(action:list,params:params) }
 
     def list = {
@@ -7,7 +9,11 @@ class ChampionshipController extends BaseController {
     }
 
     def show = {
-        [ championship : Championship.get( params.id ) ]
+		def championship = Championship.get( params.id )
+        [ championship : championship,
+          // parties : Party.findAllByChampionship(championship, [sort:'date',order:'desc'], 10)
+          playersLines : championshipService.getStandings(params.id)
+        ]
     }
 
     // called asynchronously, only renders operation result that will be displayed
@@ -93,23 +99,7 @@ class ChampionshipController extends BaseController {
         }
     }
 
-    def gettable = {
-        def championship = Championship.get( params.id )
-        def championshipParties = Party.findAllByChampionship(championship)
-        Map playersMap = new HashMap()
-        championshipParties.each { p ->
-            p.scores.each { s ->
-                def player = s.player
-                if (playersMap.get(player.login) == null)
-                    playersMap.put(player.login, new PlayerTableLine(player.login))
-                def playerTableLine = playersMap.get(player.login)
-                playerTableLine.addScore(s) 
-            }
-        }
-        Map orderedPlayersLines = new TreeMap()
-        playersMap.each { k,v ->
-            orderedPlayersLines.put(-v.totalMoney, v)
-        }
-        render(view:'table',model:[playersLines:orderedPlayersLines.values()])
+    // TODO
+    def getparties = {
     }
 }
