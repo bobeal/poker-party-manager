@@ -12,6 +12,7 @@
       <g:if test="${flash.message}">
         <div class="message"><g:message code="${flash.message}" /></div>
       </g:if>
+      <g:if test="${!championshipList.isEmpty()}">
       <table>
         <tr>
           <th><g:message code="championship.label" /></th>
@@ -63,6 +64,7 @@
           </tr>
         </g:each>
       </table>
+      </g:if>
     </div>
   </body>
 </html>

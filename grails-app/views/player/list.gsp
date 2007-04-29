@@ -15,11 +15,11 @@
         <th><g:message code="player.email" /></th>
         <th></th>
       </tr>
-      <g:each in="${playerList}" var="player">
+      <g:each in="${playerList}" var="player" status="index">
         <tr>
-          <td>${player.login}</td>
-          <td>${player.email}</td>
-          <td>
+          <td class="${index % 2 == 0 ? 'odd' : 'even'}">${player.login}</td>
+          <td class="${index % 2 == 0 ? 'odd' : 'even'}">${player.email}</td>
+          <td class="${index % 2 == 0 ? 'odd' : 'even'}">
             <g:link action="show" id="${player?.id}"><g:message code="action.show" /></g:link>
 			<g:hasPlayerPagePermission id="${player?.id}">
               <br />

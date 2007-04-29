@@ -19,7 +19,7 @@
               <fieldset>
                 <legend><g:message code="player.login_page.instructions"/></legend>
                 <g:if test="${flash['message']}">
-                  <p class="message">${flash['message']}</p>
+                  <p class="message">${message(code:flash['message'])}</p>
                 </g:if>
                 <label for="login" class="required"><g:message code="player.login"/> :</label>
                 <input id="login" type='text' name='login' value='${agent?.login}' />
@@ -27,7 +27,7 @@
                 <label for="pwd" class="required"><g:message code="player.password"/> :</label>
                 <input id="pwd" type='password' name='pwd' value='${agent?.pwd}' />
                 <br />
-                <label for="submit"></label>
+                <label for="submit">&nbsp;</label>
                 <input class="submit" id="submit" type="submit" value="Login" />
               </fieldset>
             </g:form>
