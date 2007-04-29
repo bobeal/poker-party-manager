@@ -137,7 +137,8 @@ class PlayerController extends BaseController {
                 def encryptedPassword = authenticationService.encryptPassword(params.pwd)
         		if (player.password == encryptedPassword) {
         		    session.user = player
-        		    render(view:'welcome')
+        		    session.userManagedChampionships = player.managedChampionships
+        		    redirect(controller:'championship',action:'list')
         		} else {
                    	flash.message = "Echec d'authentification pour le login '${params.login}' "
                    	render(view:'login')

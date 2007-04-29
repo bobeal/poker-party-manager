@@ -38,18 +38,9 @@ class Player {
 	}
     
     static constraints = {
-        login(length:5..15,blank:false) //,unique:true
+        login(minSize:5,maxSize:15,blank:false) //,unique:true
         password(minSize:5,blank:false)
         email(blank:false,email:true)
-    }
-    
-    def canManageChampionship(championshipId) {
-        def result = managedChampionships.find { championship ->
-        	championship.id.toString().equals(championshipId.toString())
-        }
-        if (result != null)
-            return true
-	    return false
     }
     
     def isAdminOrSelf(playerId) {

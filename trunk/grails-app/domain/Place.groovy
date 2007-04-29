@@ -22,6 +22,6 @@ class Place {
 	}
     
     static constraints = {
-        name(length:5..40,blank:false)
+        name(minSize:5,maxSize:40,blank:false)
     }
 }	
