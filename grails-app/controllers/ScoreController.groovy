@@ -74,7 +74,7 @@ class ScoreController extends BaseController {
         if (score.party.kind == "Cash Game") {
 	        score.money = (score.points - (score.refunds * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
         } else if (score.party.kind == "Sit and Go") {
-            score.money = - (score.refunds * score.party.buyin)
+            score.money = - (score.party.buyin + score.refunds * score.party.buyin)
         }
         if(score.save()) {
             redirect(controller:'party',action:'forwardToEditEmbed',id:score.party.id)

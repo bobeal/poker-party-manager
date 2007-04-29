@@ -1,28 +1,15 @@
+<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>
+
 <g:if test="${parties.size() > 0 }">
         
-  <g:paginate next="Forward" prev="Back"
-     breadcrumb="true" controller="party" 
-     action="list" total="${parties.size()}" />
-        
-  <table>
-    <tr>
-      <th class="embed"></th>
-      <g:each in="${parties}" var="party">
-        <th class="embed">${party.place} - ${party.date}</th>
-      </g:each>
-    </tr>
-    
-    <g:each in="${Player.findAll()}" var="player">
-      <tr>
-        <td class="embed">${player.login}</td>
-        <g:each in="${parties}" var="party">
-          <td>${Score.findByPartyAndPlayer(party,player)?.formattedTotal()}</td>
-        </g:each>
-      </tr>
-    </g:each>
-    
-  </table>
-        
+  <g:ajaxPaginate next="${message(code:'navigation.next')}" 
+     prev="${message(code:'navigation.prev')}"
+     breadcrumb="true" controller="championship" 
+     action="getparties" total="${total}" id="${championshipId}"
+     remote="true" remoteUpdate="partiestab" />
+       
+  <g:partiesTable parties="${parties}" playersScores="${playersScores}" />
+          
 </g:if>
 <g:else>
   <g:message code="championship.no_parties" />

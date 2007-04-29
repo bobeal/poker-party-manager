@@ -12,6 +12,7 @@ class ChampionshipController extends BaseController {
 		def championship = Championship.get( params.id )
         [ championship : championship,
           // parties : Party.findAllByChampionship(championship, [sort:'date',order:'desc'], 10)
+          // load data to display current standing
           playersLines : championshipService.getStandings(params.id)
         ]
     }
@@ -99,7 +100,39 @@ class ChampionshipController extends BaseController {
         }
     }
 
-    // TODO
+    // Load a subset of a championship's parties and render them via the displayparties template
     def getparties = {
+		def championship = Championship.get( params.id )
+		def max = params.max ? params.max : 10
+		def offset = params.offset ? params.offset : 0
+
+		def parties = Party.findAllByChampionship(championship, 
+		        [max:max, offset:offset, sort:"date", order:"desc"] )
+		// get players that attended at least one party in current championship
+		def playersLogins = Player.executeQuery("select distinct(p.login) from Player p, Score s " 
+		        + " where p.id = s.player.id "
+		        + " and s.party.championship = ? "
+		        + " order by p.login asc ", championship)
+		def playersScores = new TreeMap()
+		// pre-fill an empty score list for each player
+		playersLogins.each { playerLogin ->
+			def scoresAsList = new ArrayList()
+			(1..parties.size).each {
+			    scoresAsList.add("-")
+			}
+			String[] scores = scoresAsList.toArray()
+			playersScores[playerLogin] = scores                                               
+		}
+		// fill the empty score list with real values
+		parties.eachWithIndex { party, index ->
+		    party.scores.each { score ->
+				def playerScoresArray = playersScores[score.player.login]
+		    	playerScoresArray[index] = score.formattedTotal()
+		    }
+		}
+		def totalNbParties = Party.countByChampionship(championship)
+		render(template:"displayparties",
+		        model:['parties':parties, 'playersScores':playersScores, 'total':totalNbParties,
+		               'championshipId':params.id])
     }
 }

@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 class PokerPartyManagerTagLib {
 
     def playersTable = { attrs ->
@@ -12,7 +14,7 @@ class PokerPartyManagerTagLib {
 
     		out << "<tr>"
             out << "<td class=\"" << cssClass << "\" width='10%'>" << index + 1 << "</td>"
-            out << "<td class=\"" << cssClass << "\" width='30%'>" << playerLine?.playerLogin << "</td>"
+            out << "<td class=\"" << cssClass << "\" width='20%'>" << playerLine?.playerLogin << "</td>"
             out << "<td class=\"" << cssClass << "\" width='20%'>" << playerLine?.getFormattedTotal() << "</td>"
             out << "<td class=\"" << cssClass << "\" width='10%'>" << playerLine?.partiesWon << "</td>"
             out << "<td class=\"" << cssClass << "\" width='10%'>" << playerLine?.partiesDraw << "</td>"
@@ -23,45 +25,40 @@ class PokerPartyManagerTagLib {
     }
 
     def partiesTable = { attrs ->
-        def parties = attrs['parties']
-        def players = Player.list()
+    	def parties = attrs['parties']
+		def playersScores = attrs['playersScores']
 		def cssClass
-        
-		parties.eachWithIndex { party, index ->
-        
-        	if (index % 2 == 0)
-        	    cssClass = "odd"
-        	else
-        		cssClass = "even"
-        	
-            out << "<tr>"
-            out << "<td class=\"" << cssClass << "\">" << party?.place?.name << "</td>"
-            out << "<td class=\"" << cssClass << "\">" << party?.date << "</td>"
-            def playersScores = new HashMap()
-            party.scores.each { score ->
-            	playersScores.put(score.player.id, score)
-            }
-            players.each { player ->
-                out << "<td class=\"" << cssClass << "\">"
-                def score = playersScores.get(player.id)
-                if (score != null) {
-					if (score.money > 0)
-                    	out << "<span style=\"color:green\">" << score.formattedTotal() << "</span>"
-                    else if (score.money < 0)
-                    	out << "<span style=\"color:red\">" << score.formattedTotal() << "</span>"
-					else
-                    	out << score.formattedTotal()
-                }
-            }
 
-            out << "</td>"
-            out << "<td class=\"" << cssClass << "\">"
-            out << "<a href=\"javascript:void(0);\""
-			out	<< " onclick=\"setChampionshipTab('menu_edit_party','" << grailsAttributes.getApplicationUri(request) << "/party/edit/" << party.id << "');\">"
-			out	<< "Editer" << "</a>"
-            out << "</td>"
-            out << "</tr>"
-        }
+		def df = new SimpleDateFormat()
+    	
+		out << "<table>"
+		out << "  <tr>"
+		out << "    <th class=\"embed\"></th>"
+		parties.each { party ->
+			out << "    <th class=\"embed\">" 
+			out	<< df.format(party.date)
+			out	<< "</th>"
+		}
+		out << "  </tr>"
+        
+		playersScores.keySet().eachWithIndex { playerLogin, index ->
+		
+			if (index % 2 == 0)
+	    		cssClass = "odd"
+			else
+				cssClass = "even"
+
+			out << "  <tr>"
+			out	<< "    <td class=\"" << cssClass << "\">" << playerLogin << "</td>"
+			
+			playersScores.get(playerLogin).each { money ->
+				out << "    <td class=\"" << cssClass << "\">" << money << "</td>"
+			}
+				
+			out << "  </tr>"
+		}
+		
+		out << "</table>"
     }
     
 	/**
@@ -79,8 +76,10 @@ class PokerPartyManagerTagLib {
     def canManageChampionship = { attrs, body ->
     	if (session.user) {
     	    def championshipId = attrs['championship']
-    	    if (session.user.canManageChampionship(championshipId))
-    	        body()
+			session.userManagedChampionships.each { managedChampionship ->
+				if (managedChampionship.id == championshipId)
+				    body()
+			}
     	}
 	}
     
@@ -91,4 +90,80 @@ class PokerPartyManagerTagLib {
     	else
     	  out << ""
     }
+    
+	/**
+	 * Creates next/previous links to support pagination for the current controller
+	 *
+	 * <g:paginate total="${Account.count()}" />
+	 */
+	def ajaxPaginate = { attrs ->
+        if(attrs.total == null)
+            throwTagError("Tag [paginate] is missing required attribute [total]")
+		
+		def mkp = new groovy.xml.MarkupBuilder(out)
+		def total = attrs.total.toInteger()
+		def max = params.max?.toInteger()
+		def offset = params.offset?.toInteger() 
+		def action = (attrs.action? attrs.action : 'list')
+		def breadcrumb = true
+		if(attrs.breadcrumb) breadcrumb = Boolean.valueOf(attrs.breadcrumb)
+		def remote = false
+		if (attrs.remote) remote = Boolean.valueOf(attrs.remote)
+
+		if(!max) max = (attrs.max ? attrs.max.toInteger() : 10)
+		if(!offset) offset = (attrs.offset ? attrs.offset.toInteger() : 0)
+		
+		def linkParams = [offset:offset-max,max:max]
+		def linkTagAttrs = ['class':'prevLink',action:action]
+		if(attrs.controller) {
+			linkTagAttrs.controller = attrs.controller	
+		}
+		if(attrs.id) {
+			linkTagAttrs.id = attrs.id	
+		}
+		if(attrs.params)linkParams.putAll(attrs.params)
+		linkTagAttrs.params = linkParams
+
+//		if (remote) {
+//		    if (attrs.remoteUpdate == null)
+//	            throwTagError("Tag [paginate] is missing required attribute [remoteUpdate] where attribute [remote] is set")
+//    		linkTagAttrs.'update' = attrs.remoteUpdate
+//		}
+		linkTagAttrs.'update' = 'partiestab'
+        
+		def combined = max + offset
+		if(offset > 0) {
+//		    if (!remote)
+//				link(linkTagAttrs.clone(),{out<< (attrs.prev? attrs.prev : 'Previous' ) })
+//			else
+				remoteLink(linkTagAttrs.clone(),{out<< (attrs.prev? attrs.prev : 'Previous' ) })
+		}
+		
+		if(total > max) {
+			linkTagAttrs.'class' = 'step'
+			if(breadcrumb) {
+				def j = 0
+				0.step(total,max) { i ->
+					if(offset == i) {
+						mkp.a('class':'step',"${++j}")	
+					}
+					else {
+						linkParams.offset=i
+//						if (!remote)
+//							link(linkTagAttrs.clone(),{out<<++j})
+//						else
+							remoteLink(linkTagAttrs.clone(),{out<<++j})	
+					}
+				}			
+			}			
+		}
+		linkParams.offset = offset+max
+		if(combined < total) {	
+			linkTagAttrs.'class'='nextLink'
+//			if (!remote)
+//				link(linkTagAttrs,{out<< (attrs.'next'? attrs.'next' : 'Next' )})
+//			else
+				remoteLink(linkTagAttrs,{out<< (attrs.'next'? attrs.'next' : 'Next' )})
+		}
+	}
 }

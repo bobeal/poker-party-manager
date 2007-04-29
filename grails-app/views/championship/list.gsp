@@ -1,3 +1,5 @@
+<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>
+
 <html>
   <head>
     <meta name="layout" content="main" />
@@ -17,24 +19,26 @@
           <th><g:message code="championship.end_date" /></th>
           <th></th>
         </tr>
-        <g:each in="${championshipList}" var="championship">
+        <g:each in="${championshipList}" var="championship" status="index">
           <tr id="row-${championship.id}">
-            <td>${championship.label}</td>
-            <td>${championship.startDate}</td>
-            <td>${championship.endDate}</td>
-            <td class="actionButtons">
+            <td class="${index % 2 == 0 ? 'odd' : 'even'}">${championship.label}</td>
+            <td class="${index % 2 == 0 ? 'odd' : 'even'}">${championship.startDate}</td>
+            <td class="${index % 2 == 0 ? 'odd' : 'even'}">${championship.endDate}</td>
+            <td class="actionButtons ${index % 2 == 0 ? 'odd' : 'even'}">
               <span class="actionButton">
                 <g:link action="show" id="${championship.id}">
                   <g:message code="action.show" />
                 </g:link>
               </span>
               <br />
+              <!-- 
               <span class="actionButton">
                 <g:link controller="party" action="invite" id="${championship.id}">
                   <g:message code="party.invite" />
                 </g:link>
               </span>
               <br/>
+              -->
               <g:canManageChampionship championship="${championship.id}">
                 <span class="actionButton">
                   <g:link controller='party' 
