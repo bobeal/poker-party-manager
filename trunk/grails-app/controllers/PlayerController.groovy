@@ -39,7 +39,7 @@ class PlayerController extends BaseController {
         if (!player) {
             flash.message = "Player not found with id ${params.id}"
             redirect(action:list)
-        } else if (!player.login.equals(session.user.login)) {
+        } else if (!session.user.isSuperAdmin && !player.login.equals(session.user.login)) {
             flash.message = "You cannot edit personal information of ${player.login}"
             redirect(action:list)
         } else {
@@ -137,24 +137,26 @@ class PlayerController extends BaseController {
                 def encryptedPassword = authenticationService.encryptPassword(params.pwd)
         		if (player.password == encryptedPassword) {
         		    session.user = player
+        		    // FIXME : store them because of LazyInitializationException either
         		    session.userManagedChampionships = player.managedChampionships
         		    redirect(controller:'championship',action:'list')
         		} else {
-                   	flash.message = "Echec d'authentification pour le login '${params.login}' "
+                   	flash.message = 'player.error.failed_authentication'
                    	render(view:'login')
                	}
    			} else {
-   			    flash.message = 'Identifiant inconnu'
+   			    flash.message = 'player.error.unknown_login'
    			    render(view:'login')
    			}
    		} else {
-			flash.message = 'Identifiant ou mot de passe non fourni'
+			flash.message = 'player.error.missing_login_or_password'
            	render(view:'login')
        	}
    	}
 
    	def logout = {
       	session.user = null
+      	session.userManagedChampionships = null
    		render(view:'login')
    	}
 }

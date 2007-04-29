@@ -9,22 +9,28 @@
       <div class="message">${flash.message}</div>
     </g:if>
 
+    <g:if test="${!placeList.isEmpty()}">
     <table>
       <tr>
         <th><g:message code="place.name"/></th>
         <th><g:message code="place.description"/></th>
         <th></th>
       </tr>
-      <g:each in="${placeList}">
+      <g:each in="${placeList}" var="place" status="index">
         <tr>
-          <td>${it.name}</td>
-          <td>${it.description}</td>
-          <td>
-            <g:link action="show" id="${it.id}"><g:message code="action.show"/></g:link>
+          <td class="${index % 2 == 0 ? 'odd' : 'even'}">${place.name}</td>
+          <td class="${index % 2 == 0 ? 'odd' : 'even'}">${place.description}</td>
+          <td class="${index % 2 == 0 ? 'odd' : 'even'}">
+            <g:link action="show" id="${place.id}"><g:message code="action.show"/></g:link>
+            <g:hasPlayerPagePermission id="${place.id}">
+              <br />
+              <g:link action="edit" id="${place.id}"><g:message code="action.edit" /></g:link>
+            </g:hasPlayerPagePermission>
           </td>
         </tr>
       </g:each>
     </table>
+    </g:if>
   </body>
 </html>
             
