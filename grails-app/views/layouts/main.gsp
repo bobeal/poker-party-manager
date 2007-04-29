@@ -87,7 +87,7 @@
       </div>
     
       <div id="ft">
-        Powered by <a href="http://grails.org">Grails</a>
+        PPM ${Application.findByName('Poker Party Manager').currentVersion} - Powered by <a href="http://grails.org">Grails</a>
       </div>
     </div>   
   </body>	
