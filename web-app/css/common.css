@@ -3,6 +3,7 @@
 body {
 	margin:0px;
 	font-family:Arial,sans-serif;
+	background-color: white;
 }
 
 a:active,a:link,a:visited,a:hover {
@@ -96,7 +97,7 @@ table {
 
 
 th {
-	background-color:#FFFF88;
+	background-color:#C3D9FF;
 	font-family:Arial,sans-serif;
 	padding:5px;
 	text-align:center;	
@@ -107,15 +108,13 @@ td {
 }
 
 td.odd {
-	background-color:#F0F0F0;
+	background-color:white;
 	text-align:center;
-	/* border: 1px solid #578BB8; */
 }
 
 td.even {
-	background-color:white;
+	background-color:#F0F0F0;
 	text-align:center;
-	/* border: 1px solid #578BB8; */
 }
 
 /* form styles */
@@ -172,5 +171,7 @@ form .submit {
 }
 
 fieldset.embed {
+	border: 0px;
 	background-color: white;
 }
+

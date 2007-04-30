@@ -4,9 +4,58 @@
     <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'ajaxtabs.css')}" />
         <title>Poker Party Manager - <g:message code="championship.view_page"/></title>
-        <g:javascript src="ajaxtabs.js" />
+        <!-- Dependencies -->
+        <!-- core CSS -->
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/tabview/assets/tabview.css">
+        <!-- optional skin for border tabs -->
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/tabview/assets/border_tabs.css">
+        <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/element/element-beta-min.js"></script>
+        <!-- OPTIONAL: Connection (required for dynamic loading of data) -->
+        <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/connection/connection-min.js"></script>
+        <!-- Source file -->
+        <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/tabview/tabview-min.js"></script>
+        <style type="text/css">
+          #championshipMenu .loading {
+            background-image:url(${createLinkTo(dir:'images',file:'spinner.gif')});
+            background-position:center center;
+            background-repeat:no-repeat;
+          }
+          #championshipMenu .loading * {
+            display:none;
+          }
+        </style>
+        <script type="text/javascript">
+          YAHOO.example.init = function() {
+            var tabView = new YAHOO.widget.TabView({id: 'championshipMenu'});
+    
+            tabView.addTab(new YAHOO.widget.Tab({
+              label: '<g:message code="championship.positions"/>',
+              dataSrc: '${createLink(action:"getstandings",id:championship.id)}',
+              active: true,
+              cacheData: true
+            }));
+    
+            tabView.addTab(new YAHOO.widget.Tab({
+              label: '<g:message code="championship.parties"/>',
+              dataSrc: '${createLink(action:"getparties",id:championship.id)}',
+              cacheData: true /* only load once */
+            }));
+    
+            tabView.addTab(new YAHOO.widget.Tab({
+              label: '<g:message code="championship.add_party"/>',
+              dataSrc: '${createLink(controller:"party",action:"create",id:championship.id)}',
+              cacheData: true /* only load once */
+            }));
+    
+            YAHOO.util.Event.onContentReady('tabContent', function() {
+              tabView.appendTo('tabContent');
+            });
+          };
+
+          YAHOO.example.init();
+        </script> 
     </head>
     <body>
       <form>
@@ -37,48 +86,11 @@
 
         </fieldset>
       </form>
-           <!-- 
-           <div class="buttons">
-               <g:form controller="championship">
-                 <input type="hidden" name="id" value="${championship?.id}" />
-                 <span class="button"><g:actionSubmit value="Edit" /></span>
-                 <span class="button"><g:actionSubmit value="Delete" /></span>
-               </g:form>
-           </div>
-           -->
            
-        <br/><br/>
+      <br/><br/>
 
-        <ul id="maintab" class="shadetabs">
-          <li class="selected">
-            <a href="#default" rel="partiestab">
-              <g:message code="championship.positions"/>
-            </a>
-          </li>
-  		  <li>
-  		    <a href="${createLink(action:'getparties',id:championship.id)}" rel="partiestab">
-  		      <g:message code="championship.parties"/>
-  		    </a>
-  		  </li>
-          <li>
-            <a href="${createLink(controller:'party',action:'create',id:championship.id)}" rel="partiestab">
-              <g:message code="championship.add_party"/>
-            </a>
-          </li>
-          <li style="display:none;" id="entry_menu_edit_party">
-            <a id="menu_edit_party" href="javascript:void(0);" rel="partiestab">
-              <g:message code="championship.party_edition"/>
-            </a>
-          </li>
-        </ul>
-
-        <div class="embed" id="partiestab">
-          <g:render template="displaystandings" model="['playersLines':playersLines]" />
-        </div>
-
-        <script type="text/javascript">
-          startajaxtabs("maintab");
-        </script>
-
+      <div id="tabContent">
+      </div>
+              
     </body>
 </html>

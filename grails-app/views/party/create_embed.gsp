@@ -1,6 +1,6 @@
+<div id="addPartyContent">
 <g:form action="save" method="post" >
   <fieldset class="embed">
-    <legend><g:message code="party.create_page"/></legend>
     
     <g:if test="${flash.message}">
       <div class="message">${flash.message}</div>
@@ -17,8 +17,8 @@
     <g:render template="/party/fieldlist" model="[party:party]" />
 
     <legend for="submit">&nbsp;</legend>
-    <g:submitToRemote url="[action:'save']" update="partiestab" value="Create" />
+    <g:submitToRemote id="submit" url="[action:'save']" update="addPartyContent" value="Create" />
 
   </fieldset>
 </g:form>
-
+</div>

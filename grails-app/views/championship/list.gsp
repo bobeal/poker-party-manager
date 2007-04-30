@@ -40,26 +40,27 @@
               </span>
               <br/>
               -->
-              <g:canManageChampionship championship="${championship.id}">
-                <span class="actionButton">
-                  <g:link controller='party' 
-                    params='["championship.id":championship.id]' action='create'>
-                    <g:message code="championship.add_party" />
-                  </g:link>
-                </span>
-                <br />
-                <div id="commands-${championship.id}" class="commands" style="display: inline;">
-                  <a href="javascript:void(0);" 
-                    onclick="javascript:confirmDelete('${message(code:'championship.confirm_delete')}',
-                                                      '${message(code:'dialog.yes')}',
-                                                      '${message(code:'dialog.no')}',
-                                                      '${championship.id}',
-                                                      '${createLink(action:'delete',controller:'championship')}');return false;">
-                    <g:message code="action.delete" />
-                  </a>
-                  <br/>
-                </div>
-              </g:canManageChampionship>
+
+              <!-- 
+              <g:link controller='party' 
+                      params='["championship.id":championship.id]' action='create'>
+                <g:message code="championship.add_party" />
+              </g:link>
+   
+              <br />
+              <div id="commands-${championship.id}" class="commands" style="display: inline;">
+                <a href="javascript:void(0);" 
+                   onclick="javascript:confirmDelete('${message(code:'championship.confirm_delete')}',
+                                                     '${message(code:'dialog.yes')}',
+                                                     '${message(code:'dialog.no')}',
+                                                     '${championship.id}',
+                                                     '${createLink(action:'delete',controller:'championship')}');return false;">
+                  <g:message code="action.delete" />
+                </a>
+                <br/>
+              </div>
+              -->
+              
             </td>
           </tr>
         </g:each>

@@ -10,11 +10,7 @@ class ChampionshipController extends BaseController {
 
     def show = {
 		def championship = Championship.get( params.id )
-        [ championship : championship,
-          // parties : Party.findAllByChampionship(championship, [sort:'date',order:'desc'], 10)
-          // load data to display current standing
-          playersLines : championshipService.getStandings(params.id)
-        ]
+        [ championship : championship ]
     }
 
     // called asynchronously, only renders operation result that will be displayed
@@ -100,6 +96,11 @@ class ChampionshipController extends BaseController {
         }
     }
 
+    def getstandings = {
+    	def playersLines = championshipService.getStandings(params.id)
+		render(template:"displaystandings", model:['playersLines':playersLines])
+    }
+    
     // Load a subset of a championship's parties and render them via the displayparties template
     def getparties = {
 		def championship = Championship.get( params.id )
