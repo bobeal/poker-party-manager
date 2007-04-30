@@ -1,3 +1,4 @@
+<div id="editPartyContent">
 <g:form method="post" >
   <fieldset class="embed">
     <legend><g:message code="party.edit_page"/></legend>
@@ -15,7 +16,7 @@
    	<g:render template="/party/fieldlist" model="[party:party]" />
 
     <label for="submit">&nbsp;</label>
-    <g:submitToRemote url="[controller:'party',action:'update']" update="partiestab" value="Update" />
+    <g:submitToRemote url="[controller:'party',action:'update']" update="editPartyContent" value="Update" />
   </fieldset>
 </g:form>
             
@@ -55,7 +56,7 @@
     <br />
     
     <label for="submit">&nbsp;</label>
-    <g:submitToRemote url="[controller:'score',action:'save']" update="partiestab" value="Create" />
+    <g:submitToRemote url="[controller:'score',action:'save']" update="editPartyContent" value="Create" />
   </fieldset>
 </g:form>
             
@@ -165,3 +166,4 @@
 
 </div>
 </g:if>
+</div>

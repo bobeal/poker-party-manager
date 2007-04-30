@@ -4,14 +4,16 @@
 	<title><g:layoutTitle default="Poker Party Manager" /></title>
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-fonts-grids.css')}" />
 	<link rel="stylesheet" href="${createLinkTo(dir:'js/yahoo-full/assets',file:'menu.css')}"></link>
-    <link rel="stylesheet" href="${createLinkTo(dir:'css/container',file:'container.css')}"></link>
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'common.css')}"></link>
-	<g:javascript library="yahoofull" />
-    <g:javascript src="menu.js" />
+	<g:javascript src="yahoo-full/yahoo" />
+    <g:javascript src="yahoo-full/dom" />
+    <g:javascript src="yahoo-full/event" />
+    <g:javascript src="yahoo-full/container_core" />
+    <g:javascript src="yahoo-full/menu" />
     <g:javascript library="scriptaculous" />
     <g:javascript library="prototype" />
-	<g:layoutHead />
     <g:javascript src="ppm.js" />
+	<g:layoutHead />
   </head>
   <body onload="<g:pageProperty name='body.onload'/>">
     <div id="doc2" class="yui-t1">

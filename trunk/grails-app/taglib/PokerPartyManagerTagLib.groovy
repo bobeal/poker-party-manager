@@ -107,8 +107,8 @@ class PokerPartyManagerTagLib {
 		def action = (attrs.action? attrs.action : 'list')
 		def breadcrumb = true
 		if(attrs.breadcrumb) breadcrumb = Boolean.valueOf(attrs.breadcrumb)
-		def remote = false
-		if (attrs.remote) remote = Boolean.valueOf(attrs.remote)
+//		def remote = false
+//		if (attrs.remote) remote = Boolean.valueOf(attrs.remote)
 
 		if(!max) max = (attrs.max ? attrs.max.toInteger() : 10)
 		if(!offset) offset = (attrs.offset ? attrs.offset.toInteger() : 0)
@@ -129,7 +129,7 @@ class PokerPartyManagerTagLib {
 //	            throwTagError("Tag [paginate] is missing required attribute [remoteUpdate] where attribute [remote] is set")
 //    		linkTagAttrs.'update' = attrs.remoteUpdate
 //		}
-		linkTagAttrs.'update' = 'partiestab'
+		linkTagAttrs.'update' = 'positionsContent'
         
 		def combined = max + offset
 		if(offset > 0) {
