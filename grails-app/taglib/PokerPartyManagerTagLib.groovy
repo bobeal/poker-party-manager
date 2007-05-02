@@ -24,44 +24,11 @@ class PokerPartyManagerTagLib {
         }
     }
 
-    def partiesTable = { attrs ->
-    	def parties = attrs['parties']
-		def playersScores = attrs['playersScores']
-		def cssClass
-
-		def df = new SimpleDateFormat()
-    	
-		out << "<table>"
-		out << "  <tr>"
-		out << "    <th class=\"embed\"></th>"
-		parties.each { party ->
-			out << "    <th class=\"embed\">" 
-			out	<< df.format(party.date)
-			out	<< "</th>"
-		}
-		out << "  </tr>"
-        
-		playersScores.keySet().eachWithIndex { playerLogin, index ->
-		
-			if (index % 2 == 0)
-	    		cssClass = "odd"
-			else
-				cssClass = "even"
-
-			out << "  <tr>"
-			out	<< "    <td class=\"" << cssClass << "\">" << playerLogin << "</td>"
-			
-			playersScores.get(playerLogin).each { money ->
-				out << "    <td class=\"" << cssClass << "\">" << money << "</td>"
-			}
-				
-			out << "  </tr>"
-		}
-		
-		out << "</table>"
-    }
+    def dateFormat = { attrs ->
+    	out << new SimpleDateFormat().format(attrs.date)
+ 	}
     
-	/**
+    /**
 	 * Only invokes the body if the user within the session is a system administrator
 	 */
 	def hasPlayerPagePermission = { attrs, body ->

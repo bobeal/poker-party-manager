@@ -27,8 +27,9 @@
           }
         </style>
         <script type="text/javascript">
+          var tabView = new YAHOO.widget.TabView({id: 'championshipMenu'});
+
           YAHOO.example.init = function() {
-            var tabView = new YAHOO.widget.TabView({id: 'championshipMenu'});
     
             tabView.addTab(new YAHOO.widget.Tab({
               label: '<g:message code="championship.positions"/>',
@@ -43,18 +44,50 @@
               cacheData: true /* only load once */
             }));
     
-            tabView.addTab(new YAHOO.widget.Tab({
+            var createPartyTab = new YAHOO.widget.Tab({
               label: '<g:message code="championship.add_party"/>',
               dataSrc: '${createLink(controller:"party",action:"create",id:championship.id)}',
               cacheData: true /* only load once */
-            }));
+            })
+            tabView.addTab(createPartyTab);
+            
+            // decorate submit button of the "create party" tab
+            var handleContentChange = function(e) {
+              onSubmitButtonsMarkupReady('wrappedSubmit','submit');
+            }
+            createPartyTab.addListener('contentChange', handleContentChange); 
     
             YAHOO.util.Event.onContentReady('tabContent', function() {
               tabView.appendTo('tabContent');
             });
+
+            // remove 'edit party' tab when leaving it
+            var handleTabChange = function(e) {
+              if (tabView.getTabIndex(e.prevValue) == 3) {
+                tabView.removeTab(e.prevValue);
+              }
+            };
+    
+            tabView.on('activeTabChange', handleTabChange);
           };
 
           YAHOO.example.init();
+          
+          function openEditPartyTab(label, dataSrc) {
+            var editPartyTab = new YAHOO.widget.Tab({
+              label: label,
+              dataSrc: dataSrc,
+              active: true
+            });
+            tabView.addTab(editPartyTab,3);
+
+            // decorate submit button of the "edit party" tab
+            var handleContentChange = function(e) {
+              onSubmitButtonsMarkupReady('wrappedPartySubmit','partySubmit');
+              onSubmitButtonsMarkupReady('wrappedScoreSubmit','scoreSubmit');
+            }
+            editPartyTab.addListener('contentChange', handleContentChange); 
+          }
         </script> 
     </head>
     <body>

@@ -2,14 +2,29 @@
 <html>
   <head>
 	<title><g:layoutTitle default="Poker Party Manager" /></title>
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-fonts-grids.css')}" />
-	<link rel="stylesheet" href="${createLinkTo(dir:'js/yahoo-full/assets',file:'menu.css')}"></link>
+
+    <!-- Grid and common settings CSS -->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/reset-fonts-grids/reset-fonts-grids.css">
+    <!-- Menu and Button CSS -->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/fonts/fonts-min.css">
+    <!-- Menu CSS -->
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'customizedYuiMenu.css')}" />
+    <!-- Button CSS -->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/button/assets/button.css">
+    <!-- PPM CSS -->
     <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'common.css')}"></link>
-	<g:javascript src="yahoo-full/yahoo" />
-    <g:javascript src="yahoo-full/dom" />
-    <g:javascript src="yahoo-full/event" />
-    <g:javascript src="yahoo-full/container_core" />
-    <g:javascript src="yahoo-full/menu" />
+
+    <!-- Menu, Button and Tabview JS --> 
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+    <!-- Dependency for Menu JS --> 
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/container/container_core-min.js"></script>
+    <!-- Menu JS -->
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/menu/menu-min.js"></script>
+    <!-- Dependency for Button JS --> 
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/element/element-beta-min.js"></script>
+    <!-- Button JS -->
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/button/button-beta-min.js"></script>
+
     <g:javascript library="scriptaculous" />
     <g:javascript library="prototype" />
     <g:javascript src="ppm.js" />

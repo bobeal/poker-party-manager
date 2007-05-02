@@ -3,10 +3,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
     <title>Poker Party Manager - <g:message code="player.create_page" /></title>         
+    <script type="text/javascript">
+      YAHOO.util.Event.onContentReady('createPlayerFieldset', onSubmitButtonsMarkupReady);
+    </script> 
   </head>
   <body>
     <g:form action="save" method="post" >
-      <fieldset>
+      <fieldset id="createPlayerFieldset">
         <legend><g:message code="player.create_page" /></legend>
     
         <g:if test="${flash.message}">
@@ -34,7 +37,7 @@
         <br/>
 
         <label for="submit">&nbsp;</label>
-        <input id="submit" type="submit" value="Create"></input>
+        <input id="wrappedSubmit" type="submit" value="Create"></input>
 
       </fieldset>
     </g:form>
