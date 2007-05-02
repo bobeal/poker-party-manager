@@ -8,16 +8,38 @@ class PartyController extends BaseController {
 
     def index = { redirect(controller:'championship',action:'list',params:params) }
 
+    // called asynchronously, only renders operation result that will be displayed
+    // in a special div
     def delete = {
         def party = Party.get( params.id )
+        log.info("Deleting party ${party.id}")
         if(party) {
-            party.delete()
-            flash.message = "Party ${params.id} deleted."
-            redirect(action:list)
-        }
-        else {
-            flash.message = "Party not found with id ${params.id}"
-            redirect(action:list)
+            
+            // temp hack
+            // see http://jira.codehaus.org/browse/GRAILS-563
+			try {
+			    party.setPlace(null)
+	            party.delete()
+
+	            sessionFactory.getCurrentSession().flush()
+				log.debug("party ${params.id} deleted.")
+				render(builder:'json') {
+         			status('success')
+         			msg(getMessage('party.success_delete'))
+  	   			}
+			} catch( Exception ex ) {
+				log.debug("party ${params.id} could not be deleted !")
+				ex.printStackTrace()
+				render(builder:'json') {
+         			status('failure')
+         			msg(getMessage('party.failure_delete'))
+  	   			}
+			}
+        } else {
+			render(builder:'json') {
+     			status('failure')
+     			msg(getMessage('party.failure_delete'))
+   			}
         }
     }
 
@@ -29,8 +51,7 @@ class PartyController extends BaseController {
             redirect(action:list)
         }
         else {
-            render(view:'edit_embed',model:[party:party])
-            // return [ party : party ]
+            render(view:'edit_embed',model:[party:party],contentType:'text/javascript')
         }
     }
 
@@ -38,15 +59,16 @@ class PartyController extends BaseController {
         def party = Party.get( params.id )
         if (party) {
             party.properties = params
+            party.setDefaults()
             if(party.save()) {
-                render(view:'edit_embed',model:[party:party])
+                render(view:'edit_embed',model:[party:party],contentType:'text/javascript')
             } else {
                 flash.message = "Error updating party ${params.id}"
-                render(view:'edit_embed',model:[party:party])
+                render(view:'edit_embed',model:[party:party],contentType:'text/javascript')
             }
         } else {
             flash.message = "Party not found with id ${params.id}"
-            redirect(action:edit,id:params.id)
+            redirect(controller:'championship',action:'list')
         }
     }
 
@@ -58,8 +80,9 @@ class PartyController extends BaseController {
     def save = {
         def party = new Party()
         party.properties = params
+        party.setDefaults()
         if(party.save()) {
-            render(view:'edit_embed',model:[party:party])
+            render(view:'edit_embed',model:[party:party],contentType:'text/javascript')
         } else {
             render(view:'create_embed',model:[party:party])
         }
@@ -67,7 +90,7 @@ class PartyController extends BaseController {
     
     def forwardToEditEmbed = {
 		def party = Party.get( params.id )
-    	render(view:'edit_embed',model:[party:party])
+    	render(view:'edit_embed',model:[party:party],contentType:'text/javascript')
     }
     
     def checkScores = {
@@ -80,7 +103,6 @@ class PartyController extends BaseController {
             totalMoney += score.money
             totalPoints += score.points - (score.refunds * score.party.coinsPerBuyin)
         }
-
         
         if ((party.kind == 'Cash Game' && totalPoints == 0)
                 || (party.kind == 'Sit and Go' && totalMoney == 0)) {
