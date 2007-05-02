@@ -18,13 +18,14 @@ function switchKindFields() {
 
 var tryingDeleteElementId = '';
 
-function confirmDelete(confirmDlg, yesDlg, noDlg, elementId, postUrl) {
+function confirmDelete(confirmDlg, yesDlg, noDlg, elementId, postUrl, successDeleteMethod) {
     var yesSubmitUrl = postUrl + "/" + elementId;
     tryingDeleteElementId = elementId;
     var commands = document.getElementById('commands-' + elementId);
     var post = commands.parentNode;
     commands.style.display = 'none';
-    var confirmDeleteMethod = 'new Ajax.Updater(\'\',\'' + yesSubmitUrl + '\',{asynchronous:true,evalScripts:true,onSuccess:successDelete});return false;';
+    var confirmDeleteMethod = 'new Ajax.Updater(\'\',\'' + yesSubmitUrl 
+    	+ '\',{asynchronous:true,evalScripts:true,onSuccess:' + successDeleteMethod + '});return false;';
     var newDiv = Builder.node('div', {className:'commands', id:'commands-askdelete-' + elementId}, [
         Builder.node('span', {className:'important'}, ' ' + confirmDlg + ' '),
         Builder.node('a', {onclick:confirmDeleteMethod, href:'javascript:void(0);'}, yesDlg),
@@ -40,7 +41,11 @@ function cancelDelete() {
     tryingDeleteElementId = '';
 }
 
-function successDelete(t) {
+function successDeleteParties(t) {
+	Element.update(document.getElementById('positionsContentContainer'), t.responseText);
+}
+
+function successDeleteJson(t) {
 	var deleteResponse = eval('(' + t.responseText + ')');
     if (deleteResponse.status == "success") {
        document.getElementById('delete-result-status').innerHTML = 

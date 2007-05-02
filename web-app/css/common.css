@@ -51,7 +51,7 @@ select .errors, input .errors {
 	float:right;
 }
 
-div#positionsContent, div#standingsContent {
+div#positionsContent, div#standingsContent, div#editPartyContent , div#addPartyContent {
 	margin:2%;
 }
 
@@ -172,7 +172,6 @@ form .submit {
 
 fieldset.embed {
 	border: 1px solid #578BB8;
-	margin: 10px;        /* padding in fieldset support spotty in IE */
 	background-color: white;
 }
 

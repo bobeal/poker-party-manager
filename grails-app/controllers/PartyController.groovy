@@ -8,8 +8,6 @@ class PartyController extends BaseController {
 
     def index = { redirect(controller:'championship',action:'list',params:params) }
 
-    // called asynchronously, only renders operation result that will be displayed
-    // in a special div
     def delete = {
         def party = Party.get( params.id )
         log.info("Deleting party ${party.id}")
@@ -18,28 +16,23 @@ class PartyController extends BaseController {
             // temp hack
             // see http://jira.codehaus.org/browse/GRAILS-563
 			try {
+			    def championshipId = party.championship.id
 			    party.setPlace(null)
 	            party.delete()
 
 	            sessionFactory.getCurrentSession().flush()
 				log.debug("party ${params.id} deleted.")
-				render(builder:'json') {
-         			status('success')
-         			msg(getMessage('party.success_delete'))
-  	   			}
+				flash.message = 'party.success_delete'
+				redirect(controller:'championship',action:'getparties',id:championshipId)
 			} catch( Exception ex ) {
 				log.debug("party ${params.id} could not be deleted !")
 				ex.printStackTrace()
-				render(builder:'json') {
-         			status('failure')
-         			msg(getMessage('party.failure_delete'))
-  	   			}
+				flash.message = 'party.failure_delete'
+				redirect(controller:'championship',action:'getparties',id:championshipId)
 			}
         } else {
-			render(builder:'json') {
-     			status('failure')
-     			msg(getMessage('party.failure_delete'))
-   			}
+			flash.message = 'party.failure_delete'
+			redirect(controller:'championship',action:'getparties',id:championshipId)
         }
     }
 
