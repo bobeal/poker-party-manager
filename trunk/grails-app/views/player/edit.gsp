@@ -7,13 +7,16 @@
      	function escapeHTML(data) {
        		return data.escapeHTML()
        	}
+
+        YAHOO.util.Event.onContentReady('editPlayerFieldset', onSubmitButtonsMarkupReady);
+
     </script>
   </head>
   <body>
     <g:form method="post" enctype="multipart/form-data">
       <input type="hidden" name="id" value="${player?.id}" />
 
-      <fieldset>
+      <fieldset id="editPlayerFieldset">
         <legend><g:message code="player.my_page"/></legend>
         
         <g:if test="${flash.message}">
@@ -74,7 +77,7 @@
         <br/>
 
         <label for="submit"></label>
-        <g:actionSubmit value="Update" />
+        <input id="wrappedSubmit" type="submit" value="Update"></input>
       </fieldset>
     </g:form>
   </body>

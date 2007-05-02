@@ -2,11 +2,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
+    <script type="text/javascript">
+      YAHOO.util.Event.onContentReady('showPlayerFieldset', onSubmitButtonsMarkupReady);
+    </script> 
     <title>Poker Party Manager - <g:message code="player.show_page" args='[player.login]' /></title>
   </head>
   <body>
     <g:form action="edit" id="${player.id}">
-      <fieldset>
+      <fieldset id="showPlayerFieldset">
         <legend><g:message code="player.show_page" args='[player.login]' /></legend>
 
         <g:if test="${flash.message}">
@@ -41,7 +44,7 @@
         
         <g:hasPlayerPagePermission id="${player?.id}">
           <label for="submit">&nbsp;</label>
-          <g:actionSubmit value="Edit" />
+          <input id="wrappedSubmit" type="submit" value="Edit" />
         </g:hasPlayerPagePermission>
         
       </fieldset>

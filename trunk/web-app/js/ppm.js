@@ -1,3 +1,7 @@
+/**
+ * Switch HTML form elements to display according to specified party kind 
+ * (currently, Cash Game or Sit and Go)
+ */
 function switchKindFields() {
   	Element.toggle(document.getElementById('cashgame'));
 	if (Element.visible(document.getElementById('cashgame'))) {
@@ -11,11 +15,6 @@ function switchKindFields() {
 	}
 }
 
-function setChampionshipTab(tabId, submitUrl) {
-	document.getElementById(tabId).href = submitUrl;
-	expandtab('maintab', 3);
-	Element.show(document.getElementById(tabId).parentNode);
-}
 
 var tryingDeleteElementId = '';
 
@@ -58,13 +57,10 @@ function successDelete(t) {
     cancelDelete();
 }
 
-/*
-function failureDelete() {
-    document.getElementById('deleteResultStatus').innerHTML = "<div class=\"errors\">" + deleteResponse.msg + "</div>";
-    Effect.Appear('deleteResultStatus', {duration: 3.0 });
-    new Effect.Highlight('deleteResultStatus', {duration: 2.0});
-    Effect.Fade('deleteResultStatus');
-    cancelDelete();
+function onDefaultSubmitButtonsMarkupReady() {
+	var oSubmitButton1 = new YAHOO.widget.Button('wrappedSubmit', { id:'submit' });
 }
-*/
 
+function onSubmitButtonsMarkupReady(origId, destId) {
+	var oSubmitButton1 = new YAHOO.widget.Button(origId, { id:destId });
+}

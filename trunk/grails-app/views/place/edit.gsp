@@ -2,11 +2,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
+    <script type="text/javascript">
+      YAHOO.util.Event.onContentReady('editPlaceFieldset', onSubmitButtonsMarkupReady);
+    </script> 
     <title>Poker Party Manager - <g:message code="place.edit_page"/></title>
   </head>
   <body>
     <g:form method="post" action="update" id="${place?.id}">
-      <fieldset>
+      <fieldset id="editPlaceFieldset">
         <legend><g:message code="place.edit_page"/></legend>
       
         <g:if test="${flash.message}">
@@ -29,7 +32,7 @@
         <br/>
 
         <label for="submit">&nbsp;</label>
-        <input id="submit" type="submit" value="Update"></input>
+        <input id="wrappedSubmit" type="submit" value="Update"></input>
 
       </fieldset>
     </g:form>

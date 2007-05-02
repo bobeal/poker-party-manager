@@ -1,7 +1,7 @@
 <div id="editPartyContent">
-<g:form method="post" >
+<g:formRemote name="editPartyForm" url="[action:'update']" method="post" update="editPartyContent"
+   onComplete="onSubmitButtonsMarkupReady('wrappedPartySubmit','partySubmit');onSubmitButtonsMarkupReady('wrappedScoreSubmit','scoreSubmit');">
   <fieldset class="embed">
-    <legend><g:message code="party.edit_page"/></legend>
 
     <g:if test="${flash.message}">
       <div class="message">${flash.message}</div>
@@ -16,11 +16,12 @@
    	<g:render template="/party/fieldlist" model="[party:party]" />
 
     <label for="submit">&nbsp;</label>
-    <g:submitToRemote url="[controller:'party',action:'update']" update="editPartyContent" value="Update" />
+    <input class="submit" id="wrappedPartySubmit" type="submit" value="Update" />
   </fieldset>
-</g:form>
+</g:formRemote>
             
-<g:form controller="score" action="save" method="post" >
+<g:formRemote name="addScoreForm" url="[controller:'score',action:'save']" method="post" update="editPartyContent"
+   onComplete="onSubmitButtonsMarkupReady('wrappedPartySubmit','partySubmit');onSubmitButtonsMarkupReady('wrappedScoreSubmit','scoreSubmit');">
   <input type="hidden" name="party.id" value="${party?.id}"/>
 
   <fieldset class="embed">
@@ -36,29 +37,26 @@
     <g:if test="${party?.kind == 'Cash Game'}">
     <label for='points'><g:message code="score.chips"/> :</label>
     <input type='text' class='${hasErrors(bean:score,field:'points','errors')}' name='points' 
-      value='${score?.points}' id="points">
-    </input>
+      value='${score?.points}' id="points" />
     <br />
     </g:if>
     
     <g:if test="${party?.kind == 'Sit and Go'}">
     <label for='position'><g:message code="score.position"/> :</label>
     <input type='text' class='${hasErrors(bean:score,field:'position','errors')}' name='position' 
-      value='${score?.position}'>
-    </input>
+      value='${score?.position}' />
     <br />
     </g:if>
     
     <label for='refunds'><g:message code="score.rebuys"/> :</label>
     <input type='text' class='${hasErrors(bean:score,field:'refunds','errors')}' 
-      name='refunds' value='${score?.refunds}'>
-    </input>
+      name='refunds' value='${score?.refunds}' />
     <br />
     
     <label for="submit">&nbsp;</label>
-    <g:submitToRemote url="[controller:'score',action:'save']" update="editPartyContent" value="Create" />
+    <input class="submit" id="wrappedScoreSubmit" type="submit" value="Create" />
   </fieldset>
-</g:form>
+</g:formRemote>
             
 <div id="scores-check-result">
 </div>
