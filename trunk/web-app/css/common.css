@@ -51,14 +51,16 @@ select .errors, input .errors {
 	float:right;
 }
 
-/* style for embedded pages (pages inside ajax tabs) */
+div#positionsContent, div#standingsContent {
+	margin:2%;
+}
+
+/* styles for embedded pages (pages inside ajax tabs in championship view) */
 
 div.embed {
 	padding: 10px;
 	background-color:#FFFF88;
 	width: 100%;
-	/* padding: 15px; */
-	/* background-color:#F0F0F0; */
 	border: 1px solid #778;
 	overflow: auto;
 }
@@ -66,6 +68,12 @@ div.embed {
 th.embed {
 	background-color: #C3D9FF;
 }
+
+/*
+th.parties-embed {
+	font-size: smaller;
+}
+*/
 
 .message_embed {
 	border: 1px solid #FFCC00;
@@ -86,11 +94,6 @@ div .errors_embed {
 /* table styles */
 
 table { 
-	/*
-	table-layout: fixed;
-    margin-left: 0em;
-    margin-right: -22em; 
-    */
     width: 100%;
     border: 1px solid #578BB8;
 }
@@ -124,11 +127,6 @@ form {
 	/* font:100% verdana,arial,sans-serif; */
 	margin: 0;
 	padding: 0;
-  /*
-  min-width: 500px;
-  max-width: 600px;
-  width: 560px; 
-  */
 }
 
 form label { 
@@ -173,7 +171,8 @@ form .submit {
 }
 
 fieldset.embed {
-	border: 0px;
+	border: 1px solid #578BB8;
+	margin: 10px;        /* padding in fieldset support spotty in IE */
 	background-color: white;
 }
 

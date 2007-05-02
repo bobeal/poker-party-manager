@@ -1,5 +1,9 @@
 class ChampionshipService {
-    
+
+    /*
+     * Return a list of PlayerTableLine objects representing player's scores
+     * for a given championship.
+     */
     def getStandings(championshipId) {
         def championship = Championship.get( championshipId )
         def championshipParties = Party.findAllByChampionship(championship)
@@ -17,7 +21,7 @@ class ChampionshipService {
         playersMap.each { k,v ->
             orderedPlayersLines.put(-v.totalMoney, v)
         }
-		//render(view:'table',model:[playersLines:orderedPlayersLines.values()])
+
 		return orderedPlayersLines.values()
     }
 

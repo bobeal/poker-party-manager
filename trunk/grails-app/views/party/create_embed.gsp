@@ -1,6 +1,5 @@
 <div id="addPartyContent">
-<g:formRemote name="addPartyForm" url="[action:'save']" method="post" update="addPartyContent"
-  before="javascript:openEditPartyTab('${message(code:"championship.edit_party")}', '');">
+<g:formRemote name="addPartyForm" url="[action:'save']" method="post" update="addPartyContent">
   <fieldset class="embed" id="addPartyFieldset">
     
     <g:if test="${flash.message}">
@@ -17,7 +16,7 @@
     
     <g:render template="/party/fieldlist" model="[party:party]" />
 
-    <legend for="submit">&nbsp;</legend>
+    <label for="submit">&nbsp;</legend>
     <input class="submit" id="wrappedSubmit" type="submit" value="Create" />
     
   </fieldset>

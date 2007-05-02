@@ -2,28 +2,6 @@ import java.text.SimpleDateFormat
 
 class PokerPartyManagerTagLib {
 
-    def playersTable = { attrs ->
-        def playersLines = attrs['playersLines']
-   		def cssClass
-        
-        playersLines.eachWithIndex { playerLine,index ->
-    		if (index % 2 == 0)
-    	    	cssClass = "odd"
-    		else
-    			cssClass = "even"
-
-    		out << "<tr>"
-            out << "<td class=\"" << cssClass << "\" width='10%'>" << index + 1 << "</td>"
-            out << "<td class=\"" << cssClass << "\" width='20%'>" << playerLine?.playerLogin << "</td>"
-            out << "<td class=\"" << cssClass << "\" width='20%'>" << playerLine?.getFormattedTotal() << "</td>"
-            out << "<td class=\"" << cssClass << "\" width='10%'>" << playerLine?.partiesWon << "</td>"
-            out << "<td class=\"" << cssClass << "\" width='10%'>" << playerLine?.partiesDraw << "</td>"
-            out << "<td class=\"" << cssClass << "\" width='10%'>" << playerLine?.partiesLost << "</td>"
-            out << "<td class=\"" << cssClass << "\" width='10%'>" << playerLine?.getLpa() << "</td>"
-            out << "</tr>"
-        }
-    }
-
     def dateFormat = { attrs ->
     	out << new SimpleDateFormat().format(attrs.date)
  	}
@@ -96,7 +74,7 @@ class PokerPartyManagerTagLib {
 //	            throwTagError("Tag [paginate] is missing required attribute [remoteUpdate] where attribute [remote] is set")
 //    		linkTagAttrs.'update' = attrs.remoteUpdate
 //		}
-		linkTagAttrs.'update' = 'positionsContent'
+		linkTagAttrs.'update' = 'positionsContentContainer'
         
 		def combined = max + offset
 		if(offset > 0) {

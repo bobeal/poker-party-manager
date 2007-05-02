@@ -1,6 +1,9 @@
 <div id="editPartyContent">
-<g:formRemote name="editPartyForm" url="[action:'update']" method="post" update="editPartyContent"
-   onComplete="onSubmitButtonsMarkupReady('wrappedPartySubmit','partySubmit');onSubmitButtonsMarkupReady('wrappedScoreSubmit','scoreSubmit');">
+<script type="text/javascript">
+  onSubmitButtonsMarkupReady('wrappedPartySubmit','partySubmit');
+  onSubmitButtonsMarkupReady('wrappedScoreSubmit','scoreSubmit');
+</script>
+<g:formRemote name="editPartyForm" url="[action:'update']" method="post" update="editPartyContent">
   <fieldset class="embed">
 
     <g:if test="${flash.message}">
@@ -20,8 +23,7 @@
   </fieldset>
 </g:formRemote>
             
-<g:formRemote name="addScoreForm" url="[controller:'score',action:'save']" method="post" update="editPartyContent"
-   onComplete="onSubmitButtonsMarkupReady('wrappedPartySubmit','partySubmit');onSubmitButtonsMarkupReady('wrappedScoreSubmit','scoreSubmit');">
+<g:formRemote name="addScoreForm" url="[controller:'score',action:'save']" method="post" update="editPartyContent">
   <input type="hidden" name="party.id" value="${party?.id}"/>
 
   <fieldset class="embed">

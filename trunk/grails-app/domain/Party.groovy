@@ -33,19 +33,16 @@ class Party {
 		int hashCode = 0
 		hashCode = 29 * (hashCode + ( !id ? 0 : id ^ (id >>> 32) ) )
 	}
+
+	void setDefaults() {
+		if (buyin == null)
+		    buyin = Double.valueOf("2.5")
+		if (coinsPerBuyin == null)
+		    coinsPerBuyin = Integer.valueOf("100")
+	}
 	
 	static constraints = {
 	    coinsPerBuyin(matches:"[0-9]",blank:false)
 		buyin(matches:"[(0-9)*.(0-9)*]",blank:false)
-	    /*
-	    buyin(validator : {
-	        val, obj ->
-	        	println obj.properties['kind']
-	        	println val
-	        	if (obj.properties['kind'] == "Cash Game" && val == null)
-	        		return false
-	    	}
-	    )
-	    */
 	}
 }

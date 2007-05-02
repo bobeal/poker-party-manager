@@ -35,19 +35,19 @@
               label: '<g:message code="championship.positions"/>',
               dataSrc: '${createLink(action:"getstandings",id:championship.id)}',
               active: true,
-              cacheData: true
+              cacheData: false
             }));
     
             tabView.addTab(new YAHOO.widget.Tab({
               label: '<g:message code="championship.parties"/>',
               dataSrc: '${createLink(action:"getparties",id:championship.id)}',
-              cacheData: true /* only load once */
+              cacheData: false
             }));
     
             var createPartyTab = new YAHOO.widget.Tab({
               label: '<g:message code="championship.add_party"/>',
               dataSrc: '${createLink(controller:"party",action:"create",id:championship.id)}',
-              cacheData: true /* only load once */
+              cacheData: false
             })
             tabView.addTab(createPartyTab);
             
@@ -82,6 +82,7 @@
             tabView.addTab(editPartyTab,3);
 
             // decorate submit button of the "edit party" tab
+            // FIXME : duplicate with what is done in edit_embed.gsp
             var handleContentChange = function(e) {
               onSubmitButtonsMarkupReady('wrappedPartySubmit','partySubmit');
               onSubmitButtonsMarkupReady('wrappedScoreSubmit','scoreSubmit');
