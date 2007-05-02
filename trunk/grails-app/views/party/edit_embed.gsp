@@ -149,7 +149,8 @@
                                                '${message(code:'dialog.yes')}',
                                                '${message(code:'dialog.no')}',
                                                '${score.id}',
-                                               '${createLink(action:'delete',controller:'score')}');return false;">
+                                               '${createLink(action:'delete',controller:'score')}',
+                                               'successDeleteJson');return false;">
             <g:message code="action.delete" />
           </a>
         </div>

@@ -5,6 +5,10 @@
   <div id="positionsContentContainer">    
   <div id="positionsContent">
   
+    <g:if test="${flash.message}">
+      <div class="message">${message(code:flash['message'])}</div>
+    </g:if>
+    
     <div style="float:right;">
       <g:ajaxPaginate next="${message(code:'navigation.next')}" 
           prev="${message(code:'navigation.prev')}"
@@ -24,18 +28,17 @@
               <g:dateFormat date="${party.date}"/>
             </a>
             <br/>
-            <!-- 
             <div id="commands-${party.id}" class="commands" style="display: inline;">
               <a href="javascript:void(0);" 
                   onclick="javascript:confirmDelete('${message(code:'party.confirm_delete')}',
                                                '${message(code:'dialog.yes')}',
                                                '${message(code:'dialog.no')}',
                                                '${party.id}',
-                                               '${createLink(action:'delete',controller:'party')}');return false;">
+                                               '${createLink(action:'delete',controller:'party')}',
+                                               'successDeleteParties');return false;">
                   <g:message code="action.delete" />
               </a>
             </div>
-            -->
           </th>
         </g:each>
       </tr>
