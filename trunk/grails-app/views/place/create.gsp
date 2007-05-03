@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
     <script type="text/javascript">
-      YAHOO.util.Event.onContentReady('createPlaceFieldset', onSubmitButtonsMarkupReady);
+      YAHOO.util.Event.onContentReady('createPlaceFieldset', onDefaultSubmitButtonsMarkupReady);
     </script> 
     <title>Poker Party Manager - <g:message code="place.create_page"/></title>         
   </head>

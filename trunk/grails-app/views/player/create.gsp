@@ -4,7 +4,7 @@
     <meta name="layout" content="main" />
     <title>Poker Party Manager - <g:message code="player.create_page" /></title>         
     <script type="text/javascript">
-      YAHOO.util.Event.onContentReady('createPlayerFieldset', onSubmitButtonsMarkupReady);
+      YAHOO.util.Event.onContentReady('createPlayerFieldset', onDefaultSubmitButtonsMarkupReady);
     </script> 
   </head>
   <body>
