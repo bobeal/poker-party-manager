@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <script type="text/javascript">
-      YAHOO.util.Event.onContentReady('showPlayerFieldset', onSubmitButtonsMarkupReady);
+      YAHOO.util.Event.onContentReady('showPlayerFieldset', onDefaultSubmitButtonsMarkupReady);
     </script> 
     <title>Poker Party Manager - <g:message code="player.show_page" args='[player.login]' /></title>
   </head>

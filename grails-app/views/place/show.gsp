@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
     <script type="text/javascript">
-      YAHOO.util.Event.onContentReady('showPlaceFieldset', onSubmitButtonsMarkupReady);
+      YAHOO.util.Event.onContentReady('showPlaceFieldset', onDefaultSubmitButtonsMarkupReady);
     </script> 
     <title>Poker Party Manager - <g:message code="place.show_page"/></title>
   </head>

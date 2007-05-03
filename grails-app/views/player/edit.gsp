@@ -8,7 +8,7 @@
        		return data.escapeHTML()
        	}
 
-        YAHOO.util.Event.onContentReady('editPlayerFieldset', onSubmitButtonsMarkupReady);
+        YAHOO.util.Event.onContentReady('editPlayerFieldset', onDefaultSubmitButtonsMarkupReady);
 
     </script>
   </head>
