@@ -6,7 +6,6 @@ class ScoreController extends BaseController {
     // in a special div
     def delete = {
         def score = Score.get( params.id )
-        log.info("Deleting score ${score.id}")
         if(score) {
             
             // temp hack
@@ -15,13 +14,11 @@ class ScoreController extends BaseController {
 	            score.delete()
 
 	            sessionFactory.getCurrentSession().flush()
-				log.debug("score ${params.id} deleted.")
 				render(builder:'json') {
          			status('success')
          			msg(getMessage('score.success_delete'))
   	   			}
 			} catch( Exception ex ) {
-				log.debug("score ${params.id} could not be deleted !")
 				ex.printStackTrace()
 				render(builder:'json') {
          			status('failure')
@@ -71,17 +68,18 @@ class ScoreController extends BaseController {
     def save = {
         def score = new Score()
         score.properties = params
+        
         if (score.party.kind == "Cash Game") {
 	        score.money = (score.points - (score.refunds * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
         } else if (score.party.kind == "Sit and Go") {
             score.money = - (score.party.buyin + score.refunds * score.party.buyin)
         }
+        
         if(score.save()) {
             redirect(controller:'party',action:'forwardToEditEmbed',id:score.party.id)
         }
         else {
-            render(view:'create',model:[score:score])
+            redirect(controller:'party',action:'forwardToEditEmbed',id:score.party.id)
         }
     }
-
 }

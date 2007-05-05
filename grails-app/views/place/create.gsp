@@ -1,7 +1,8 @@
+<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>
+
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main" />
+    <meta name="layout" content="main">
     <script type="text/javascript">
       YAHOO.util.Event.onContentReady('createPlaceFieldset', onDefaultSubmitButtonsMarkupReady);
     </script> 
@@ -28,8 +29,9 @@
 
         <label for='description'><g:message code="place.description"/> :</label>
         <textarea class="${hasErrors(bean:place,field:'description','errors')}"
-          cols="40" rows="3" id="description" name="description" 
-          value="${place?.description}">${place?.description}</textarea>
+          cols="40" rows="3" id="description" name="description">
+          ${place?.description}
+        </textarea>
         <br/>
 
         <label for="submit">&nbsp;</label>

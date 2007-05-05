@@ -2,8 +2,7 @@
 
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main" />
+    <meta name="layout" content="main">
     <script type="text/javascript">
       YAHOO.util.Event.onContentReady('showPlaceFieldset', onDefaultSubmitButtonsMarkupReady);
     </script> 
@@ -26,9 +25,11 @@
         ${place.description}
         <br/>
 
-        <label for="submit">&nbsp;</label>
-        <input id="wrappedSubmit" type="submit" value="Edit"></input>
-
+        <g:if test="${session?.user?.isSuperAdmin}">
+          <label for="submit">&nbsp;</label>
+          <input id="wrappedSubmit" type="submit" value="Edit"></input>
+        </g:if>
+        
       </fieldset>
     </g:form>
 

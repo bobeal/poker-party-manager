@@ -1,7 +1,8 @@
+<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>
+
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main" />
+    <meta name="layout" content="main">
     <title>Poker Party Manager - <g:message code="place.list_page"/></title>
   </head>
   <body>
@@ -22,10 +23,10 @@
           <td class="${index % 2 == 0 ? 'odd' : 'even'}">${place.description}</td>
           <td class="${index % 2 == 0 ? 'odd' : 'even'}">
             <g:link action="show" id="${place.id}"><g:message code="action.show"/></g:link>
-            <g:hasPlayerPagePermission id="${place.id}">
+            <g:if test="${session?.user?.isSuperAdmin}">
               <br />
               <g:link action="edit" id="${place.id}"><g:message code="action.edit" /></g:link>
-            </g:hasPlayerPagePermission>
+            </g:if>
           </td>
         </tr>
       </g:each>

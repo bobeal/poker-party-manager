@@ -2,19 +2,16 @@
 
 <html>
     <head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="layout" content="main" />
+        <meta name="layout" content="main">
         <title>Poker Party Manager - <g:message code="championship.view_page"/></title>
-        <!-- Dependencies -->
-        <!-- core CSS -->
+        <!-- Tab View CSS -->
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/tabview/assets/tabview.css">
         <!-- optional skin for border tabs -->
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/tabview/assets/border_tabs.css">
-        <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-        <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/element/element-beta-min.js"></script>
-        <!-- OPTIONAL: Connection (required for dynamic loading of data) -->
+        
+        <!-- Required for dynamic loading of data -->
         <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/connection/connection-min.js"></script>
-        <!-- Source file -->
+        <!-- Tab View JS -->
         <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/tabview/tabview-min.js"></script>
         <style type="text/css">
           #championshipMenu .loading {
@@ -22,9 +19,11 @@
             background-position:center center;
             background-repeat:no-repeat;
           }
+          /*
           #championshipMenu .loading * {
             display:none;
           }
+          */
         </style>
         <script type="text/javascript">
           var tabView = new YAHOO.widget.TabView({id: 'championshipMenu'});
@@ -120,7 +119,7 @@
 
         </fieldset>
       </form>
-           
+
       <br/><br/>
 
       <div id="tabContent">

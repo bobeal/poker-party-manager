@@ -2,7 +2,7 @@ class PlaceController extends BaseController {
     def index = { redirect(action:list,params:params) }
 
     def list = {
-        [ placeList: Place.list( params ) ]
+        [ placeList: Place.list( sort:"name", order:"asc" ) ]
     }
 
     def show = {

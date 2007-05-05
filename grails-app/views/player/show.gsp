@@ -1,6 +1,7 @@
+<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>
+
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="main" />
     <script type="text/javascript">
       YAHOO.util.Event.onContentReady('showPlayerFieldset', onDefaultSubmitButtonsMarkupReady);

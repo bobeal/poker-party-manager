@@ -2,8 +2,7 @@
 
 <html>
   <head>
-    <meta name="layout" content="main" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="layout" content="main">
     <title>Poker Party Manager - <g:message code="championship.list_page" /></title>
   </head>
   <body>

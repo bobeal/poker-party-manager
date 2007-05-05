@@ -1,6 +1,7 @@
+<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>
+
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
     <title>Poker Party Manager - <g:message code="player.my_page"/></title>
     <script type="text/javascript">
@@ -68,14 +69,18 @@
           size='40' name='amulet' value='<g:escapeHTML data="${player?.amulet}"/>' />
         <br/>
 
-        <label for='isSuperAdmin'><g:message code="player.is_super_admin"/>  :</label>
-        <g:checkBox name='isSuperAdmin' value='${player?.isSuperAdmin}' />
-        <br/>
+        <g:if test="${session?.user?.isSuperAdmin}">
 
-        <label for='canManageChampionship'><g:message code="player.can_manage_championship"/>  :</label>
-        <g:checkBox name='canManageChampionship' value='${player?.canManageChampionship}' />
-        <br/>
+          <label for='isSuperAdmin'><g:message code="player.is_super_admin"/>  :</label>
+          <g:checkBox name='isSuperAdmin' value='${player?.isSuperAdmin}' />
+          <br/>
 
+          <label for='canManageChampionship'><g:message code="player.can_manage_championship"/>  :</label>
+          <g:checkBox name='canManageChampionship' value='${player?.canManageChampionship}' />
+          <br/>
+
+        </g:if>
+        
         <label for="submit"></label>
         <input id="wrappedSubmit" type="submit" value="Update"></input>
       </fieldset>
