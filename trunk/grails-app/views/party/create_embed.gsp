@@ -16,7 +16,7 @@
     
     <g:render template="/party/fieldlist" model="[party:party]" />
 
-    <label for="submit">&nbsp;</legend>
+    <label for="submit">&nbsp;</label>
     <input class="submit" id="wrappedSubmit" type="submit" value="Create" />
     
   </fieldset>

@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title><g:layoutTitle default="Poker Party Manager" /></title>
 
     <!-- Grid and common settings CSS -->
@@ -8,11 +9,11 @@
     <!-- Menu and Button CSS -->
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/fonts/fonts-min.css">
     <!-- Menu CSS -->
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'customizedYuiMenu.css')}" />
+    <link rel="stylesheet" type="text/css" href="${createLinkTo(dir:'css',file:'customizedYuiMenu.css')}">
     <!-- Button CSS -->
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/button/assets/button.css">
     <!-- PPM CSS -->
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'common.css')}"></link>
+    <link rel="stylesheet" type="text/css" href="${createLinkTo(dir:'css',file:'common.css')}">
 
     <!-- Menu, Button and Tabview JS --> 
     <script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
@@ -34,7 +35,7 @@
     <div id="doc2" class="yui-t1">
       <div id="hd">
         <div style="float:left;">
-          <a href="${createLink(controller:'player',action:'welcome')}">
+          <a href="${createLink(controller:'championship',action:'list')}">
         	<img src="${createLinkTo(dir:'images',file:'ppm_small.png')}" alt="Poker" />
           </a>
           <!-- <img src="${createLinkTo(dir:'images',file:'ppm_header.png')}" /> -->

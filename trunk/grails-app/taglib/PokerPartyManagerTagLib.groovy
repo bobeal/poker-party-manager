@@ -7,17 +7,38 @@ class PokerPartyManagerTagLib {
  	}
     
     /**
-	 * Only invokes the body if the user within the session is a system administrator
+	 * Only invokes the body if the current user is a system administrator (FIXME : or self).
 	 */
 	def hasPlayerPagePermission = { attrs, body ->
-		if(session.user) {
+		if (session.user) {
 			def u = session.user
-			if(u.isSuperAdmin || String.valueOf(u.id.longValue()) == attrs['id']) {
+			out << u.id << " / " << attrs['id']
+			//if(u.isSuperAdmin || String.valueOf(u.id) == attrs['id']) {
 				body()	
-			}
+			//}
 		}
 	}
     
+    def isAdminOrSelf = { attrs, body ->
+		def playerId = attrs['playerId']
+		if (session?.user?.isSuperAdmin || session?.user?.id.equals(Long.valueOf(playerId)))
+	    	body()
+	}
+
+    /**
+	 * Only invokes the body if the current user is a system administrator (FIXME : or self).
+	 */
+    def isAdmin = { attrs, body ->
+    	def user = attrs['user']
+    	if (user.isSuperAdmin)
+    	    out << "Oui"
+    	else
+    	    return false
+	}
+    
+    /**
+	 * Only invokes the body if the current user can manage the given championship.
+	 */
     def canManageChampionship = { attrs, body ->
     	if (session.user) {
     	    def championshipId = attrs['championship']

@@ -1,4 +1,4 @@
-#Wed Mar 14 09:19:12 CET 2007
+#Sat May 05 19:50:23 CEST 2007
 eclipse.preferences.version=1
 encoding//grails-app/i18n/messages_fr.properties=UTF-8
 encoding//grails-app/views/championship/_displaystandings.gsp=UTF-8
@@ -15,5 +15,4 @@ encoding//grails-app/views/player/edit.gsp=UTF-8
 encoding//grails-app/views/player/list.gsp=UTF-8
 encoding//grails-app/views/player/login.gsp=UTF-8
 encoding//grails-app/views/player/show.gsp=UTF-8
-encoding//grails-app/views/player/welcome.gsp=UTF-8
 encoding/<project>=UTF-8

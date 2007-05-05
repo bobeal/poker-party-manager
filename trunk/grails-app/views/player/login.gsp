@@ -1,8 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+
+<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>
+
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'login.css')}" />
+    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'login.css')}">
 
     <!-- Grid and common settings CSS -->
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/reset-fonts-grids/reset-fonts-grids.css">
