@@ -1,0 +1,1 @@
+<div class="${resultClass}"><g:message code="${resultMsg}" args="${resultArgs}"/></div>

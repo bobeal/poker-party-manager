@@ -99,12 +99,17 @@ class PartyController extends BaseController {
         
         if ((party.kind == 'Cash Game' && totalPoints == 0)
                 || (party.kind == 'Sit and Go' && totalMoney == 0)) {
-            render "<div class=\"message_embed\">Le compte est bon !</div>"
+            render(template:'resultscorescheck',
+                   model:['resultClass':'message_embed','resultMsg':'score.success_check'])
         } else {
             if (party.kind == 'Cash Game')
-				render "<div class=\"errors_embed\">Too bad, il y a un &eacute;cart de ${totalPoints}</div>"
+                render(template:'resultscorescheck',
+                        model:['resultClass':'errors_embed','resultMsg':'score.failure_check',
+                               'resultArgs':[totalPoints] ])
 			else
-				render "<div class=\"errors_embed\">Too bad, il y a un &eacute;cart de ${totalMoney}</div>"
+                render(template:'resultscorescheck',
+                        model:['resultClass':'errors_embed','resultMsg':'score.failure_check',
+                               'resultArgs':[totalMoney] ])
         }
     }
     
@@ -125,10 +130,10 @@ class PartyController extends BaseController {
         def messageSource = grailsAttributes
         						.getApplicationContext()
         						.getBean("messageSource")
-        def date = new Date()
-        bindData(date, params.date)
-		def dayAsText = DateFormat.getDateInstance(DateFormat.FULL, RCU.getLocale(request) ).format(date)
-		def hourAsText = new SimpleDateFormat("HH:mm:ss", RCU.getLocale(request) ).format(date)
+        InvitationDataWrapper invitationWrapper = new InvitationDataWrapper()
+        bindData(invitationWrapper, params)
+		def dayAsText = DateFormat.getDateInstance(DateFormat.FULL, RCU.getLocale(request) ).format(invitationWrapper.partyDate)
+		def hourAsText = new SimpleDateFormat("HH:mm:ss", RCU.getLocale(request) ).format(invitationWrapper.partyDate)
 		def subject = messageSource.getMessage( "party.invitation_subject",
         	                                    [ place.name, dayAsText, hourAsText ].toArray(),
                                                 "",

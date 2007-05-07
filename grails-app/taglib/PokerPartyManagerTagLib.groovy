@@ -12,7 +12,6 @@ class PokerPartyManagerTagLib {
 	def hasPlayerPagePermission = { attrs, body ->
 		if (session.user) {
 			def u = session.user
-			out << u.id << " / " << attrs['id']
 			//if(u.isSuperAdmin || String.valueOf(u.id) == attrs['id']) {
 				body()	
 			//}
@@ -48,14 +47,6 @@ class PokerPartyManagerTagLib {
 			}
     	}
 	}
-    
-    def escapeHTML = { attrs, body ->
-    	def data = attrs['data']
-    	if (data)
-    	  out << data.replaceAll("'","&apos;")
-    	else
-    	  out << ""
-    }
     
 	/**
 	 * Creates next/previous links to support pagination for the current controller
