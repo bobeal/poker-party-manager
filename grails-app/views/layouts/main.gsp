@@ -36,7 +36,7 @@
       <div id="hd">
         <div style="float:left;">
           <a href="${createLink(controller:'championship',action:'list')}">
-        	<img src="${createLinkTo(dir:'images',file:'ppm_small.png')}" alt="Poker" />
+        	<img src="${createLinkTo(dir:'images',file:'ppm_banner.png')}" alt="Poker" />
           </a>
           <!-- <img src="${createLinkTo(dir:'images',file:'ppm_header.png')}" /> -->
         </div>
