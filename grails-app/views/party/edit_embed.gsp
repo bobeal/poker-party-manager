@@ -53,6 +53,7 @@
     <label for='refunds'><g:message code="score.rebuys"/> :</label>
     <input type='text' class='${hasErrors(bean:score,field:'refunds','errors')}' 
       name='refunds' value='${score?.refunds}' />
+    <g:message code="party.refunds.notice" />
     <br />
     
     <label for="submit">&nbsp;</label>

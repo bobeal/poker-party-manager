@@ -38,7 +38,7 @@ class ScoreController extends BaseController {
        def score = Score.get(params.id)
        
        score.points = Integer.parseInt(params.value)
-       score.money = (score.points - (score.refunds * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
+       score.money = (score.points - ( (score.refunds + 1) * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
        score.save()
        render(builder:'json') {
          points(score.points)
@@ -51,7 +51,7 @@ class ScoreController extends BaseController {
        def score = Score.get(params.id)
        
        score.prize = Integer.parseInt(params.value)
-       score.money = score.prize - (score.refunds * score.party.buyin)
+       score.money = score.prize - ( (score.refunds + 1) * score.party.buyin)
        score.save()
        render(builder:'json') {
 		   prize(score.prize)
@@ -70,9 +70,9 @@ class ScoreController extends BaseController {
         score.properties = params
         
         if (score.party.kind == "Cash Game") {
-	        score.money = (score.points - (score.refunds * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
+	        score.money = (score.points - ( (score.refunds + 1) * score.party.coinsPerBuyin)) / (score.party.coinsPerBuyin / score.party.buyin)
         } else if (score.party.kind == "Sit and Go") {
-            score.money = - (score.party.buyin + score.refunds * score.party.buyin)
+            score.money = - (score.party.buyin * ( 1 + score.refunds) )
         }
         
         if(score.save()) {
