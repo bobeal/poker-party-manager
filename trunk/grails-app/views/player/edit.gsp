@@ -2,19 +2,14 @@
 
 <html>
   <head>
-    <meta name="layout" content="main" />
+    <meta name="layout" content="main">
     <title>Poker Party Manager - <g:message code="player.my_page"/></title>
     <script type="text/javascript">
-     	function escapeHTML(data) {
-       		return data.escapeHTML()
-       	}
-
         YAHOO.util.Event.onContentReady('editPlayerFieldset', onDefaultSubmitButtonsMarkupReady);
-
     </script>
   </head>
   <body>
-    <g:form method="post" enctype="multipart/form-data">
+    <g:form action="update" method="post" enctype="multipart/form-data">
       <input type="hidden" name="id" value="${player?.id}" />
 
       <fieldset id="editPlayerFieldset">
@@ -54,19 +49,17 @@
 
         <label for='favoriteHand'><g:message code="player.favorite_hand"/> :</label>
         <input type='text' class='${hasErrors(bean:player,field:'favoriteHand','errors')}' 
-          name='favoriteHand' value='<g:escapeHTML data="${player?.favoriteHand}"/>' />
+          name='favoriteHand' value="${player?.favoriteHand?.encodeAsHTML()}" />
         <br/>
 
         <label for='favoriteQuote'><g:message code="player.favorite_quote"/> :</label>
         <textarea class="${hasErrors(bean:player,field:'favoriteQuote','errors')}"
-          cols="40" rows="3" name="favoriteQuote">
-          <g:escapeHTML data="${player?.favoriteQuote}"/>
-        </textarea>
+          cols="40" rows="3" name="favoriteQuote">${player?.favoriteQuote?.encodeAsHTML()}</textarea>
         <br/>
 
         <label for='amulet'><g:message code="player.amulet"/> :</label>
         <input type='text' class='${hasErrors(bean:player,field:'amulet','errors')}' 
-          size='40' name='amulet' value='<g:escapeHTML data="${player?.amulet}"/>' />
+          size='40' name='amulet' value="${player?.amulet?.encodeAsHTML()}" />
         <br/>
 
         <g:if test="${session?.user?.isSuperAdmin}">

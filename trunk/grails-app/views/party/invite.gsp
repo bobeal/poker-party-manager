@@ -25,22 +25,22 @@
       
         <label for='place'><g:message code="party.place"/> :</label>
         <g:select optionKey="id" optionValue="name" 
-          from="${Place.list()}" name='place_id'></g:select>
+          from="${Place.list(sort:'name', order:'asc')}" name='place_id'></g:select>
         <br />
 
-        <label for='date'><g:message code="party.date"/> :</label>
-        <g:datePicker name='date' value='${party?.date}'></g:datePicker>
+        <label for='partyDate'><g:message code="party.date"/> :</label>
+        <g:datePicker name='partyDate'></g:datePicker>
         <br />
 
-        <label for='date'><g:message code="party.guests"/> :</label>
+        <label for='guests'><g:message code="party.guests"/> :</label>
         <select name="guests" multiple>
-          <g:each in="${Player.list()}" var="player">
+          <g:each in="${Player.list(sort:'login', order:'asc')}" var="player">
             <option value="${player.id}">${player.login}</option>
           </g:each>
         </select>
         <br />
 
-        <label for='date'><g:message code="party.invite_message"/> :</label>
+        <label for='message'><g:message code="party.invite_message"/> :</label>
         <textarea cols="30" rows="5" name="message"></textarea>
         <br />
 

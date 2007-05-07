@@ -31,16 +31,14 @@
                 </g:link>
               </span>
               <br />
-              <!-- 
               <span class="actionButton">
                 <g:link controller="party" action="invite" id="${championship.id}">
                   <g:message code="party.invite" />
                 </g:link>
               </span>
-              <br/>
-              -->
 
               <!-- 
+              <br/>
               <g:link controller='party' 
                       params='["championship.id":championship.id]' action='create'>
                 <g:message code="championship.add_party" />
