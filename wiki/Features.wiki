@@ -1,4 +1,5 @@
 #summary Poker Party Manager features
+#labels Featured
 
 = Introduction =
 
