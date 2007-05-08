@@ -36,7 +36,20 @@
                   <g:message code="party.invite" />
                 </g:link>
               </span>
-
+              <g:canManageChampionship championshipId="${championship.id}">
+              <br/>
+              <div id="commands-${championship.id}" class="commands" style="display: inline;">
+                <a href="javascript:void(0);" 
+                   onclick="javascript:confirmDelete('${message(code:'championship.confirm_delete')}',
+                                                     '${message(code:'dialog.yes')}',
+                                                     '${message(code:'dialog.no')}',
+                                                     '${championship.id}',
+                                                     '${createLink(action:'delete',controller:'championship')}',
+                                                     'successDeleteJson');return false;">
+                  <g:message code="action.delete" />
+                </a>
+              </div>
+              </g:canManageChampionship>
               <!-- 
               <br/>
               <g:link controller='party' 
@@ -45,18 +58,6 @@
               </g:link>
    
               <br />
-              <div id="commands-${championship.id}" class="commands" style="display: inline;">
-                <a href="javascript:void(0);" 
-                   onclick="javascript:confirmDelete('${message(code:'championship.confirm_delete')}',
-                                                     '${message(code:'dialog.yes')}',
-                                                     '${message(code:'dialog.no')}',
-                                                     '${championship.id}',
-                                                     '${createLink(action:'delete',controller:'championship')}'
-                                                     'successDeleteJson');return false;">
-                  <g:message code="action.delete" />
-                </a>
-                <br/>
-              </div>
               -->
               
             </td>

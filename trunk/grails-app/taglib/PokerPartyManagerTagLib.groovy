@@ -40,7 +40,7 @@ class PokerPartyManagerTagLib {
 	 */
     def canManageChampionship = { attrs, body ->
     	if (session.user) {
-    	    def championshipId = attrs['championship']
+    	    def championshipId = attrs['championshipId']
 			session.userManagedChampionships.each { managedChampionship ->
 				if (managedChampionship.id == championshipId)
 				    body()

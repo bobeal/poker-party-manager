@@ -3,54 +3,31 @@ class ChampionshipController extends BaseController {
     ChampionshipService championshipService
     LocalizationService localizationService
     
-    def index = { redirect(action:list,params:params) }
+    def index = { redirect(action:list) }
 
     def list = {
-        [ championshipList: Championship.list( params ) ]
+        [ championshipList: championshipService.list() ]
     }
 
     def show = {
-		def championship = Championship.get( params.id )
-        [ championship : championship ]
+        [ championship : championshipService.get(params.id) ]
     }
 
     // called asynchronously, only renders operation result that will be displayed
     // in a special div
     def delete = {
-        def championship = Championship.get( params.id )
-        log.info("Deleting championship ${championship.id}")
-        if(championship) {
-            
-            // temp hack
-            // see http://jira.codehaus.org/browse/GRAILS-563
-			try {
-			    championship.admins.each { admin ->
-			    	admin.managedChampionships.remove(championship)
-			    }
-			    championship.parties.each { party ->
-			    	party.delete()
-			    }
-	            championship.delete()
 
-	            sessionFactory.getCurrentSession().flush()
-				log.debug("championship ${params.id} deleted.")
-				render(builder:'json') {
-         			status('success')
-         			msg(localizationService.getMessage(request,'championship.success_delete'))
-  	   			}
-			} catch( Exception ex ) {
-				log.debug("championship ${params.id} could not be deleted !")
-				ex.printStackTrace()
-				render(builder:'json') {
-         			status('failure')
-         			msg(localizationService.getMessage(request,'championship.failure_delete'))
-  	   			}
-			}
+        def deleteResult = championshipService.delete(params.id)
+        if (deleteResult) {
+			render(builder:'json') {
+     			status('success')
+     			msg(localizationService.getMessage(request,'championship.success_delete'))
+	   			}
         } else {
 			render(builder:'json') {
      			status('failure')
      			msg(localizationService.getMessage(request,'championship.failure_delete'))
-   			}
+	   			}
         }
     }
 

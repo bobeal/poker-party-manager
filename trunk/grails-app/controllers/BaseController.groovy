@@ -1,8 +1,5 @@
-import org.hibernate.SessionFactory;
-
 abstract class BaseController {
 	def beforeInterceptor = [action:this.&authAndAuthz,except:['login','handleLogin']]
-	def SessionFactory sessionFactory
 	                         
 	def authAndAuthz() {
 
