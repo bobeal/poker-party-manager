@@ -1,0 +1,16 @@
+#summary Poker Party Manager features
+
+= Introduction =
+
+The application is divided into three main parts :
+  * Championship : the heart of the application. It lets you manage your poker parties and see some common statistics (positions, ...)
+  * Player : lets you customize your profile and see others profiles.
+  * Place : this is where parties take place. 
+
+= Parties =
+
+TBD.
+
+= Users profiles and rights =
+
+TBD.
