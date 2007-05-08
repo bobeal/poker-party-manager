@@ -1,10 +1,11 @@
-import org.springframework.web.servlet.support.RequestContextUtils as RCU;
+import org.springframework.web.servlet.support.RequestContextUtils as RCU
 import java.text.SimpleDateFormat
 import java.text.DateFormat
 
 class PartyController extends BaseController {
     
     EmailerService emailerService
+    LocalizationService localizationService
 
     def index = { redirect(controller:'championship',action:'list',params:params) }
 
@@ -127,17 +128,13 @@ class PartyController extends BaseController {
 			}
 		}
 
-        def messageSource = grailsAttributes
-        						.getApplicationContext()
-        						.getBean("messageSource")
         InvitationDataWrapper invitationWrapper = new InvitationDataWrapper()
         bindData(invitationWrapper, params)
 		def dayAsText = DateFormat.getDateInstance(DateFormat.FULL, RCU.getLocale(request) ).format(invitationWrapper.partyDate)
 		def hourAsText = new SimpleDateFormat("HH:mm:ss", RCU.getLocale(request) ).format(invitationWrapper.partyDate)
-		def subject = messageSource.getMessage( "party.invitation_subject",
-        	                                    [ place.name, dayAsText, hourAsText ].toArray(),
-                                                "",
-                                                RCU.getLocale(request) )
+		def subject = localizationService.getMessage(request, "party.invitation_subject", 
+		        [ place.name, dayAsText, hourAsText ])
+
 		// Each "email" is a simple Map
 	    def email = [
 	       to: guestList,        // "to" expects a List, NOT a single email address

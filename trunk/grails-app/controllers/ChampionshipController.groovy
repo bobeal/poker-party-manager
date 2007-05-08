@@ -1,6 +1,7 @@
 class ChampionshipController extends BaseController {
     
     ChampionshipService championshipService
+    LocalizationService localizationService
     
     def index = { redirect(action:list,params:params) }
 
@@ -35,20 +36,20 @@ class ChampionshipController extends BaseController {
 				log.debug("championship ${params.id} deleted.")
 				render(builder:'json') {
          			status('success')
-         			msg(getMessage('championship.success_delete'))
+         			msg(localizationService.getMessage(request,'championship.success_delete'))
   	   			}
 			} catch( Exception ex ) {
 				log.debug("championship ${params.id} could not be deleted !")
 				ex.printStackTrace()
 				render(builder:'json') {
          			status('failure')
-         			msg(getMessage('championship.failure_delete'))
+         			msg(localizationService.getMessage(request,'championship.failure_delete'))
   	   			}
 			}
         } else {
 			render(builder:'json') {
      			status('failure')
-     			msg(getMessage('championship.failure_delete'))
+     			msg(localizationService.getMessage(request,'championship.failure_delete'))
    			}
         }
     }
