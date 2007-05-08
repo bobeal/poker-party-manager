@@ -15,7 +15,7 @@ TBD.
 = Users profiles and rights =
 
 An user has the following levels of rights :
-  * Championship manager : gives the rights to create, delete and manage championships,
+  * Championship manager : gives the rights to create, delete and manage championships. Each championship has its own set of managers.
   * Site administrator : gives the rights to administer the site : create, edit and delete places and players.
 
 An user with no specific rights can :
