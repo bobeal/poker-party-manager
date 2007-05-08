@@ -6,31 +6,16 @@ class PartyController extends BaseController {
     
     EmailerService emailerService
     LocalizationService localizationService
-
+	PartyService partyService
+	
     def index = { redirect(controller:'championship',action:'list',params:params) }
 
     def delete = {
-        def party = Party.get( params.id )
-        log.info("Deleting party ${party.id}")
-        if(party) {
-            
-            // temp hack
-            // see http://jira.codehaus.org/browse/GRAILS-563
-			try {
-			    def championshipId = party.championship.id
-			    party.setPlace(null)
-	            party.delete()
 
-	            sessionFactory.getCurrentSession().flush()
-				log.debug("party ${params.id} deleted.")
-				flash.message = 'party.success_delete'
-				redirect(controller:'championship',action:'getparties',id:championshipId)
-			} catch( Exception ex ) {
-				log.debug("party ${params.id} could not be deleted !")
-				ex.printStackTrace()
-				flash.message = 'party.failure_delete'
-				redirect(controller:'championship',action:'getparties',id:championshipId)
-			}
+        def deleteResult = partyService.delete(params.id)
+        if (deleteResult) {
+			flash.message = 'party.success_delete'
+			redirect(controller:'championship',action:'getparties',id:championshipId)
         } else {
 			flash.message = 'party.failure_delete'
 			redirect(controller:'championship',action:'getparties',id:championshipId)

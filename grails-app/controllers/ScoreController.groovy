@@ -1,37 +1,25 @@
 class ScoreController extends BaseController {
     
     LocalizationService localizationService
-
+	ScoreService scoreService
+	
     def index = { redirect(action:list,params:params) }
 
     // called asynchronously, only renders operation result that will be displayed
     // in a special div
     def delete = {
-        def score = Score.get( params.id )
-        if(score) {
-            
-            // temp hack
-            // see http://jira.codehaus.org/browse/GRAILS-563
-			try {
-	            score.delete()
 
-	            sessionFactory.getCurrentSession().flush()
-				render(builder:'json') {
-         			status('success')
-         			msg(localizationService.getMessage(request,'score.success_delete'))
-  	   			}
-			} catch( Exception ex ) {
-				ex.printStackTrace()
-				render(builder:'json') {
-         			status('failure')
-         			msg(localizationService.getMessage(request,'score.failure_delete'))
-  	   			}
-			}
+		def deleteResult = scoreService.delete(params.id)
+        if (deleteResult) {
+    		render(builder:'json') {
+        		status('success')
+        		msg(localizationService.getMessage(request,'score.success_delete'))
+    		}
         } else {
-			render(builder:'json') {
-     			status('failure')
-     			msg(localizationService.getMessage(request,'score.failure_delete'))
-   			}
+    		render(builder:'json') {
+        		status('failure')
+        		msg(localizationService.getMessage(request,'score.failure_delete'))
+    		}
         }
     }
 
