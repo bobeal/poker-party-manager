@@ -1,5 +1,7 @@
 class ScoreController extends BaseController {
     
+    LocalizationService localizationService
+
     def index = { redirect(action:list,params:params) }
 
     // called asynchronously, only renders operation result that will be displayed
@@ -16,19 +18,19 @@ class ScoreController extends BaseController {
 	            sessionFactory.getCurrentSession().flush()
 				render(builder:'json') {
          			status('success')
-         			msg(getMessage('score.success_delete'))
+         			msg(localizationService.getMessage(request,'score.success_delete'))
   	   			}
 			} catch( Exception ex ) {
 				ex.printStackTrace()
 				render(builder:'json') {
          			status('failure')
-         			msg(getMessage('score.failure_delete'))
+         			msg(localizationService.getMessage(request,'score.failure_delete'))
   	   			}
 			}
         } else {
 			render(builder:'json') {
      			status('failure')
-     			msg(getMessage('score.failure_delete'))
+     			msg(localizationService.getMessage(request,'score.failure_delete'))
    			}
         }
     }
