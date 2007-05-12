@@ -138,7 +138,7 @@ class PlayerController extends BaseController {
         		if (player.password == encryptedPassword) {
         		    session.user = player
         		    // FIXME : store them because of LazyInitializationException either
-        		    session.userManagedChampionships = player.managedChampionships
+        		    session.userManagedChampionships = player.managedChampionships.toArray()
         		    redirect(controller:'championship',action:'list')
         		} else {
                    	flash.message = 'player.error.failed_authentication'
