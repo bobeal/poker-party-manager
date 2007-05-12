@@ -12,12 +12,12 @@
     <div style="float:right;">
       <g:ajaxPaginate next="${message(code:'navigation.next')}" 
           prev="${message(code:'navigation.prev')}"
-          breadcrumb="true" controller="championship" 
+          breadcrumb="true" controller="championship"
           action="getparties" total="${total}" id="${championshipId}" />
     </div>
     <div style="clear:both;"></div>
     
-    <table>
+    <table style="table-layout:fixed;">
       <tr>
         <th class="embed parties-embed"></th>
         <g:each in="${parties}" var="party">

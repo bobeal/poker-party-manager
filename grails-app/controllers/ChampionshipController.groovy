@@ -1,6 +1,7 @@
 class ChampionshipController extends BaseController {
     
     ChampionshipService championshipService
+    PlayerService playerService
     LocalizationService localizationService
     
     def index = { redirect(action:list) }
@@ -51,7 +52,7 @@ class ChampionshipController extends BaseController {
     def create = {
         def championship = new Championship()
         championship.properties = params
-        return ['championship':championship]
+        return ['championship':championship, 'eligibleAdmins':playerService.getAuthorizedToAdminChampionships()]
     }
 
     def save = {
