@@ -80,7 +80,7 @@ class PartyController extends BaseController {
         
         party.scores.each { score ->
             totalMoney += score.money
-            totalPoints += score.points - (score.refunds * score.party.coinsPerBuyin)
+            totalPoints += score.points - ((score.refunds + 1) * score.party.coinsPerBuyin)
         }
         
         if ((party.kind == 'Cash Game' && totalPoints == 0)

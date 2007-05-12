@@ -82,4 +82,36 @@ class ChampionshipService {
 		return orderedPlayersLines.values()
     }
 
+    def getParties(championshipId, offset, max) {
+
+		def championship = Championship.get(championshipId)
+        def parties = Party.findAllByChampionship(championship, 
+		        [max:max, offset:offset, sort:"date", order:"desc"] )
+		// get players that attended at least one party in current championship
+		def playersLogins = Player.executeQuery("select distinct(p.login) from Player p, Score s " 
+		        + " where p.id = s.player.id "
+		        + " and s.party.championship = ? "
+		        + " order by p.login asc ", championship)
+		def playersScores = new TreeMap()
+		// pre-fill an empty score list for each player
+		playersLogins.each { playerLogin ->
+			def scoresAsList = new ArrayList()
+			(1..parties.size).each {
+			    scoresAsList.add("-")
+			}
+			playersScores[playerLogin] = scoresAsList.toArray()
+		}
+		// fill the empty score list with real values
+		parties.eachWithIndex { party, index ->
+		    party.scores.each { score ->
+				def playerScoresArray = playersScores[score.player.login]
+		    	playerScoresArray[index] = score.formattedTotal()
+		    }
+		}
+
+		// get total number of parties for pagination
+		def totalNbParties = Party.countByChampionship(championship)
+
+    	return ['parties':parties, 'playersScores':playersScores, 'total':totalNbParties]
+    }
 }
