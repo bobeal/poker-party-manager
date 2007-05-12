@@ -6,9 +6,9 @@ class ApplicationBootStrap {
      	if (!application) {
      	    application = new Application()
      	    application.name = applicationName
-     	    application.currentVersion = '1.0-Beta2'
+     	    application.currentVersion = '1.0-Beta3'
      	} else {
-     	    application.currentVersion = '1.0-Beta2'
+     	    application.currentVersion = '1.0-Beta3'
      	}
  	    application.save()
      }
