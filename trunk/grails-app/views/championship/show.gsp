@@ -97,7 +97,7 @@
           <legend><g:message code="championship.view_page"/></legend>
 
           <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
+            <div class="message"><g:message code="${flash.message}" /></div>
           </g:if>
 
           <label><g:message code="championship.label"/> :</label>
