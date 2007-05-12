@@ -14,9 +14,9 @@ class EmailerService {
    SimpleMailMessage mailMessage // a "prototype" email instance
 
    /**
-    * Send a list of emails
+    * Send a list of emails.
     *
-    * @param mails a list of maps
+    * @param mails a list of mails
     */
    def sendEmails(mails) {
        // Build the mail messages
@@ -24,6 +24,8 @@ class EmailerService {
        for (mail in mails) {
            // Create a thread safe "sandbox" of the message
            SimpleMailMessage message = new SimpleMailMessage(mailMessage)
+           if (mail.replyTo)
+               message.replyTo = mail.replyTo
            message.to = mail.to
            message.cc = [ message.from ].toArray()
            message.text = mail.text

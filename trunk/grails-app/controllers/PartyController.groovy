@@ -118,13 +118,14 @@ class PartyController extends BaseController {
 		def dayAsText = DateFormat.getDateInstance(DateFormat.FULL, RCU.getLocale(request) ).format(invitationWrapper.partyDate)
 		def hourAsText = new SimpleDateFormat("HH:mm:ss", RCU.getLocale(request) ).format(invitationWrapper.partyDate)
 		def subject = localizationService.getMessage(request, "party.invitation_subject", 
-		        [ place.name, dayAsText, hourAsText ])
+		        [ session.user.login, place.name, dayAsText, hourAsText ])
 
 		// Each "email" is a simple Map
 	    def email = [
-	       to: guestList,        // "to" expects a List, NOT a single email address
-	       subject: subject,
-	       text: params.message         // "text" is the email body
+	    	replyTo: session.user.email == null ? null : session.user.email,
+			to: guestList,        // "to" expects a List, NOT a single email address
+	       	subject: subject,
+	       	text: params.message         // "text" is the email body
 	    ]
 	    // sendEmails expects a List
 	    emailerService.sendEmails([email])
