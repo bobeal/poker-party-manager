@@ -4,12 +4,11 @@ class PartyService {
     
 	def SessionFactory sessionFactory
 
-	def delete(partyId) {
-        def party = Party.get(partyId)
-        
+	def delete(party) {
+	    
         if(party) {
             
-            println "Gonna delete party ${partyId}"
+            println "Gonna delete party ${party.id}"
 
             // temp hack
             // see http://jira.codehaus.org/browse/GRAILS-563
@@ -18,15 +17,15 @@ class PartyService {
 	            party.delete()
 
 	            sessionFactory.getCurrentSession().flush()
-				println "Party ${partyId} deleted"
+				println "Party ${party.id} deleted"
 				return true
 			} catch( Exception ex ) {
-				println "Party ${partyId} could not be deleted !"
+				println "Party ${party.id} could not be deleted !"
 				ex.printStackTrace()
 				return false
 			}
         } else {
-			println "Party ${partyId} not found !"
+			println "No party provided !"
             return false
         }
     }

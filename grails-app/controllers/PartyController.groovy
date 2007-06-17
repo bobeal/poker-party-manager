@@ -12,14 +12,14 @@ class PartyController extends BaseController {
 
     def delete = {
 
-        def deleteResult = partyService.delete(params.id)
+        def party = Party.get(params.id)
+        def deleteResult = partyService.delete(party)
         if (deleteResult) {
 			flash.message = 'party.success_delete'
-			redirect(controller:'championship',action:'getparties',id:championshipId)
         } else {
 			flash.message = 'party.failure_delete'
-			redirect(controller:'championship',action:'getparties',id:championshipId)
         }
+		redirect(controller:'championship',action:'getparties',id:party.championship.id)
     }
 
     def edit = {
