@@ -61,10 +61,11 @@ class ChampionshipService {
      * Return a list of PlayerTableLine objects representing player's scores
      * for a given championship.
      */
-    def getStandings(championshipId) {
+    def getStandings(championshipId, onlyRegulars) {
         def championship = Championship.get( championshipId )
         def championshipParties = Party.findAllByChampionship(championship)
         Map playersMap = new HashMap()
+        def totalNbOfParties = championshipParties.size()
         championshipParties.each { p ->
             p.scores.each { s ->
                 def player = s.player
@@ -75,8 +76,14 @@ class ChampionshipService {
             }
         }
         Map orderedPlayersLines = new TreeMap()
-        playersMap.each { k,v ->
-            orderedPlayersLines.put(-v.totalMoney, v)
+        playersMap.each { playerLogin,playerTableLine ->
+        	if (onlyRegulars) {
+        	 	def playerAttendedParties = playerTableLine.getAttendedPartiesNb()
+        	 	if (playerAttendedParties > (totalNbOfParties / 4 ))
+        	 	   orderedPlayersLines.put(-playerTableLine.totalMoney, playerTableLine)
+        	} else {
+            	orderedPlayersLines.put(-playerTableLine.totalMoney, playerTableLine)
+        	}
         }
 
 		return orderedPlayersLines.values()

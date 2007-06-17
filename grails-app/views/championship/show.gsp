@@ -38,6 +38,12 @@
             }));
     
             tabView.addTab(new YAHOO.widget.Tab({
+              label: '<g:message code="championship.elite_positions"/>',
+              dataSrc: '${createLink(action:"getelitestandings",id:championship.id)}',
+              cacheData: false
+            }));
+    
+            tabView.addTab(new YAHOO.widget.Tab({
               label: '<g:message code="championship.parties"/>',
               dataSrc: '${createLink(action:"getparties",id:championship.id)}',
               cacheData: false
