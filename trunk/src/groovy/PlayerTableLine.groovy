@@ -28,6 +28,10 @@ class PlayerTableLine {
     	return numberFormat.format(tempDouble)
     }
     
+    def getAttendedPartiesNb() {
+    	return partiesWon + partiesDraw + partiesLost    
+    }
+    
     def addScore(score) {
         totalMoney = new Double(totalMoney + score.money)
         

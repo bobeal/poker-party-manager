@@ -77,10 +77,15 @@ class ChampionshipController extends BaseController {
     }
 
     def getstandings = {
-    	def playersLines = championshipService.getStandings(params.id)
+    	def playersLines = championshipService.getStandings(params.id, false)
 		render(template:"displaystandings", model:['playersLines':playersLines])
     }
     
+    def getelitestandings = {
+       	def playersLines = championshipService.getStandings(params.id, true)
+   		render(template:"displaystandings", model:['playersLines':playersLines])
+    }
+        
     // Load a subset of a championship's parties and render them via the displayparties template
     def getparties = {
 		def max = params.max ? params.max : 10
