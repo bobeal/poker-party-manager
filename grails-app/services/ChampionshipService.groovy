@@ -75,19 +75,21 @@ class ChampionshipService {
                 playerTableLine.addScore(s) 
             }
         }
-        Map orderedPlayersLines = new TreeMap()
-        playersMap.each { playerLogin,playerTableLine ->
-        	if (onlyRegulars) {
-        	 	def playerAttendedParties = playerTableLine.getAttendedPartiesNb()
-        	 	if (playerAttendedParties > (totalNbOfParties / 4 ))
-        	 	   orderedPlayersLines.put(-playerTableLine.totalMoney, playerTableLine)
-        	} else {
-            	orderedPlayersLines.put(-playerTableLine.totalMoney, playerTableLine)
-        	}
+        
+        Set orderedStandings = new TreeSet()
+        orderedStandings.addAll(playersMap.values())
+        if (onlyRegulars) {
+            Set regularStandings = new TreeSet()
+         	orderedStandings.each { playerTableLine ->
+         		def playerAttendedParties = playerTableLine.getAttendedPartiesNb()
+         		if (playerAttendedParties > (totalNbOfParties / 4 ))
+         		    regularStandings.add(playerTableLine)
+         	}
+            return regularStandings
+        } else {
+			return orderedStandings
         }
-
-		return orderedPlayersLines.values()
-    }
+	}
 
     def getParties(championshipId, offset, max) {
 

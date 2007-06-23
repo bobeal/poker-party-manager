@@ -1,7 +1,7 @@
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
-class PlayerTableLine {
+class PlayerTableLine implements Comparable {
     
     String playerLogin
     Double totalMoney
@@ -41,5 +41,13 @@ class PlayerTableLine {
             partiesLost += 1
         else
             partiesDraw += 1
+    }
+    
+    int compareTo(obj) {
+        int moneyComp = totalMoney.compareTo(obj.totalMoney)
+        if (moneyComp == 0)
+            return playerLogin.compareTo(obj.playerLogin)
+        else
+            return -moneyComp
     }
 }
