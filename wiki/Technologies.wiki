@@ -1,5 +1,5 @@
 #summary Description of the technologies used in Poker Party Manager
-#labels Featured
+#labels Featured,Phase-Implementation
 
 = Framework =
 
@@ -17,4 +17,3 @@ Major parts of the GUI are built using [http://developer.yahoo.com/yui YUI 2.2.2
    * Buttons are build with Button Control ([http://developer.yahoo.com/yui/button/])
 
 Some utility Javascript functions make use of ([http://prototypejs.org/ Prototype]).
-
