@@ -44,9 +44,9 @@
     </g:if>
     
     <g:if test="${party?.kind == 'Sit and Go'}">
-    <label for='position'><g:message code="score.position"/> :</label>
-    <input type='text' class='${hasErrors(bean:score,field:'position','errors')}' name='position' 
-      value='${score?.position}' />
+    <label for='place'><g:message code="score.place"/> :</label>
+    <input type='text' class='${hasErrors(bean:score,field:'place','errors')}' name='place' 
+      value='${score?.place}' />
     <br />
     </g:if>
     
@@ -75,7 +75,7 @@
       <th class="embed"><g:message code="score.chips"/></th>
     </g:if>
     <g:if test="${party.kind == 'Sit and Go'}">
-      <th class="embed"><g:message code="score.position"/></th>
+      <th class="embed"><g:message code="score.place"/></th>
     </g:if>
     <th class="embed"><g:message code="score.rebuys"/></th>
     <g:if test="${party.kind == 'Sit and Go'}">
@@ -110,7 +110,7 @@
         </script>
       </g:if>
       <g:if test="${party.kind == 'Sit and Go'}">
-        <td width="15%" class="even">${score.position}</td>
+        <td width="15%" class="even">${score.place}</td>
       </g:if>
       <td width="15%" class="even">${score.refunds}</td>
       <g:if test="${party.kind == 'Sit and Go'}">
