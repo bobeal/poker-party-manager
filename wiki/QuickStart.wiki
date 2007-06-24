@@ -1,5 +1,5 @@
 #summary Quick start guide for PPM
-#labels Featured
+#labels Featured,WorkInProgress
 
 = Installation =
 
@@ -27,5 +27,4 @@ Put the war in the _webapps_ directory then start Tomcat.
 = Test =
 
 Go to [http://localhost:8080/poker-party-manager].
-
 
