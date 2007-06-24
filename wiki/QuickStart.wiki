@@ -19,7 +19,7 @@ grails init
 grails -Dgrails.env=demo run-app
 }}}
 
-== From the war ==
+== From the war (Work in Progress) ==
 
 In order to run PPM from the sources, you have to install a servlet container. You can for instance use [http://tomcat.apache.org Tomcat].
 
@@ -28,4 +28,3 @@ Put the war in the _webapps_ directory then start Tomcat.
 = Test =
 
 Go to [http://localhost:8080/poker-party-manager], follow the instructions to create the first administrator and have fun !
-
