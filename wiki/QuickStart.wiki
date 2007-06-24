@@ -16,7 +16,7 @@ Go to the project's root directory and launch PPM :
 {{{
 cd poker-party-manager
 grails init
-grails run-app
+grails -Dgrails.env=demo run-app
 }}}
 
 == From the war ==
@@ -27,4 +27,5 @@ Put the war in the _webapps_ directory then start Tomcat.
 
 = Test =
 
-Go to [http://localhost:8080/poker-party-manager].
+Go to [http://localhost:8080/poker-party-manager], follow the instructions to create the first administrator and have fun !
+
