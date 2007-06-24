@@ -98,15 +98,31 @@ class PlayerController extends BaseController {
         def player = new Player()
         player.properties = params
 		// validate before encrypting password
-        if (!player.validate(true)) {
-            render(view:'create',model:[player:player])
+        if (player.validate(true)) {
+        	player.password = authenticationService.encryptPassword(player.password)
+        	if (player.save()) {
+            	render(view:'edit',model:[player:player])
+        	}
         }
-        player.password = authenticationService.encryptPassword(player.password)
-        if (player.save()) {
-            render(view:'edit',model:[player:player])
-        } else {
-            render(view:'create',model:[player:player])
+
+        render(view:'create',model:[player:player])
+	}
+
+    def saveFirstAdmin = {
+        def player = new Player()
+        player.properties = params
+    	// validate before encrypting password
+        if (player.validate(true)) {
+            player.password = authenticationService.encryptPassword(player.password)
+            player.canManageChampionship = true
+            player.isSuperAdmin = true
+            if (player.save()) {
+       		  	session.user = player
+               	redirect(controller:"championship",action:"list")
+            }
         }
+
+		render(view:'firstUser',model:[player:player])
     }
 
     def getPhotoData = {
@@ -125,7 +141,10 @@ class PlayerController extends BaseController {
    		if (session.user) {
    		  	redirect(controller:"championship",action:"list")	
         } else {
-   		  	return
+            if (Player.count() == 0)
+                render(view:'firstUser')
+            else
+   		  		render(view:'login')
         }
     }
 

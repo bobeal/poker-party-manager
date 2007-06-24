@@ -1,5 +1,5 @@
 abstract class BaseController {
-	def beforeInterceptor = [action:this.&authAndAuthz,except:['login','handleLogin']]
+	def beforeInterceptor = [action:this.&authAndAuthz,except:['login','handleLogin', 'saveFirstAdmin']]
 	                         
 	def authAndAuthz() {
 

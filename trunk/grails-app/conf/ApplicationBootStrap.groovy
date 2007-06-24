@@ -1,6 +1,8 @@
 class ApplicationBootStrap {
 
      def init = { servletContext ->
+     
+     	// update application information
      	def applicationName = 'Poker Party Manager'
      	def application = Application.findByName(applicationName)
      	if (!application) {

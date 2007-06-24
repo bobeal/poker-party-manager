@@ -5,6 +5,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:'favicon.ico')}" type="image/vnd.microsoft.icon">
 	<title><g:layoutTitle default="Poker Party Manager" /></title>
 
     <!-- Grid and common settings CSS -->
@@ -41,7 +42,6 @@
           <a href="${createLink(controller:'championship',action:'list')}">
         	<img src="${createLinkTo(dir:'images',file:'ppm_banner.png')}" alt="Poker" />
           </a>
-          <!-- <img src="${createLinkTo(dir:'images',file:'ppm_header.png')}" /> -->
         </div>
 		<span class="userInfo">
 		  ${session?.user?.login} - <a href="${createLink(controller:'player',action:'logout')}"><g:message code="action.logout"/></a>
