@@ -1,0 +1,31 @@
+#summary Quick start guide for PPM
+
+= Installation =
+
+== From the sources ==
+
+In order to run PPM from the sources, you have to install [http://grails.org/Installation Grails 0.4.2].
+
+Once Grails is installed, check out the PPM's sources :
+{{{
+svn checkout http://poker-party-manager.googlecode.com/svn/trunk/ poker-party-manager
+}}}
+
+Go to the project's root directory and launch PPM :
+{{{
+cd poker-party-manager
+grails run-app
+}}}
+
+== From the war ==
+
+In order to run PPM from the sources, you have to install a servlet container. You can for instance use [http://tomcat.apache.org Tomcat].
+
+Put the war in the _webapps_ directory then start Tomcat.
+
+= Test =
+
+Go to [http://localhost:8080/poker-party-manager].
+
+
+
