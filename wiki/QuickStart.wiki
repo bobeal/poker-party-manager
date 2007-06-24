@@ -1,5 +1,5 @@
 #summary Quick start guide for PPM
-#labels Featured,WorkInProgress
+#labels Featured,Phase-Deploy
 
 = Installation =
 
@@ -18,12 +18,6 @@ cd poker-party-manager
 grails init
 grails -Dgrails.env=demo run-app
 }}}
-
-== From the war (Work in Progress) ==
-
-In order to run PPM from the sources, you have to install a servlet container. You can for instance use [http://tomcat.apache.org Tomcat].
-
-Put the war in the _webapps_ directory then start Tomcat.
 
 = Test =
 
