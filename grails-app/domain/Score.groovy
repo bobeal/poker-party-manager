@@ -13,7 +13,7 @@ class Score {
     int points
 
     // sit and go specific properties
-    int position
+    int place
 	int prize    
     
     static belongsTo = [Player,Party]
