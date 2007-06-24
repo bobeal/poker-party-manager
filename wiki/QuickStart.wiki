@@ -15,6 +15,7 @@ svn checkout http://poker-party-manager.googlecode.com/svn/trunk/ poker-party-ma
 Go to the project's root directory and launch PPM :
 {{{
 cd poker-party-manager
+grails init
 grails run-app
 }}}
 
@@ -27,4 +28,3 @@ Put the war in the _webapps_ directory then start Tomcat.
 = Test =
 
 Go to [http://localhost:8080/poker-party-manager].
-
