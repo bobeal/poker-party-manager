@@ -1,5 +1,5 @@
 #summary Poker Party Manager features
-#labels Featured
+#labels Featured,Phase-Requirements,WorkInProgress
 
 = Introduction =
 
