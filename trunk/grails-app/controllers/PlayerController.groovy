@@ -102,6 +102,7 @@ class PlayerController extends BaseController {
         	player.password = authenticationService.encryptPassword(player.password)
         	if (player.save()) {
             	render(view:'edit',model:[player:player])
+            	return
         	}
         }
 
