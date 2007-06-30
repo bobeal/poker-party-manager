@@ -8,11 +8,14 @@ function switchKindFields() {
 		Element.setStyle(document.getElementById('cashgame'), {display:'inline'});
 		Element.addClassName(document.getElementById('buyinLabel'), 'required');
 	}
+	// no sitandgo special div atm
+	/*
   	Element.toggle(document.getElementById('sitandgo'));
 	if (Element.visible(document.getElementById('sitandgo'))) {
 		Element.setStyle(document.getElementById('sitandgo'), {display:'inline'});
 		Element.removeClassName(document.getElementById('buyinLabel'), 'required');
 	}
+	*/
 }
 
 
