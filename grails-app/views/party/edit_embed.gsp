@@ -19,7 +19,7 @@
    	<g:render template="/party/fieldlist" model="[party:party]" />
 
     <label for="submit">&nbsp;</label>
-    <input class="submit" id="wrappedPartySubmit" type="submit" value="Update" />
+    <input class="submit" id="wrappedPartySubmit" type="submit" value="<g:message code="action.update" />" />
   </fieldset>
 </g:formRemote>
             
@@ -57,7 +57,7 @@
     <br />
     
     <label for="submit">&nbsp;</label>
-    <input class="submit" id="wrappedScoreSubmit" type="submit" value="Create" />
+    <input class="submit" id="wrappedScoreSubmit" type="submit" value="<g:message code="action.create" />" />
   </fieldset>
 </g:formRemote>
             

@@ -27,7 +27,7 @@
 
         <g:if test="${session?.user?.isSuperAdmin}">
           <label for="submit">&nbsp;</label>
-          <input id="wrappedSubmit" type="submit" value="Edit"></input>
+          <input id="wrappedSubmit" type="submit" value="<g:message code="action.edit" />"></input>
         </g:if>
         
       </fieldset>

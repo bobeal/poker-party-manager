@@ -45,7 +45,7 @@
         
         <g:hasPlayerPagePermission id="${player?.id}">
           <label for="submit">&nbsp;</label>
-          <input id="wrappedSubmit" type="submit" value="Edit" />
+          <input id="wrappedSubmit" type="submit" value="<g:message code="action.edit" />" />
         </g:hasPlayerPagePermission>
         
       </fieldset>
