@@ -21,13 +21,16 @@
 <g:textField class="${hasErrors(bean:party,field:'buyin','errors')}" name="buyin" 
   value='${party?.buyin}' />
 <g:if test="${party?.kind == 'Cash Game'}">
-  <g:message code="party.buyin.cashgame_example" />
+  <g:message code="party.cashgame.buyin.default" />
 </g:if>
 <br/>
 <div id="cashgame" style="${party?.kind == 'Cash Game' ? 'display:inline' : 'display:none;' }">
   <label for="coinsPerBuyin" class="required"><g:message code="party.coins_per_buyin" /> :</label>
   <g:textField class="${hasErrors(bean:party,field:'coinsPerBuyin','errors')}"
     name="coinsPerBuyin" value='${party?.coinsPerBuyin}' />
+  <g:if test="${party?.kind == 'Cash Game'}">
+    <g:message code="party.cashgame.coinsPerBuyin.default" />
+  </g:if>
   <br/>
 </div>
 
