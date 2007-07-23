@@ -40,9 +40,4 @@ class Party {
 		if (coinsPerBuyin == null)
 		    coinsPerBuyin = Integer.valueOf("100")
 	}
-	
-	static constraints = {
-	    coinsPerBuyin(matches:"[0-9]",blank:false)
-		buyin(matches:"[(0-9)*.(0-9)*]",blank:false)
-	}
 }
