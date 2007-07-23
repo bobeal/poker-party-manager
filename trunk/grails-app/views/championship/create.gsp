@@ -43,7 +43,7 @@
             <br/>
 
             <label for="submit">&nbsp;</label>
-            <input type="submit" id="wrappedSubmit" value="Create"></input>
+            <input type="submit" id="wrappedSubmit" value="<g:message code="action.create" />"></input>
           </fieldset>
       </g:form>
   </body>

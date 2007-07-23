@@ -52,7 +52,7 @@
                 <input id="pwd" type='password' name='pwd' value='${agent?.pwd}' />
                 <br />
                 <label for="submit">&nbsp;</label>
-                <input class="submit" id="wrappedSubmit" type="submit" value="Login" />
+                <input class="submit" id="wrappedSubmit" type="submit" value="<g:message code="action.login" />" />
               </fieldset>
             </g:form>
             </div>

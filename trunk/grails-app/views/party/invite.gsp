@@ -45,7 +45,7 @@
         <br />
 
         <label for="submit">&nbsp;</label>
-        <g:actionSubmit value="Send" />
+        <g:actionSubmit value="<g:message code="action.invite" />" />
 
       </fieldset>
     </g:form>

@@ -33,7 +33,7 @@
         <br/>
 
         <label for="submit">&nbsp;</label>
-        <input id="wrappedSubmit" type="submit" value="Update"></input>
+        <input id="wrappedSubmit" type="submit" value="<g:message code="action.update" />"></input>
 
       </fieldset>
     </g:form>
